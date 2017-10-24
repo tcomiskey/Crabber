@@ -10,7 +10,7 @@ public class Board extends JPanel implements MouseListener {
 	private boolean win;
 	private boolean loss;
 	private Player player;
-	private Character[] enemies;
+	private gameCharacter[] enemies;
 	private boolean landOrOcean; //0 for land, 1 for ocean
 	
 	
@@ -27,20 +27,20 @@ public class Board extends JPanel implements MouseListener {
 		landOrOcean = 0;
 		
 		if(difficulty == 1){
-			enemies = new Character[8];
+			enemies = new gameCharacter[8];
 		}		
 		else if(difficulty == 2){
-			enemies = new Character[12];
+			enemies = new gameCharacter[12];
 		}
 		else{
-			enemies = new Character[16];
+			enemies = new gameCharacter[16];
 		}
 	}
 	public static void main(String[] args){
 		Board b = new Board(1);
 	}
 	public void moveCharacter(){
-		for (Character c: enemies){
+		for (gameCharacter c: enemies){
 			c.move();
 		}
 	}
@@ -104,5 +104,7 @@ public class Board extends JPanel implements MouseListener {
 	public boolean getLandOrOcean(){
 		return landOrOcean;
 	}
-	
+	public String toString(){
+		return "This game board is " + boardHeight + " by " + boardWidth + ". The difficulty is " + difficulty + ". The win and loss booleans are: " + win + " " + loss + ".";
+	}
 }
