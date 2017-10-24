@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Question {
     String question;
     String rightAnswer;
@@ -5,14 +7,14 @@ public class Question {
     String wronganswer2;
     
     public Question(ArrayList<String> questionSpecifics) {
-        question = questionSpecifics[1]
-        rightAnswer = questionSpecifics[2]
-        wrongAnswer1 = questionSpecifics[3]
-        wronganswer2 = questionSpecifics[4]
+        question = questionSpecifics.get(0);
+        rightAnswer = questionSpecifics.get(1);
+        wrongAnswer1 = questionSpecifics.get(2);
+        wronganswer2 = questionSpecifics.get(3);
     }
     
     public String toString() {
-        return "Question: " + question + "\n" + rightAnswer + "\n" + wrongAnswer1 + "\n" + wronganswer2
+        return "Question: " + question + "\n" + rightAnswer + "\n" + wrongAnswer1 + "\n" + wronganswer2 + "\n";
     }
     
 }
