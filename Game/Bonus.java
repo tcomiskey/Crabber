@@ -1,3 +1,3 @@
-public class Bonus extends Character{
+public class Bonus extends GameCharacter{
 
 }
