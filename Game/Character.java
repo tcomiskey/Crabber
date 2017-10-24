@@ -47,6 +47,10 @@ public class Character {
 	public ImageIcon getImage(){
 		return image;
 	}//getImage
+
+	public String toString(){
+		return "x: "+xLoc+" y: "+yLoc+" dir: "+dir;
+	}//tostring
 	
 }//Character
 
