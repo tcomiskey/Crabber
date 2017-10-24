@@ -22,9 +22,11 @@ public class Board extends JPanel implements MouseListener {
 		win = false;
 		//make and fill character array in here based on difficulty
 		addMouseListener(this);
+		while (!win){}
 		
-		
-		
+	}
+	public static void main(String[] args){
+		Board b = new Board(1);
 	}
 	public void moveCharacter(){
 		for (Character c: things){
@@ -33,6 +35,7 @@ public class Board extends JPanel implements MouseListener {
 	}
 	public void mouseClicked(MouseEvent e){
 		System.out.println("Mouse Clicked");
+		win = true;
 	}
 	public void mouseEntered(MouseEvent e){
 	
