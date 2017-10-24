@@ -1,25 +1,51 @@
 import java.io.*;
-import java.util.*
-
-public class Enemy extends Character{
-	private Question[] questions;
+import java.util.*;
+import java.lang.Math;
+public class Enemy extends GameCharacter{
 	
-	public Enemy(int x, int y){
-		super(x, y);
+	private Scanner fileScanner;
+	// made static so that all enemies will have the same question index
+	private static int questionIndex;
+	private static ArrayList<Question> questions;	
+	
+	//this constructor only called once to set the static variables for all other enemies
+	public Enemy(int x, int y, int randomIndex){
+		//super(x, y);
+		questions = new ArrayList<Question>();
 		File qAndAFile = new File("QuestionAndAnswerList.txt");
-		if myFile.exists(){
-			Scanner fileScanner = new Scanner(qAndAFile);
+		if (qAndAFile.exists()){
+			try{
+			fileScanner = new Scanner(qAndAFile);
+			}
+			catch (FileNotFoundException e) {e.printStackTrace();}
+			
 			while(fileScanner.hasNext()){
-				ArrayList <String> questionSpecifics = new ArrayList<String>[4];
-				for (int newLineCount = 0, newLineCount<4, newLineCount++){
-					questionSpecifics[newLineCount] = fileScanner.next();
+				ArrayList <String> questionSpecifics = new ArrayList<String>(4);
+				for (int newLineCount = 0; newLineCount<4; newLineCount++){
+					questionSpecifics.add(fileScanner.nextLine());
 				}
-				questions[i] = new Question(questionSpecifics);
+				questions.add(new Question(questionSpecifics));
 			}
 		}
+		questionIndex = (int) Math.floor(Math.random()*questions.size());
+	}
+	public Enemy(int x, int y){
+		//super(x,y);
+	}
+	public static void main(String[] args) {
+		Enemy badboi = new Enemy(1,1);
+		Enemy badboi2 = new Enemy(1,1);
+		Enemy badboi3 = new Enemy(1,1);
+		Enemy badboi4 = new Enemy(1,1);
+		System.out.println(badboi.hit());
+		System.out.println(badboi2.hit());
+		System.out.println(badboi3.hit());
+		System.out.println(badboi4.hit());
+		
 	}
 	public Question hit(){
-		return 
+		return questions.get(questionIndex); 
+		questionIndex
 	}
 	
 }
