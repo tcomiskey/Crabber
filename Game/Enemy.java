@@ -32,20 +32,10 @@ public class Enemy extends GameCharacter{
 	public Enemy(int x, int y){
 		//super(x,y);
 	}
-	public static void main(String[] args) {
-		Enemy badboi = new Enemy(1,1);
-		Enemy badboi2 = new Enemy(1,1);
-		Enemy badboi3 = new Enemy(1,1);
-		Enemy badboi4 = new Enemy(1,1);
-		System.out.println(badboi.hit());
-		System.out.println(badboi2.hit());
-		System.out.println(badboi3.hit());
-		System.out.println(badboi4.hit());
-		
-	}
+	
 	public Question hit(){
-		return questions.get(questionIndex); 
-		questionIndex
+        questionIndex++;
+		return questions.get(questionIndex);
 	}
 	
 }

@@ -15,8 +15,8 @@ public class GameCharacter {
 		height = image.getIconHeight();
 	}//constructor
 	
-	public int hit(){
-		return 0;
+	public Question hit(){
+		return null;
 	}//hit
 	
 	public int move(){
