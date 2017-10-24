@@ -1,6 +1,9 @@
 import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-public class Board implements MouseListener extends JPanel{
+public class Board extends JPanel implements MouseListener {
 	private int boardWidth;
 	private int boardHeight;
 	private int difficulty;
@@ -23,13 +26,25 @@ public class Board implements MouseListener extends JPanel{
 		
 		
 	}
-	public moveCharacter(){
+	public void moveCharacter(){
 		for (Character c: things){
 		
 		}
 	}
 	public void mouseClicked(MouseEvent e){
 		System.out.println("Mouse Clicked");
+	}
+	public void mouseEntered(MouseEvent e){
+	
+	}
+	public void mouseExited(MouseEvent e){
+	
+	}
+	public void mousePressed(MouseEvent e){
+	
+	}
+	public void mouseReleased(MouseEvent e){
+	
 	}
 	
 	
