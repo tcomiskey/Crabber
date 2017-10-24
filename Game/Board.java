@@ -104,4 +104,5 @@ public class Board extends JPanel implements MouseListener {
 	public boolean getLandOrOcean(){
 		return landOrOcean;
 	}
+	
 }
