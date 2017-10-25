@@ -24,7 +24,7 @@ public class Board extends JPanel implements MouseListener {
 		win = false;
 		loss = false;
 		addMouseListener(this);
-		landOrOcean = 0;
+		landOrOcean = false;
 		
 	}
 	public static void main(String[] args){
@@ -34,7 +34,7 @@ public class Board extends JPanel implements MouseListener {
 		GameCharacter c;
 		Iterator<GameCharacter> iter = enemies.iterator();
 		while (iter.hasNext()){
-			c = iter.next;
+			c = iter.next();
 			c.move();
 		}
 	}
@@ -64,7 +64,7 @@ public class Board extends JPanel implements MouseListener {
 	public void setDifficulty(int difficulty){
 		this.difficulty = difficulty;
 	}
-	public void setWin(boolean win)
+	public void setWin(boolean win){
 		this.win = win;
 	}
 	public void setLoss(boolean loss){
@@ -86,7 +86,7 @@ public class Board extends JPanel implements MouseListener {
 	public int getDifficulty(){
 		return difficulty;
 	}
-	public boolean getWin()
+	public boolean getWin(){
 		return win;
 	}
 	public boolean getLoss(){
