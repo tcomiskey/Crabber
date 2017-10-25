@@ -8,11 +8,18 @@ public class GameCharacter {
 	int xLoc;
 	int yLoc;
 	int dir;
+	int farLeft;
+	int farRight;
 	
-	public GameCharacter(){
+	public GameCharacter(int boardWidth){
 		image = new ImageIcon("brown rectangle.png");
 		width = image.getIconWidth();
 		height = image.getIconHeight();
+		//Sets bounds on how far off screen a character can go before it loops around
+		int usableWidth = boardWidth/width+3*width;
+		farLeft = -(usableWidth-boardWidth)/2;
+		farRight = boardWidth+(usableWidth-boardWidth)/2;
+			
 	}//constructor
 	
 	public Question hit(){
@@ -21,6 +28,13 @@ public class GameCharacter {
 	
 	public int move(){
 		xLoc += dir*5;
+		if(xLoc < farLeft){
+			xLoc = farRight;
+		}
+		else if(xLoc > farRight){
+			xLoc = farLeft;
+		}
+			
 		return xLoc;
 	}//move
 	
