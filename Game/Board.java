@@ -10,7 +10,7 @@ public class Board extends JPanel implements MouseListener {
 	private boolean win;
 	private boolean loss;
 	private Player player;
-	private gameCharacter[] enemies;
+	private ArrayList<GameCharacter> enemies;
 	private boolean landOrOcean; //0 for land, 1 for ocean
 	
 	
@@ -26,21 +26,15 @@ public class Board extends JPanel implements MouseListener {
 		addMouseListener(this);
 		landOrOcean = 0;
 		
-		if(difficulty == 1){
-			enemies = new gameCharacter[8];
-		}		
-		else if(difficulty == 2){
-			enemies = new gameCharacter[12];
-		}
-		else{
-			enemies = new gameCharacter[16];
-		}
 	}
 	public static void main(String[] args){
 		Board b = new Board(1);
 	}
 	public void moveCharacter(){
-		for (gameCharacter c: enemies){
+		GameCharacter c;
+		Iterator<GameCharacter> iter = enemies.iterator();
+		while (iter.hasNext()){
+			c = iter.next;
 			c.move();
 		}
 	}
