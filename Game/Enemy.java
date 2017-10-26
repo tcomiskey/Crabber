@@ -34,8 +34,31 @@ public class Enemy extends GameCharacter{
 	}
 	
 	public Question hit(){
-        questionIndex++;
+        	questionIndex++;
 		return questions.get(questionIndex);
 	}
+	public int getX(){
+		return xLoc;
+	}//getX
 	
+	public int getY(){
+		return yLoc;
+	}//getY
+	
+	public void setX(int x){
+		xLoc = x;
+	}//setX
+	
+	public void setY(int y){
+		yLoc = y;
+	}//setY
+	
+	public void setDir(int dir){
+		this.dir = dir;
+	}//setDir
+	
+	public ImageIcon getImage(){
+		return image;
+	}//getImage
+
 }
