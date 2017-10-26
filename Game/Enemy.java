@@ -29,8 +29,8 @@ public class Enemy extends GameCharacter{
 		}
 		questionIndex = (int) Math.floor(Math.random()*questions.size());
 	}
-	public Enemy(int x, int y){
-		//super(x,y);
+	public Enemy(int boardWidth){
+		super(boardWidth);
 	}
 	
 	public Question hit(){

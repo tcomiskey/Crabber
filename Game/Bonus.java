@@ -3,8 +3,8 @@ import java.util.*;
 import java.lang.Math;
 public class Bonus extends GameCharacter{
 
-    	public Bonus(int x, int y) {
-        //super(x,y);
+    	public Bonus(int boardWidth) {
+        	super(boardWidth);
     	}
     
 	public Message hit() {

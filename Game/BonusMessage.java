@@ -6,4 +6,7 @@ public class BonusMessage extends Message{
 	public String toString(){
 		return bonusMessage;
 	}
+	public String getBonusMessage(){
+		return bonusMessage;
+	}
 }
