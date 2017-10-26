@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Question {
+public class Question extends Message{
     String question;
     String rightAnswer;
     String wrongAnswer1;
@@ -14,7 +14,7 @@ public class Question {
     }
     
     public String toString() {
-        return "Question: " + question + "\n" + rightAnswer + "\n" + wrongAnswer1 + "\n" + wronganswer2 + "\n";
+        return question + "\n" + rightAnswer + "\n" + wrongAnswer1 + "\n" + wronganswer2 + "\n";
     }
     
 }
