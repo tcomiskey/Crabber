@@ -22,7 +22,7 @@ public class GameCharacter {
 			
 	}//constructor
 	
-	public Question hit(){
+	public Message hit(){
 		return null;
 	}//hit
 	

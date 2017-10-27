@@ -3,7 +3,7 @@ import org.junit.*;
 
 public class Tests {
 
-@Test
+    @Test
     public void testHitMessage() {
         int boardWidth = 100;
         Bonus newBonus = new Bonus(boardWidth);

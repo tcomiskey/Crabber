@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 import java.lang.Math;
+import java.awt.*;
 public class Enemy extends GameCharacter{
 	
 	private Scanner fileScanner;
@@ -9,8 +10,8 @@ public class Enemy extends GameCharacter{
 	private static ArrayList<Question> questions;	
 	
 	//this constructor only called once to set the static variables for all other enemies
-	public Enemy(int x, int y, int randomIndex){
-		//super(x, y);
+	public Enemy(int boardWidth, int randomIndex){
+		super(boardWidth);
 		questions = new ArrayList<Question>();
 		File qAndAFile = new File("QuestionAndAnswerList.txt");
 		if (qAndAFile.exists()){
