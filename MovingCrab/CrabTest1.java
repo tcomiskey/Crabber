@@ -29,7 +29,7 @@ public class CrabTest1 extends JPanel implements ActionListener,MouseListener{
     	final ImageIcon icon = null;
     	
 	    layeredPane = new JLayeredPane();
-	    layeredPane.setPreferredSize(new Dimension(600,620));
+	    layeredPane.setPreferredSize(new Dimension(300,620));
 	    layeredPane.setBorder(BorderFactory.createTitledBorder("Click to move the crab."));
 	    layeredPane.addMouseListener(this);
 	    
@@ -83,17 +83,18 @@ public class CrabTest1 extends JPanel implements ActionListener,MouseListener{
 		return label;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getY() < layeredPane.getHeight()/2){
 			layeredPane.setLayer(crabLabel, 72,0);
 			crabLabel.move(crabLabel.getX(), crabLabel.getY()-(layeredPane.getHeight()/14)-1);
 		}
-		else if(e.getX() > layeredPane.getWidth()/2){
+		else if(e.getX() > layeredPane.getWidth()/2 && crabLabel.getX()+(layeredPane.getWidth()/6)-2 < layeredPane.getWidth()-layeredPane.getWidth()/6){
 			layeredPane.setLayer(crabLabel, 72,0);
 			crabLabel.move(crabLabel.getX()+(layeredPane.getWidth()/6)-2, crabLabel.getY());
 		}
-		else{
+		else if(e.getX() < layeredPane.getWidth()/2 && crabLabel.getX()-(layeredPane.getWidth()/6)+2 > 0){
 			layeredPane.setLayer(crabLabel, 72,0);
 			crabLabel.move(crabLabel.getX()-(layeredPane.getWidth()/6)+2, crabLabel.getY());
 		}
@@ -131,7 +132,7 @@ public class CrabTest1 extends JPanel implements ActionListener,MouseListener{
 	
 	private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("LayeredPaneDemo2");
+        JFrame frame = new JFrame("Crabber");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
@@ -151,3 +152,4 @@ public class CrabTest1 extends JPanel implements ActionListener,MouseListener{
     }
 
 }
+
