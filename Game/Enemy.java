@@ -58,8 +58,8 @@ public class Enemy extends GameCharacter{
 		this.dir = dir;
 	}//setDir
 	
-	public ImageIcon getImage(){
-		return image;
-	}//getImage
+//	public ImageIcon getImage(){
+//		return image;
+//	}//getImage
 
 }
