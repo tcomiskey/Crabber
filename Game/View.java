@@ -18,9 +18,10 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	private JLabel playerLabel;
 	private ArrayList<JLabel> enemyLabels;
 	private JButton start;
-	private JButton easy;
+	public JButton easy;
 	private JButton medium;
 	private JButton hard;
+	private Controller c;
 	
 	View(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -59,6 +60,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 				public void actionPerformed(ActionEvent e){
 					difficulty = 1;
 					System.out.println(difficulty);
+					setupController();
 					startGameWindow();
 				}
 			}
@@ -110,9 +112,11 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	public JButton getEasyButton(){
 		return easy;
 	}
+
+	public void setupController(){
+		c = new Controller(this);
+	}
 }
 		
 
-	
-	
 

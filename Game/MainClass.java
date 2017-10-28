@@ -1,7 +1,8 @@
 public class MainClass{
 
 	public static void main(String[] args){
-		Controller c = new Controller();
+		View v = new View();
+		v.setVisible(true);
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				createAndShowGUI();

@@ -6,25 +6,19 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.*;
 
-public class Controller implements ActionListener{
+public class Controller{
 
 	Board b;
 	View v;
 
-	public Controller(){
-		v = new View();//don't know what this constructor looks like yet
-		v.setVisible(true);
+	public Controller(View v){
+		this.v = v;//don't know what this constructor looks like yet
 		b = new Board(v.getDifficulty());//where does board get diff? (buttons but like actually how)
 		System.out.println(b);
 		b.moveCharacter();
 		System.out.println(b);
 	}
 
-	public void actionPerformed(ActionEvent e){
-		//if(e.getSource() == v.getEasyButton()){
-			System.out.println("It works!");
-		//}
-	}
 }
 
 	
