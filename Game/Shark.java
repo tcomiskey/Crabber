@@ -5,11 +5,11 @@ public class Shark extends Enemy{
 	
 	public Shark(int boardWidth, int xLoc, int yLoc, String fileName){
 		super(boardWidth, xLoc, yLoc, fileName);
-        image = new ImageIcon("shark.png");
+        image = new ImageIcon("images/shark.png");
 	}
 	public Shark(int boardWidth, int xLoc, int yLoc){
 		super(boardWidth, xLoc, yLoc);
-        image = new ImageIcon("shark.png");
+        image = new ImageIcon("images/shark.png");
 	}
 	
 	public int getX(){

@@ -5,12 +5,12 @@ public class Human extends Enemy{
     
     public Human(int boardWidth, int xLoc, int yLoc, String fileName){
     	super(boardWidth, xLoc, yLoc, fileName);
-        image = new ImageIcon("Sonny stand west.png");
+        image = new ImageIcon("images/Sonny stand west.png");
     }
               
     public Human(int boardWidth, int xLoc, int yLoc){
         super(boardWidth, xLoc, yLoc);
-        image = new ImageIcon("Sonny stand west.png");
+        image = new ImageIcon("images/Sonny stand west.png");
     }
     
     public int getX(){
