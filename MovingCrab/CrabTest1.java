@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 //import components.LayeredPaneDemo2;
 
-public class CrabTest1 extends JPanel implements ActionListener,MouseListener{
+public class CrabTest1 extends JPanel implements MouseListener{
 	
 	private JLayeredPane layeredPane;
     	private JLabel crabLabel;
