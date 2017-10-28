@@ -3,8 +3,8 @@ import java.swing.*;
 public class Human {
     private ImageIcon image;
     
-    public Enemy(int boardWidth, int randomIndex){
-        super(boardWidth, randomIndex);
+    public Enemy(int boardWidth, int fileName){
+        super(boardWidth, fileName);
     }
               
     public Enemy(int boardWidth){

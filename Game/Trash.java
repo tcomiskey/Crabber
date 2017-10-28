@@ -1,12 +1,12 @@
 import java.swing.*;
 
-public class Shark extends Enemy{
+public class Trash extends Enemy{
 	private ImageIcon image;
 	
-	public Shark(int boardWidth, int fileName){
+	public Trash(int boardWidth, int fileName){
 		super(boardWidth, fileName);
 	}
-	public Shark(int boardWidth){
+	public Trash(int boardWidth){
 		super(boardWidth);
 	}
 	
