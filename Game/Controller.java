@@ -14,18 +14,18 @@ public class Controller implements ActionListener{
 	public Controller(){
 		v = new View();//don't know what this constructor looks like yet
 		v.setVisible(true);
-        b = v.getBoard();//where does board get diff? (buttons but like actually how)
+        b = new Board(v.getDifficulty());//where does board get diff? (buttons but like actually how)
 		System.out.println(b);
 		b.moveCharacter();
 		System.out.println(b);
 	}
 
-	public void actionPerformed(ActionEvent e){
+	/*public void actionPerformed(ActionEvent e){
 		//if(e.getSource() == v.getEasyButton()){
 			System.out.println("It works!");
         
 		//}
-	}
+	}*/
 }
 
 	
