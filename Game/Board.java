@@ -2,7 +2,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.lang.Math
+import java.lang.Math;
 
 public class Board extends JPanel implements MouseListener {
 	private int boardWidth;
@@ -12,7 +12,7 @@ public class Board extends JPanel implements MouseListener {
 	private boolean loss;
 	private Player player;
 	private ArrayList<GameCharacter> enemies;
-	private boolean landOrOcean; //0 for land, 1 for ocean
+	private boolean isOcean; //false for land, true for ocean
 	
 	
 	
@@ -25,7 +25,7 @@ public class Board extends JPanel implements MouseListener {
 		win = false;
 		loss = false;
 		addMouseListener(this);
-		landOrOcean = false;
+		isOcean = false;
         int xcoord = 0;
         int ycoord = boardHeight-(2*player.getPlayerHeight());
         int row = 0;
@@ -33,17 +33,19 @@ public class Board extends JPanel implements MouseListener {
         int numPerRowConstant = 5;
         
         // constant subject to change
-        enemies.add(new Shark(boardWidth, xcoord, ycoord, "QuestionAndAnswerList.txt"))
+        enemies.add(new Shark(boardWidth, xcoord, ycoord, "QuestionAndAnswerList.txt"));
         xcoord += enemies.get(0).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
         for(int i = 1; i < difficulty * numEnemiesConstant; i++){
-            if (row%2 == 0)
+            if (row%2 == 0){
                 enemies.add(new Shark(boardWidth, xcoord, ycoord));
                 xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
-            else
+            }
+            else{
                 enemies.add(new Trash(boardWidth, xcoord, ycoord));
                 xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+            }
             if (i > numPerRowConstant){
-                int randomRowSpacing = Math.random();
+                double randomRowSpacing = Math.random();
                 if (randomRowSpacing < 0.8){
                     ycoord += player.getPlayerHeight();
                     row++;
@@ -105,8 +107,8 @@ public class Board extends JPanel implements MouseListener {
 	public void setPlayer(Player player){
 		this.player = player;
 	}
-	public void setLandOrOcean(boolean landOrOcean){
-		this.landOrOcean = landOrOcean;
+	public void setIsOcean(boolean isOcean){
+		this.isOcean = isOcean;
 	}
 	//getters
 	public int getBoardWidth(){
@@ -127,8 +129,8 @@ public class Board extends JPanel implements MouseListener {
 	public Player getPlayer(){
 		return player;
 	}
-	public boolean getLandOrOcean(){
-		return landOrOcean;
+	public boolean getIsOcean(){
+		return isOcean;
 	}
 	public String toString(){
 		return "This game board is " + boardHeight + " by " + boardWidth + ". The difficulty is " + difficulty + ". The win and loss booleans are: " + win + " " + loss + ".";

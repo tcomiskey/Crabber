@@ -44,10 +44,10 @@ public class Player{
 	public void setY(int yCoord){
 		yLocation = yCoord;
 	} 	
-	public void getHeight(){
+	public int getPlayerHeight(){
 		return PLAYER_HEIGHT;
 	}
-	public void getWidth(){
+	public int getPlayerWidth(){
 		return PLAYER_WIDTH;
 	}
 }

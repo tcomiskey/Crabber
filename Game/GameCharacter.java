@@ -64,6 +64,14 @@ public class GameCharacter {
 		return image;
 	}//getImage
 
+	public int getImgWidth(){
+		return width;
+	}
+
+	public int getImgHeight(){
+		return height;
+	}
+
 	public String toString(){
 		return "x: "+xLoc+" y: "+yLoc+" dir: "+dir;
 	}//toString

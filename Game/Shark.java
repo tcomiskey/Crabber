@@ -1,9 +1,9 @@
-import java.swing.*;
+import javax.swing.*;
 
 public class Shark extends Enemy{
 	private ImageIcon image;
 	
-	public Shark(int boardWidth, int xLoc, int yLoc, int fileName){
+	public Shark(int boardWidth, int xLoc, int yLoc, String fileName){
 		super(boardWidth, xLoc, yLoc, fileName);
 	}
 	public Shark(int boardWidth, int xLoc, int yLoc){

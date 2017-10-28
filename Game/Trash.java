@@ -1,9 +1,9 @@
-import java.swing.*;
+import javax.swing.*;
 
 public class Trash extends Enemy{
 	private ImageIcon image;
 	
-	public Trash(int boardWidth, int xLoc, int yLoc, int fileName){
+	public Trash(int boardWidth, int xLoc, int yLoc, String fileName){
 		super(boardWidth, xLoc, yLoc, fileName);
 	}
 	public Trash(int boardWidth, int xLoc, int yLoc){

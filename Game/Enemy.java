@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.lang.Math;
 import java.awt.*;
-import java.swing.*;
+import javax.swing.*;
 
 public class Enemy extends GameCharacter{
         private ImageIcon image;
