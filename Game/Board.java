@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.lang.Math;
 
-public class Board extends JPanel implements MouseListener {
+public class Board {
 	private int boardWidth;
 	private int boardHeight;
 	private int difficulty; //1 = easy, 2 = medium, 3 = hard
@@ -72,22 +72,7 @@ public class Board extends JPanel implements MouseListener {
 			c.move();
 		}
 	}
-	public void mouseClicked(MouseEvent e){
-		System.out.println("Mouse Clicked");
-		win = true;
-	}
-	public void mouseEntered(MouseEvent e){
 	
-	}
-	public void mouseExited(MouseEvent e){
-	
-	}
-	public void mousePressed(MouseEvent e){
-	
-	}
-	public void mouseReleased(MouseEvent e){
-	
-	}
 	//setters
 	public void setBoardWidth(int boardWidth){
 		this.boardWidth = boardWidth;
