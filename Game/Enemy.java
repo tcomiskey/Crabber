@@ -34,7 +34,7 @@ public class Enemy extends GameCharacter{
 		super(boardWidth);
 	}
 	
-	public Question hit(){
+	public Message hit(){
         	questionIndex++;
 		return questions.get(questionIndex);
 	}
