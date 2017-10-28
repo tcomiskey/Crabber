@@ -7,7 +7,7 @@ public class GameCharacter {
 	int height;
 	int xLoc;
 	int yLoc;
-	int dir;
+	int dir = -1;
 	int farLeft;
 	int farRight;
 	
@@ -16,11 +16,12 @@ public class GameCharacter {
         	this.xLoc=xLoc;
         	this.yLoc=yLoc;
 		width = image.getIconWidth();
+        System.out.println(image.getIconWidth());
 		height = image.getIconHeight();
 		//Sets bounds on how far off screen a character can go before it loops around
-		int usableWidth = boardWidth/width+3*width;
-		farLeft = -(usableWidth-boardWidth)/2;
-		farRight = boardWidth+(usableWidth-boardWidth)/2;
+		int usableWidth = (boardWidth/width) + 3*width; //335
+		farLeft = -(usableWidth)/2;
+		farRight = boardWidth+(usableWidth)/2;
 			
 	}//constructor
 	

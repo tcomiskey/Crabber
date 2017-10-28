@@ -34,6 +34,6 @@ public class Shark extends Enemy{
 		return image;
 	}//getImage
 	public String toString(){
-		return "Shark located at x = " + xLoc + "y = " + yLoc;
+		return "Shark located at x = " + xLoc + " y = " + yLoc;
 	}
 }	
