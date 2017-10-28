@@ -106,6 +106,10 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 		setVisible(true);
 		repaint();
 	}
+
+	public JButton getEasyButton(){
+		return easy;
+	}
 }
 		
 
