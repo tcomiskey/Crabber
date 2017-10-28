@@ -3,11 +3,11 @@ import java.swing.*;
 public class Shark extends Enemy{
 	private ImageIcon image;
 	
-	public Shark(int boardWidth, int fileName){
-		super(boardWidth, fileName);
+	public Shark(int boardWidth, int xLoc, int yLoc, int fileName){
+		super(boardWidth, xLoc, yLoc, fileName);
 	}
-	public Shark(int boardWidth){
-		super(boardWidth);
+	public Shark(int boardWidth, int xLoc, int yLoc){
+		super(boardWidth, xLoc, yLoc);
 	}
 	
 	public int getX(){

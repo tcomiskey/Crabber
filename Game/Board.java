@@ -2,11 +2,12 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.lang.Math
 
 public class Board extends JPanel implements MouseListener {
 	private int boardWidth;
 	private int boardHeight;
-	private int difficulty;
+	private int difficulty; //1 = easy, 2 = medium, 3 = hard
 	private boolean win;
 	private boolean loss;
 	private Player player;
@@ -25,6 +26,37 @@ public class Board extends JPanel implements MouseListener {
 		loss = false;
 		addMouseListener(this);
 		landOrOcean = false;
+        int xcoord = 0;
+        int ycoord = boardHeight-(2*player.getPlayerHeight());
+        int row = 0;
+        int numEnemiesConstant = 20;
+        int numPerRowConstant = 5;
+        
+        // constant subject to change
+        enemies.add(new Shark(boardWidth, xcoord, ycoord, "QuestionAndAnswerList.txt"))
+        xcoord += enemies.get(0).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+        for(int i = 1; i < difficulty * numEnemiesConstant; i++){
+            if (row%2 == 0)
+                enemies.add(new Shark(boardWidth, xcoord, ycoord));
+                xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+            else
+                enemies.add(new Trash(boardWidth, xcoord, ycoord));
+                xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+            if (i > numPerRowConstant){
+                int randomRowSpacing = Math.random();
+                if (randomRowSpacing < 0.8){
+                    ycoord += player.getPlayerHeight();
+                    row++;
+                }
+                else{
+                    ycoord += 2*player.getPlayerHeight();
+                    row+=2;
+                }
+                xcoord = 0;
+                
+            }
+            
+        }
 		
 	}
 	public static void main(String[] args){

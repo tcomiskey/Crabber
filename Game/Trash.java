@@ -3,11 +3,11 @@ import java.swing.*;
 public class Trash extends Enemy{
 	private ImageIcon image;
 	
-	public Trash(int boardWidth, int fileName){
-		super(boardWidth, fileName);
+	public Trash(int boardWidth, int xLoc, int yLoc, int fileName){
+		super(boardWidth, xLoc, yLoc, fileName);
 	}
-	public Trash(int boardWidth){
-		super(boardWidth);
+	public Trash(int boardWidth, int xLoc, int yLoc){
+		super(boardWidth, xLoc, yLoc);
 	}
 	
 	public int getX(){

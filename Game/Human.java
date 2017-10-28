@@ -3,12 +3,12 @@ import java.swing.*;
 public class Human {
     private ImageIcon image;
     
-    public Enemy(int boardWidth, int fileName){
-        super(boardWidth, fileName);
+    public Enemy(int boardWidth, int xLoc, int yLoc, int fileName){
+        super(boardWidth, xLoc, yLoc, fileName);
     }
               
-    public Enemy(int boardWidth){
-            super(boardWidth);
+    public Enemy(int boardWidth, int xLoc, int yLoc){
+            super(boardWidth, xLoc, yLoc);
     }
     
     public int getX(){
