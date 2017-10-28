@@ -18,48 +18,48 @@ import javax.swing.JPanel;
 public class CrabTest1 extends JPanel implements ActionListener,MouseListener{
 	
 	private JLayeredPane layeredPane;
-    private JLabel crabLabel;
+    	private JLabel crabLabel;
     
-    private static String ON_TOP_COMMAND = "ontop";
-    private static String LAYER_COMMAND = "layer";
+    	private static String ON_TOP_COMMAND = "ontop";
+    	private static String LAYER_COMMAND = "layer";
     
-    public CrabTest1(){
-    	setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+    	public CrabTest1(){
+    		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     	
-    	final ImageIcon icon = null;
-    	
-	    layeredPane = new JLayeredPane();
-	    layeredPane.setPreferredSize(new Dimension(300,620));
-	    layeredPane.setBorder(BorderFactory.createTitledBorder("Click to move the crab."));
-	    layeredPane.addMouseListener(this);
-	    
-	    layeredPane.setLayout(new GridLayout(13,6));
-	    JLabel label;
-	    for (int i = 0; i < 72; i++){
-	    	if (i % 2 == 0 && (i / 6) % 2 == 0){
-	    		label = createColoredLabel("",Color.gray);
-	    	}
-	    	else if((i / 6) % 2 == 1 && i % 2 == 1){
-	    		label = createColoredLabel("",Color.gray);
-	    	}
-	    	else{
-	    		label = createColoredLabel("",Color.white);
-	    	}
+	    	final ImageIcon icon = null;
 	    	
-	    	layeredPane.add(label, new Integer(i),-1);
-	    }
-	    
-	    crabLabel = new JLabel(icon);
-	    if (icon == null) {
-            //System.err.println("Duke icon not found; using black rectangle instead.");
-            crabLabel.setOpaque(true);
-            crabLabel.setBackground(Color.BLACK);
-        }
-        layeredPane.add(crabLabel,new Integer(-1));
-        
-        add(Box.createRigidArea(new Dimension(0,10)));
-        add(layeredPane);
-    }
+		    layeredPane = new JLayeredPane();
+		    layeredPane.setPreferredSize(new Dimension(300,620));
+		    layeredPane.setBorder(BorderFactory.createTitledBorder("Click to move the crab."));
+		    layeredPane.addMouseListener(this);
+		    
+		    layeredPane.setLayout(new GridLayout(13,6));
+		    JLabel label;
+		    for (int i = 0; i < 72; i++){
+		    	if (i % 2 == 0 && (i / 6) % 2 == 0){
+		    		label = createColoredLabel("",Color.gray);
+		    	}
+		    	else if((i / 6) % 2 == 1 && i % 2 == 1){
+		    		label = createColoredLabel("",Color.gray);
+		    	}
+		    	else{
+		    		label = createColoredLabel("",Color.white);
+		    	}
+		    	
+		    	layeredPane.add(label, new Integer(i),-1);
+		    }
+		    
+		    crabLabel = new JLabel(icon);
+		    if (icon == null) {
+		    //System.err.println("Duke icon not found; using black rectangle instead.");
+		    crabLabel.setOpaque(true);
+		    crabLabel.setBackground(Color.BLACK);
+		}
+		layeredPane.add(crabLabel,new Integer(-1));
+		
+		add(Box.createRigidArea(new Dimension(0,10)));
+		add(layeredPane);
+	}
     
     protected static ImageIcon createImageIcon(String path) {
         java.net.URL imgURL = CrabTest1.class.getResource(path);
