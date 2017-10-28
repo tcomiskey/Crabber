@@ -9,7 +9,6 @@ public class Board {
 	private int boardHeight;
 	private int difficulty; //1 = easy, 2 = medium, 3 = hard
 	private boolean win;
-	private boolean loss;
 	private Player player;
 	private ArrayList<GameCharacter> enemies;
 	private boolean isOcean; //false for land, true for ocean
@@ -22,8 +21,7 @@ public class Board {
 		boardWidth = 300;
 		boardHeight = 300;
 		this.difficulty = difficulty;
-		win = false;
-		loss = false;
+		win = true;
 		addMouseListener(this);
 		isOcean = false;
         int xcoord = 0;
@@ -121,6 +119,6 @@ public class Board {
 		return isOcean;
 	}
 	public String toString(){
-		return "This game board is " + boardHeight + " by " + boardWidth + ". The difficulty is " + difficulty + ". The win and loss booleans are: " + win + " " + loss + ".";
+		return "This game board is " + boardHeight + " by " + boardWidth + ". The difficulty is " + difficulty + ". The win and loss booleans are: " + win + " " + enemies;
 	}
 }
