@@ -41,13 +41,13 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 		menu.setBackground(Color.black);
 	}
 
-	public static void main (String[] args){
+	/*public static void main (String[] args){
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				new View().setVisible(true);
 			}
 		});
-	}
+	}*/
 
 	private void createDiffScreen(){
 		//this clears old screen
