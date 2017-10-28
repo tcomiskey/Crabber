@@ -10,7 +10,7 @@ public class Board {
 	private int difficulty; //1 = easy, 2 = medium, 3 = hard
 	private boolean win;
 	private Player player;
-	private ArrayList<GameCharacter> enemies;
+	private ArrayList<GameCharacter> enemies = new ArrayList<GameCharacter>(50);
 	private boolean isOcean; //false for land, true for ocean
 	
 	
@@ -18,12 +18,14 @@ public class Board {
 	//hella getters and setters
 	
 	public Board(int difficulty){
-		boardWidth = 300;
-		boardHeight = 300;
+		boardWidth = 1000;
+		boardHeight = 1000;
 		this.difficulty = difficulty;
 		win = true;
-		addMouseListener(this);
 		isOcean = false;
+        
+        player = new Player();
+        
         int xcoord = 0;
         int ycoord = boardHeight-(2*player.getPlayerHeight());
         int row = 0;
@@ -60,10 +62,9 @@ public class Board {
             }
             
         }
+        //System.out.println("Board constructor made it to the end.");
+        //System.out.println(enemies);
 		
-	}
-	public static void main(String[] args){
-		Board b = new Board(1);
 	}
 	public void moveCharacter(){
 		GameCharacter c;
@@ -87,9 +88,6 @@ public class Board {
 	public void setWin(boolean win){
 		this.win = win;
 	}
-	public void setLoss(boolean loss){
-		this.loss = loss;
-	}
 	public void setPlayer(Player player){
 		this.player = player;
 	}
@@ -108,9 +106,6 @@ public class Board {
 	}
 	public boolean getWin(){
 		return win;
-	}
-	public boolean getLoss(){
-		return loss;
 	}
 	public Player getPlayer(){
 		return player;

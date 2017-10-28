@@ -2,11 +2,11 @@ import java.io.*;
 import java.util.*;
 import java.lang.Math;
 import java.awt.*;
-import java.swing.*;
+import javax.swing.*;
 public class Bonus extends GameCharacter{
 
-    	public Bonus(int boardWidth) {
-        	super(boardWidth);
+    	public Bonus(int boardWidth, int xLoc, int yLoc) {
+        	super(boardWidth, xLoc, yLoc);
     	}
     
 	public Message hit() {

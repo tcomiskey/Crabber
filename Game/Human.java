@@ -1,9 +1,9 @@
-import java.swing.*;
+import javax.swing.*;
 
-public class Human {
+public class Human extends Enemy{
     private ImageIcon image;
     
-    public Human(int boardWidth, int xLoc, int yLoc, int fileName){
+    public Human(int boardWidth, int xLoc, int yLoc, String fileName){
         super(boardWidth, xLoc, yLoc, fileName);
     }
               
