@@ -5,6 +5,7 @@ public class Trash extends Enemy{
 	
 	public Trash(int boardWidth, int xLoc, int yLoc, String fileName){
 		super(boardWidth, xLoc, yLoc, fileName);
+        image = new ImageIcon("Trash.png");
 	}
 	public Trash(int boardWidth, int xLoc, int yLoc){
 		super(boardWidth, xLoc, yLoc);
