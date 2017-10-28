@@ -33,5 +33,8 @@ public class Trash extends Enemy{
 	public ImageIcon getImage(){
 		return image;
 	}//getImage
-
+	
+	public String toString(){
+		return "Trash located at x = " +  xLoc + " y = " + yLoc;
+	}
 }	

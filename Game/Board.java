@@ -9,9 +9,8 @@ public class Board {
 	private int boardHeight;
 	private int difficulty; //1 = easy, 2 = medium, 3 = hard
 	private boolean win;
-	private boolean loss;
 	private Player player;
-	private ArrayList<GameCharacter> enemies;
+	private ArrayList<GameCharacter> enemies = new ArrayList<GameCharacter>(50);
 	private boolean isOcean; //false for land, true for ocean
 	
 	
@@ -19,18 +18,20 @@ public class Board {
 	//hella getters and setters
 	
 	public Board(int difficulty){
-		boardWidth = 300;
-		boardHeight = 300;
+		boardWidth = 10000;
+		boardHeight = 10000;
 		this.difficulty = difficulty;
-		win = false;
-		loss = false;
-		addMouseListener(this);
+		win = true;
 		isOcean = false;
+        
+        player = new Player();
+        
         int xcoord = 0;
         int ycoord = boardHeight-(2*player.getPlayerHeight());
         int row = 0;
         int numEnemiesConstant = 20;
         int numPerRowConstant = 5;
+        int enemiesInRow = 0;
         
         // first enemy will use complex constuctor to instantiate static array of questions
         enemies.add(new Shark(boardWidth, xcoord, ycoord, "QuestionAndAnswerList.txt"));
@@ -46,8 +47,9 @@ public class Board {
                 enemies.add(new Trash(boardWidth, xcoord, ycoord));
                 xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
             }
+            enemiesInRow++;
             // if you max out the number of enemies for a row, pick next row to fill (1 or 2 rows up), reset xcoord to 0
-            if (i > numPerRowConstant){
+            if (enemiesInRow == numPerRowConstant){
                 double randomRowSpacing = Math.random();
                 if (randomRowSpacing < 0.8){
                     ycoord += player.getPlayerHeight();
@@ -58,15 +60,14 @@ public class Board {
                     row+=2;
                 }
                 xcoord = 0;
-                
+                enemiesInRow = 0;
             }
+            
             
         }
 		
 	}
-	public static void main(String[] args){
-		Board b = new Board(1);
-	}
+    //move method
 	public void moveCharacter(){
 		GameCharacter c;
 		Iterator<GameCharacter> iter = enemies.iterator();
@@ -75,7 +76,7 @@ public class Board {
 			c.move();
 		}
 	}
-	
+    
 	//setters
 	public void setBoardWidth(int boardWidth){
 		this.boardWidth = boardWidth;
@@ -88,9 +89,6 @@ public class Board {
 	}
 	public void setWin(boolean win){
 		this.win = win;
-	}
-	public void setLoss(boolean loss){
-		this.loss = loss;
 	}
 	public void setPlayer(Player player){
 		this.player = player;
@@ -111,9 +109,6 @@ public class Board {
 	public boolean getWin(){
 		return win;
 	}
-	public boolean getLoss(){
-		return loss;
-	}
 	public Player getPlayer(){
 		return player;
 	}
@@ -121,6 +116,10 @@ public class Board {
 		return isOcean;
 	}
 	public String toString(){
-		return "This game board is " + boardHeight + " by " + boardWidth + ". The difficulty is " + difficulty + ". The win and loss booleans are: " + win + " " + loss + ".";
+        String returnString = "This game board is " + boardHeight + " by " + boardWidth + ". The difficulty is " + difficulty + ". The win and loss booleans are: " + win + " ";
+        for (GameCharacter character: enemies){
+            returnString += character.toString() + "\n";
+        }
+        return returnString;
 	}
 }

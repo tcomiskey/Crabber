@@ -1,13 +1,13 @@
-import java.swing.*;
+import javax.swing.*;
 
-public class Human {
+public class Human extends Enemy{
     private ImageIcon image;
     
-    public Enemy(int boardWidth, int xLoc, int yLoc, int fileName){
+    public Human(int boardWidth, int xLoc, int yLoc, String fileName){
         super(boardWidth, xLoc, yLoc, fileName);
     }
               
-    public Enemy(int boardWidth, int xLoc, int yLoc){
+    public Human(int boardWidth, int xLoc, int yLoc){
             super(boardWidth, xLoc, yLoc);
     }
     
@@ -34,5 +34,7 @@ public class Human {
     public ImageIcon getImage(){
         return image;
     }//getImage
-
+	public String toString(){
+		return "Human located at x = " + xLoc + " y = " + yLoc;
+	}
 }

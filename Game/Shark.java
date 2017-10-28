@@ -33,5 +33,7 @@ public class Shark extends Enemy{
 	public ImageIcon getImage(){
 		return image;
 	}//getImage
-
+	public String toString(){
+		return "Shark located at x = " + xLoc + " y = " + yLoc;
+	}
 }	
