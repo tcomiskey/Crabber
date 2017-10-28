@@ -13,8 +13,8 @@ public class GameCharacter {
 	
 	public GameCharacter(int boardWidth, int xLoc, int yLoc){
 		image = new ImageIcon("brown rectangle.png");
-        this.xLoc=xLoc;
-        this.yLoc=yLoc;
+        	this.xLoc=xLoc;
+        	this.yLoc=yLoc;
 		width = image.getIconWidth();
 		height = image.getIconHeight();
 		//Sets bounds on how far off screen a character can go before it loops around

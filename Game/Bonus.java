@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.lang.Math;
 import java.awt.*;
+import java.swing.*;
 public class Bonus extends GameCharacter{
 
     	public Bonus(int boardWidth) {
@@ -30,9 +31,9 @@ public class Bonus extends GameCharacter{
 		this.dir = dir;
 	}//setDir
 	
-//	public ImageIcon getImage(){
-//		return image;
-//	}//getImage
+	public ImageIcon getImage(){
+		return image;
+	}//getImage
 
     
 }
