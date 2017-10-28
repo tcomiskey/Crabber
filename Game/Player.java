@@ -1,14 +1,26 @@
 public class Player{
 	
-	private int xLocation;
+	private int xLocation;	//Locations are top left corner
 	private int yLocation;
 	static final int PLAYER_WIDTH = 160; //Not accurate values just place holders
 	static final int PLAYER_HEIGHT = 160;
 	static final int BOARD_LEFT_BOUNDARY = 0;
 	static final int BOARD_RIGHT_BOUNDARY = 500;
 
+	public void move(MouseEvent e){
+		if(e.getY() < yLocation-PLAYER_HEIGHT){
+			moveForward();
+		}
+		else if(e.getX() > xLocation + PLAYER_WIDTH){
+			moveRight();
+		}
+		else if(e.getX() < xLocation){
+			moveLeft();
+		}
+	}
+	
 	private void moveLeft(){
-		if(xLocation >= BOARD_LEFT_BOUNDARY ){
+		if(xLocation >= BOARD_LEFT_BOUNDARY + PLAYER_WIDTH/4){	//makes sure player is on screen and has room to move
 			xLocation -= PLAYER_WIDTH/4; // Increment by a quarter of player width
 			System.out.println("Player moved left");	
 			System.out.println(this);	
@@ -16,7 +28,7 @@ public class Player{
 	}
 	
 	private void moveRight(){
-		if(xLocation <= BOARD_RIGHT_BOUNDARY - PLAYER_WIDTH){
+		if(xLocation <= BOARD_RIGHT_BOUNDARY - PLAYER_WIDTH*1.25){
 			xLocation += PLAYER_WIDTH/4;
 			System.out.println("Player moved right");	
 			System.out.println(this);
@@ -24,7 +36,7 @@ public class Player{
 	}
 
 	private void moveForward(){
-		yLocation += PLAYER_HEIGHT/4;
+		yLocation += PLAYER_HEIGHT;
 		System.out.println("Player moved forward");
 		System.out.println(this);	
 	}
