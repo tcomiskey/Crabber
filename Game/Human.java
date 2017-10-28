@@ -3,11 +3,11 @@ import java.swing.*;
 public class Human {
     private ImageIcon image;
     
-    public Enemy(int boardWidth, int xLoc, int yLoc, int fileName){
+    public Human(int boardWidth, int xLoc, int yLoc, int fileName){
         super(boardWidth, xLoc, yLoc, fileName);
     }
               
-    public Enemy(int boardWidth, int xLoc, int yLoc){
+    public Human(int boardWidth, int xLoc, int yLoc){
             super(boardWidth, xLoc, yLoc);
     }
     
