@@ -2,7 +2,10 @@ import java.io.*;
 import java.util.*;
 import java.lang.Math;
 import java.awt.*;
+import java.swing.*;
+
 public class Enemy extends GameCharacter{
+    private ImageIcon image;
 	
 	private Scanner fileScanner;
 	// made static so that all enemies will have the same question index
@@ -58,8 +61,8 @@ public class Enemy extends GameCharacter{
 		this.dir = dir;
 	}//setDir
 	
-//	public ImageIcon getImage(){
-//		return image;
-//	}//getImage
+	public ImageIcon getImage(){
+		return image;
+	}//getImage
 
 }
