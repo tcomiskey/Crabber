@@ -34,5 +34,7 @@ public class Human extends Enemy{
     public ImageIcon getImage(){
         return image;
     }//getImage
-
+	public String toString(){
+		return "Human located at x = " + xLoc + " y = " + yLoc;
+	}
 }
