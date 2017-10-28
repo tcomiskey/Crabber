@@ -3,9 +3,12 @@ import java.util.*;
 import java.lang.Math;
 import java.awt.*;
 import java.swing.*;
+<<<<<<< HEAD
+=======
 
+>>>>>>> bd62cb3bc1c3321998ac14b3dcd4b7a5743d7fe1
 public class Enemy extends GameCharacter{
-        private ImageIcon image;
+    private ImageIcon image;
 	
 	private Scanner fileScanner;
 	// made static so that all enemies will have the same question index
