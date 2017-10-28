@@ -8,6 +8,7 @@ public class Trash extends Enemy{
 	}
 	public Trash(int boardWidth, int xLoc, int yLoc){
 		super(boardWidth, xLoc, yLoc);
+        image = new ImageIcon("Trash.png");
 	}
 	
 	public int getX(){
