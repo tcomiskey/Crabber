@@ -12,7 +12,7 @@ public class Board {
 	private Player player;
 	private ArrayList<GameCharacter> enemies = new ArrayList<GameCharacter>(50);
 	private boolean isOcean; //false for land, true for ocean
-	private ArrayList<boolean> safeRows = new ArrayList<boolean>();
+	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>();
 	private int numberOfRows;
 	
 	
@@ -33,7 +33,7 @@ public class Board {
 		int row = 0;
 		numberOfRows = boardHeight/player.getPlayerHeight()-1;
 		for (int i = 0; i<numberOfRows; i++){
-			safeRows.add(true);
+			safeRows.add(new Boolean(true));
 		}
 		int numEnemiesConstant = 100*difficulty;
 		int numPerRowConstant = 3*difficulty;
@@ -44,7 +44,7 @@ public class Board {
 		enemies.add(new Shark(boardWidth, xcoord, ycoord, currentDirection, "QuestionAndAnswerList.txt"));
 		// xcoord will be incremented based on the game difficulty*width of the player
 		xcoord += enemies.get(0).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
-		safeRows.set(1) = false;
+		safeRows.set(1, new Boolean(false));
 		// looping until total number of enemies needed for game difficulty are instantiated
 		for(int i = 1; i < difficulty * numEnemiesConstant/*multiplier to get number of enemies required for the difficulty*/; i++){
 		    if (row%2 == 0){ // even rows will be sharks
@@ -62,12 +62,12 @@ public class Board {
 		        if (randomRowSpacing < 0.4){
 		            ycoord -= player.getPlayerHeight();
 		            row++;
-		            safeRows.set(row+1) = false;
+		            safeRows.set(row+1, new Boolean(false));
 		        }
 		        else{
 		            ycoord -= 2*player.getPlayerHeight();
 		            row+=2;
-		            safeRows.set(row+1) = false;
+		            safeRows.set(row+1, new Boolean(false));
 		        }
                 xcoord = (int) Math.floor(Math.random() * 4 * player.getPlayerWidth());
                 enemiesInRow = 0;
@@ -95,11 +95,12 @@ public class Board {
 	}
 	public void resetPlayer(){
 		int currentRow = boardHeight/player.getX();
-		for (int i = currentRow; i>0; i--){
-			if(safeRows(i)){
-				player.setX(boardHeight/(numberOfRows-index));
+		for (int i = currentRow; i>=0; i--){
+			if(safeRows.get(i)){
+				player.setX(boardHeight/(numberOfRows-i));
 			}
 		}
+	
 	}
     
 	//setters
