@@ -1,8 +1,8 @@
 How does this work?
-a. IDK
-b. Maybe this way
-c. Yay
+IDK (correct)
+Maybe this way
+Yay
 Why you do this?
-a. help
-b. idk man
-c. because
+help (correct)
+idk man
+because
