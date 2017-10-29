@@ -25,27 +25,28 @@ public class Board {
 		isOcean = false;
       	
 			
-		player = new Player();
+		player = new Player(boardWidth, boardHeight);
 		
 		int xcoord = 0;
 		int ycoord = boardHeight-(2*player.getPlayerHeight());
 		int row = 0;
-		int numEnemiesConstant = 40;
-		int numPerRowConstant = 7;
-		int enemiesInRow = 0;
+		int numEnemiesConstant = 100*difficulty;
+		int numPerRowConstant = 3;
+		int enemiesInRow = 1;
+        int currentDirection = -1;
 		
 		// first enemy will use complex constuctor to instantiate static array of questions
-		enemies.add(new Shark(boardWidth, xcoord, ycoord, "QuestionAndAnswerList.txt"));
+		enemies.add(new Shark(boardWidth, xcoord, ycoord, currentDirection, "QuestionAndAnswerList.txt"));
 		// xcoord will be incremented based on the game difficulty*width of the player
 		xcoord += enemies.get(0).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		// looping until total number of enemies needed for game difficulty are instantiated
 		for(int i = 1; i < difficulty * numEnemiesConstant/*multiplier to get number of enemies required for the difficulty*/; i++){
 		    if (row%2 == 0){ // even rows will be sharks
-		        enemies.add(new Shark(boardWidth, xcoord, ycoord));
+		        enemies.add(new Shark(boardWidth, xcoord, ycoord, currentDirection));
 		        xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		    }
 		    else{ // odd rows will be trash
-		        enemies.add(new Trash(boardWidth, xcoord, ycoord));
+		        enemies.add(new Trash(boardWidth, xcoord, ycoord, currentDirection));
 		        xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		    }
 		    enemiesInRow++;
@@ -60,8 +61,15 @@ public class Board {
 		            ycoord -= 2*player.getPlayerHeight();
 		            row+=2;
 		        }
-		        xcoord = 0;
-		        enemiesInRow = 0;
+                xcoord = (int) Math.floor(Math.random() * 4 * player.getPlayerWidth());
+                enemiesInRow = 0;
+                double randomDir = Math.random();
+                if (randomDir < 0.5){
+                    currentDirection = -1;
+                }
+                else{
+                    currentDirection = 1;
+                }
 		    }
 		    
 		    

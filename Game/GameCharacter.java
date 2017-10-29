@@ -11,10 +11,11 @@ public class GameCharacter {
 	int farLeft;
 	int farRight;
 	
-	public GameCharacter(int boardWidth, int xLoc, int yLoc){
+	public GameCharacter(int boardWidth, int xLoc, int yLoc, int direction){
 		//image = new ImageIcon("images/brown rectangle.png");
         	this.xLoc=xLoc;
         	this.yLoc=yLoc;
+        dir = direction;
 		
 			
 	}//constructor

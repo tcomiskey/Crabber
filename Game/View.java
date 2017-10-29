@@ -29,7 +29,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	View(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setSize(new Dimension(1000,1000));
+		setSize(new Dimension(800,800));
 		menu = new JPanel();
 		getContentPane().add(menu);
 		start = new JButton("Start");

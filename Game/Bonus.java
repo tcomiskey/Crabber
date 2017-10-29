@@ -5,8 +5,8 @@ import java.awt.*;
 import javax.swing.*;
 public class Bonus extends GameCharacter{
 
-    	public Bonus(int boardWidth, int xLoc, int yLoc) {
-        	super(boardWidth, xLoc, yLoc);
+    	public Bonus(int boardWidth, int xLoc, int yLoc, int direction) {
+        	super(boardWidth, xLoc, yLoc, direction);
     	}
     
 	public Message hit() {

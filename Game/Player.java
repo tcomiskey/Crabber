@@ -7,10 +7,12 @@ public class Player{
 	static final int PLAYER_WIDTH = 50; //Not accurate values just place holders
 	static final int PLAYER_HEIGHT = 50;
 	static final int BOARD_LEFT_BOUNDARY = 0;
-	static final int BOARD_RIGHT_BOUNDARY = 800;
-	static final int BOARD_HEIGHT = 800;
+    static int BOARD_RIGHT_BOUNDARY;
+    static int BOARD_HEIGHT;
 
-	public Player(){
+	public Player(int boardWidth, int boardHeight){
+        BOARD_RIGHT_BOUNDARY = boardWidth;
+        BOARD_HEIGHT = boardWidth;
 		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
 		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
 	}

@@ -13,8 +13,8 @@ public class Enemy extends GameCharacter{
 	private static ArrayList<Question> questions;	
 	
 	//this constructor only called once to set the static variables for all other enemies
-	public Enemy(int boardWidth, int xLoc, int yLoc, String fileName){
-		super(boardWidth, xLoc, yLoc);
+	public Enemy(int boardWidth, int xLoc, int yLoc, int direction, String fileName){
+		super(boardWidth, xLoc, yLoc, direction);
 		questions = new ArrayList<Question>();
 		File qAndAFile = new File(fileName);
 		if (qAndAFile.exists()){
@@ -33,8 +33,8 @@ public class Enemy extends GameCharacter{
 		}
 		questionIndex = (int) Math.floor(Math.random()*questions.size());
 	}
-	public Enemy(int boardWidth, int xLoc, int yLoc){
-		super(boardWidth, xLoc, yLoc);
+	public Enemy(int boardWidth, int xLoc, int yLoc, int direction){
+		super(boardWidth, xLoc, yLoc, direction);
 	}
 	
 	public Message hit(){

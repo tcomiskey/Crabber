@@ -3,8 +3,8 @@ import javax.swing.*;
 public class Trash extends Enemy{
 	private ImageIcon image;
 	
-	public Trash(int boardWidth, int xLoc, int yLoc, String fileName){
-		super(boardWidth, xLoc, yLoc, fileName);
+	public Trash(int boardWidth, int xLoc, int yLoc, int direction, String fileName){
+		super(boardWidth, xLoc, yLoc, direction, fileName);
 	        image = new ImageIcon("images/Trash.png");
 		width = image.getIconWidth();
 		height = image.getIconHeight();
@@ -13,8 +13,8 @@ public class Trash extends Enemy{
 		farLeft = -(usableWidth)/2;
 		farRight = boardWidth+(usableWidth)/2;
 	}
-	public Trash(int boardWidth, int xLoc, int yLoc){
-		super(boardWidth, xLoc, yLoc);
+	public Trash(int boardWidth, int xLoc, int yLoc, int direction){
+		super(boardWidth, xLoc, yLoc, direction);
 		image = new ImageIcon("images/Trash.png");
 		width = image.getIconWidth();
 		height = image.getIconHeight();
