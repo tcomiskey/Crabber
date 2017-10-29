@@ -22,6 +22,9 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	private JButton medium;
 	private JButton hard;
 	private Controller c;
+	private int playerX;
+	private int playerY;
+	private ArrayList<GameCharacter> enemies;
 	
 	View(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -114,6 +117,18 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 
 	public void setupController(){
 		c = new Controller(this);
+	}
+
+	public void setPlayerX(int x){
+		playerX = x;
+	}
+
+	public void setPlayerY(int y){
+		playerY = y;
+	}
+
+	public ArrayList<GameCharacter> getEnemies(){
+		return enemies;
 	}
 }
 		
