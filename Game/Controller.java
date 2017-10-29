@@ -27,7 +27,7 @@ public class Controller{
 
 	public void tick(){
 	        System.out.println("tick");
-		/*Player player = b.getPlayer();
+		Player player = b.getPlayer();
 		v.setPlayerX(player.getX());
 		v.setPlayerY(player.getY());
 		ArrayList<GameCharacter> boardEnemies = b.getEnemies();
@@ -48,7 +48,7 @@ public class Controller{
 				message = curBoardEnemy.hit();
 			}
 		}//for
-		*/
+		
 	}//tick
 
     

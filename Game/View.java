@@ -43,6 +43,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 		start.setVisible(true);
 		menu.add(start);
 		menu.setBackground(Color.black);
+		
 	}
 
 	/*public static void main (String[] args){
@@ -105,6 +106,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	}
 
 	private void startGameWindow(){
+		setEnemies();
 		gameScreen = new JPanel();
 		gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
@@ -131,6 +133,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	}
     
     public void setEnemies() {
+    	enemies = new ArrayList<GameCharacter>();
         Iterator<GameCharacter> enemyIterator = control.getBoard().getEnemies().iterator();
         while (enemyIterator.hasNext()) {
             enemies.add(enemyIterator.next());
