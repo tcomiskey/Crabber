@@ -38,23 +38,23 @@ public class Player{
 	}
 	
 	private void moveLeft(){
-		if(xLocation >= BOARD_LEFT_BOUNDARY + PLAYER_WIDTH/4){	//makes sure player is on screen and has room to move
-			xLocation -= PLAYER_WIDTH/4; // Increment by a quarter of player width
+		if(xLocation >= BOARD_LEFT_BOUNDARY + PLAYER_WIDTH){	//makes sure player is on screen and has room to move
+			xLocation -= PLAYER_WIDTH; // Increment by a quarter of player width
 			System.out.println("Player moved left");	
 			System.out.println(this);	
 		}
 	}
 	
 	private void moveRight(){
-		if(xLocation <= BOARD_RIGHT_BOUNDARY - PLAYER_WIDTH*1.25){
-			xLocation += PLAYER_WIDTH/4;
+		if(xLocation <= BOARD_RIGHT_BOUNDARY - PLAYER_WIDTH){
+			xLocation += PLAYER_WIDTH;
 			System.out.println("Player moved right");	
 			System.out.println(this);
 		}
 	}
 
 	private void moveForward(){
-		yLocation += PLAYER_HEIGHT;
+		yLocation -= PLAYER_HEIGHT;
 		System.out.println("Player moved forward");
 		System.out.println(this);	
 	}

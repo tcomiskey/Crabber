@@ -55,6 +55,12 @@ public class Controller{
 		
 	}//tick
 
+	public void getMouseClick(MouseEvent e){
+		b.getPlayer().move(e);
+		v.setPlayerX(b.getPlayer().getX());
+		v.setPlayerY(b.getPlayer().getY());
+	}
+
     
     public String toString() {
         return "Controller!!!";

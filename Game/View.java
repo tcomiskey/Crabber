@@ -172,6 +172,9 @@ public class View extends JFrame implements MouseListener{
 
     @Override
 	public void mouseClicked(MouseEvent e) {
+		control.getMouseClick(e);
+		playerLabel.setLocation(playerX, playerY);
+	/*
 		if(e.getY() < playerLabel.getY()){
 			playerLabel.setLocation(playerLabel.getX(),playerLabel.getY()-playerLabel.getIcon().getIconHeight());
 		}
@@ -181,6 +184,7 @@ public class View extends JFrame implements MouseListener{
 		else if(e.getX() < playerLabel.getX()){
 			playerLabel.setLocation(playerLabel.getX()-playerLabel.getIcon().getIconWidth(), playerLabel.getY());
 		}
+		*/
 	}
 
 	@Override
