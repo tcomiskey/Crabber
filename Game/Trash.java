@@ -5,11 +5,23 @@ public class Trash extends Enemy{
 	
 	public Trash(int boardWidth, int xLoc, int yLoc, String fileName){
 		super(boardWidth, xLoc, yLoc, fileName);
-        image = new ImageIcon("images/Trash.png");
+	        image = new ImageIcon("images/Trash.png");
+		width = image.getIconWidth();
+		height = image.getIconHeight();
+		//Sets bounds on how far off screen a character can go before it loops around
+		int usableWidth = (boardWidth/width) + 3*width; //335
+		farLeft = -(usableWidth)/2;
+		farRight = boardWidth+(usableWidth)/2;
 	}
 	public Trash(int boardWidth, int xLoc, int yLoc){
 		super(boardWidth, xLoc, yLoc);
-        image = new ImageIcon("images/Trash.png");
+		image = new ImageIcon("images/Trash.png");
+		width = image.getIconWidth();
+		height = image.getIconHeight();
+		//Sets bounds on how far off screen a character can go before it loops around
+		int usableWidth = (boardWidth/width) + 3*width; //335
+		farLeft = -(usableWidth)/2;
+		farRight = boardWidth+(usableWidth)/2;
 	}
 	
 	public int getX(){
