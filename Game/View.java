@@ -129,6 +129,13 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	public void setPlayerY(int y){
 		playerY = y;
 	}
+    
+    public void setEnemies() {
+        Iterator<GameCharacter> enemyIterator = control.getBoard().getEnemies().iterator();
+        while (enemyIterator.hasNext()) {
+            enemies.add(enemyIterator.next());
+        }
+    }
 
 	public ArrayList<GameCharacter> getEnemies(){
 		return enemies;
