@@ -18,8 +18,8 @@ public class Board {
 	//hella getters and setters
 	
 	public Board(int difficulty){
-		boardWidth = 10000;
-		boardHeight = 10000;
+		boardWidth = 1000;
+		boardHeight = 1000;
 		this.difficulty = difficulty;
 		win = true;
 		isOcean = false;

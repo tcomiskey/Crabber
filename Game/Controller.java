@@ -48,6 +48,7 @@ public class Controller{
 				message = curBoardEnemy.hit();
 			}
 		}//for
+		v.updateLocations();
 		
 	}//tick
 

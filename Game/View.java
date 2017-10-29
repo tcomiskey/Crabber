@@ -29,7 +29,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	View(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setSize(new Dimension(400,400));
+		setSize(new Dimension(1000,1000));
 		menu = new JPanel();
 		getContentPane().add(menu);
 		start = new JButton("Start");
@@ -100,7 +100,13 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 		setVisible(true);
 		repaint();
 	}
+	public void updateLocations(){
+		for(int i = 0; i < enemies.size(); i++){
+			enemyLabels.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
+		}
+		repaint();
 		
+	}	
 	public int getDifficulty(){
 		return difficulty;
 	}
@@ -108,6 +114,11 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	private void startGameWindow(){
 		setEnemies();
 		gameScreen = new JPanel();
+		for(int i = 0; i < enemies.size(); i++){
+			enemyLabels.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
+			gameScreen.add(enemyLabels.get(i));
+			
+		}
 		gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
 		getContentPane().add(gameScreen);
@@ -134,9 +145,12 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
     
     public void setEnemies() {
     	enemies = new ArrayList<GameCharacter>();
+   	enemyLabels = new ArrayList<JLabel>();
         Iterator<GameCharacter> enemyIterator = control.getBoard().getEnemies().iterator();
         while (enemyIterator.hasNext()) {
-            enemies.add(enemyIterator.next());
+        	GameCharacter gc = enemyIterator.next();
+            	enemies.add(gc);
+            	enemyLabels.add(new JLabel(gc.getImage()));
         }
     }
 
