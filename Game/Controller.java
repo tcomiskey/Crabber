@@ -39,7 +39,7 @@ public class Controller{
 			curViewEnemy.setX(curBoardEnemy.getX());
 			curViewEnemy.setY(curBoardEnemy.getY());
 			//Determine if there is a collision
-			if(player.getY() == curBoardEnemy.getY() && player.getX()+player.getPlayerWidth() > curBoardEnemy.getX() && player.getX() < curBoardEnemy.getX()){
+			if(player.getY() == curBoardEnemy.getY() && player.getX()+player.getPlayerWidth() > curBoardEnemy.getX() && player.getX() < curBoardEnemy.getX()+curBoardEnemy.getImgWidth()){
 				message = curBoardEnemy.hit();
 			}
 		}//for
