@@ -2,11 +2,18 @@ public class Player{
 	
 	private int xLocation;	//Locations are top left corner
 	private int yLocation;
-	static final int PLAYER_WIDTH = 160; //Not accurate values just place holders
-	static final int PLAYER_HEIGHT = 160;
+	static final int PLAYER_WIDTH = 60; //Not accurate values just place holders
+	static final int PLAYER_HEIGHT = 60;
 	static final int BOARD_LEFT_BOUNDARY = 0;
 	static final int BOARD_RIGHT_BOUNDARY = 500;
+	static final int BOARD_HEIGHT = 500;
 
+	public Player(){
+		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
+		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
+	}
+
+	//Chooses a direction to move
 	public void move(MouseEvent e){
 		if(e.getY() < yLocation-PLAYER_HEIGHT){
 			moveForward();
