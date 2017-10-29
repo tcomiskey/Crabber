@@ -34,7 +34,11 @@ public class Controller{
 		Message message;
 		*/
         	System.out.println("tick");
+<<<<<<< HEAD
 		/*for(int i=0; i<boardEnemies.size(); i++){
+=======
+		for(int i=0; i<boardEnemies.size(); i++){ //maybe switch to iterator
+>>>>>>> 133c586fc1fa503158b23ff9b9b525e99f1fb389
 			//Current enemy in the board and view arraylists
 			GameCharacter curBoardEnemy = boardEnemies.get(i);
 			GameCharacter curViewEnemy = viewEnemies.get(i);
