@@ -28,7 +28,7 @@ public class Board {
 		player = new Player(boardWidth, boardHeight);
 		
 		int xcoord = 0;
-		int ycoord = boardHeight-(2*player.getPlayerHeight());
+		int ycoord = boardHeight-(3*player.getPlayerHeight());
 		int row = 0;
 		int numEnemiesConstant = 100*difficulty;
 		int numPerRowConstant = 3*difficulty;
