@@ -218,6 +218,10 @@ public class View extends JFrame implements MouseListener{
         if (rc==0) {
             System.out.println("RIGHT!");
             control.resetPlayer();
+            playerLabel.setLocation(playerX, playerY);
+            System.out.println(playerLabel.getX());
+            System.out.println(playerLabel.getY());
+            repaint();
             
         }
         else {

@@ -52,7 +52,6 @@ public class Controller{
 				System.out.println(message);
 				timer.stop();
                 		v.throwQuestion(message);
-                		return;
 			}
 		}//for
 		v.updateLocations();
@@ -82,6 +81,8 @@ public class Controller{
     	b.resetPlayer();
     	v.setPlayerX(b.getPlayer().getX());
 	v.setPlayerY(b.getPlayer().getY());
+	System.out.println(b.getPlayer().getX());
+	System.out.println(b.getPlayer().getY());
 	timer.start();
     }
 }
