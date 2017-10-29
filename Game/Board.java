@@ -97,7 +97,7 @@ public class Board {
 		int currentRow = boardHeight/player.getX();
 		for (int i = currentRow; i>=0; i--){
 			if(safeRows.get(i)){
-				player.setX(boardHeight/(numberOfRows-i));
+				player.setY(boardHeight/(numberOfRows-i));
 			}
 		}
 	
