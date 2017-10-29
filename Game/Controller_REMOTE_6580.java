@@ -4,37 +4,32 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Controller{
 
 	Board b;
 	View v;
-	private Timer timer = new Timer(1000, new ActionListener(){
-		public void actionPerformed(ActionEvent e){
-			tick();
-		}
-	}
-	);
+	private Timer timer = new Timer(1000, new TimerListener());
 
 	public Controller(View v){
 		this.v = v;
 		b = new Board(v.getDifficulty());
 		System.out.println(b);
 		timer.start();
+        	runTick();
 
 	}
 
 	public void tick(){
-	        System.out.println("tick");
-		/*Player player = b.getPlayer();
+		Player player = b.getPlayer();
 		v.setPlayerX(player.getX());
 		v.setPlayerY(player.getY());
 		ArrayList<GameCharacter> boardEnemies = b.getEnemies();
 		ArrayList<GameCharacter> viewEnemies = v.getEnemies();
 		Message message;
-
-		for(int i=0; i<boardEnemies.size(); i++){
+        	System.out.println("tick");
+		for(int i=0; i<boardEnemies.size(); i++){ //maybe switch to iterator
 			//Current enemy in the board and view arraylists
 			GameCharacter curBoardEnemy = boardEnemies.get(i);
 			GameCharacter curViewEnemy = viewEnemies.get(i);
@@ -48,9 +43,13 @@ public class Controller{
 				message = curBoardEnemy.hit();
 			}
 		}//for
-		*/
 	}//tick
 
+    public void runTick() {
+        for(int i = 0; i < 10; i++) {
+            tick();
+        }
+    }
     
     public String toString() {
         return "Controller!!!";

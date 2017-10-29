@@ -26,15 +26,15 @@ public class Controller{
 	}
 
 	public void tick(){
-	        System.out.println("tick");
 		/*Player player = b.getPlayer();
 		v.setPlayerX(player.getX());
 		v.setPlayerY(player.getY());
 		ArrayList<GameCharacter> boardEnemies = b.getEnemies();
 		ArrayList<GameCharacter> viewEnemies = v.getEnemies();
 		Message message;
-
-		for(int i=0; i<boardEnemies.size(); i++){
+		*/
+        	System.out.println("tick");
+		/*for(int i=0; i<boardEnemies.size(); i++){
 			//Current enemy in the board and view arraylists
 			GameCharacter curBoardEnemy = boardEnemies.get(i);
 			GameCharacter curViewEnemy = viewEnemies.get(i);
