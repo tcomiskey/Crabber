@@ -70,6 +70,8 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					difficulty = 2;
+					System.out.println(difficulty);
+					setupController();
 					startGameWindow();
 				}
 			}
@@ -80,6 +82,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 				public void actionPerformed(ActionEvent e){
 					difficulty = 3;
 					System.out.println(difficulty);
+					setupController();
 					startGameWindow();
 				}
 			}
