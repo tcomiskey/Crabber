@@ -1,4 +1,6 @@
+import java.awt.event.*;
 public class Player{
+
 	
 	private int xLocation;	//Locations are top left corner
 	private int yLocation;

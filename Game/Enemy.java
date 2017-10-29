@@ -64,5 +64,8 @@ public class Enemy extends GameCharacter{
 	public ImageIcon getImage(){
 		return image;
 	}//getImage
+	public String toString(){
+		return "Enemy located at x = " + xLoc + "y = " + yLoc;
+	}
 
 }
