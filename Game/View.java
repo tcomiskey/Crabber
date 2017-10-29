@@ -15,12 +15,14 @@ public class View extends JFrame implements MouseListener{
 	private JPanel menu;
 	private JPanel diffScreen;
 	private JPanel gameScreen;
+	private JPanel gameOverScreen;
 	private JLabel playerLabel;
 	private ArrayList<JLabel> enemyLabels;
 	private JButton start;
 	public JButton easy;
 	private JButton medium;
 	private JButton hard;
+	private JButton playAgain;
 	private Controller control;
 	private int playerX;
 	private int playerY;
@@ -215,11 +217,36 @@ public class View extends JFrame implements MouseListener{
         int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[1]);
         if (rc==0) {
             System.out.println("RIGHT!");
+            control.resetPlayer();
+            
         }
         else {
             System.out.println("W R O N G heck u");
+            startGameOverWindow();
         }
     }
+
+    	private void startGameOverWindow(){
+		gameOverScreen = new JPanel();
+		gameOverScreen.setBackground(Color.red);
+		gameOverScreen.setLayout(new FlowLayout());
+		gameOverScreen.setVisible(true);
+		playAgain = new JButton("Play again?");
+		playAgain.addActionListener(
+			new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					//send back to beginning here
+				}
+			}
+			);
+		playAgain.setVisible(true);
+		gameOverScreen.setVisible(true);
+		getContentPane().removeAll();
+		getContentPane().add(gameOverScreen);
+		//diffScreen.setOpaque(true);
+		getContentPane().setVisible(true);
+		repaint();
+	}
 
 }
 		

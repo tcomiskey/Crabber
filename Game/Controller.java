@@ -51,7 +51,8 @@ public class Controller{
 				message = curBoardEnemy.hit();
 				System.out.println(message);
 				timer.stop();
-                v.throwQuestion(message);
+                		v.throwQuestion(message);
+                		return;
 			}
 		}//for
 		v.updateLocations();
@@ -75,6 +76,13 @@ public class Controller{
 
     public View getView(){
     	return v;
+    }
+
+    public void resetPlayer(){
+    	b.resetPlayer();
+    	v.setPlayerX(b.getPlayer().getX());
+	v.setPlayerY(b.getPlayer().getY());
+	timer.start();
     }
 }
 
