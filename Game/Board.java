@@ -31,7 +31,7 @@ public class Board {
 		int ycoord = boardHeight-(2*player.getPlayerHeight());
 		int row = 0;
 		int numEnemiesConstant = 100*difficulty;
-		int numPerRowConstant = 3;
+		int numPerRowConstant = 3*difficulty;
 		int enemiesInRow = 1;
         int currentDirection = -1;
 		
