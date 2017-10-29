@@ -20,8 +20,8 @@ public class Player{
         BOARD_RIGHT_BOUNDARY = boardWidth;
         BOARD_HEIGHT = boardWidth;
 		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
-		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
-		image = new ImageIcon("brown rectangle.png");
+		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT*2;
+		image = new ImageIcon("images/brown rectangle.png");
 	}
 
 	//Chooses a direction to move

@@ -9,7 +9,7 @@ import java.util.*;
 
 //import components.LayeredPaneDemo2;
 
-public class View extends JFrame{ //implements ActionListener,MouseListener{
+public class View extends JFrame implements MouseListener{
 
 	private int difficulty;
 	private JPanel menu;
@@ -106,7 +106,8 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 		}
 		repaint();
 		
-	}	
+	}
+		
 	public int getDifficulty(){
 		return difficulty;
 	}
@@ -121,6 +122,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 		}
 		gameScreen.add(playerLabel);
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
+		gameScreen.addMouseListener(this);
 		gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
 		getContentPane().add(gameScreen);
@@ -167,6 +169,44 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
     public Controller getControl() {
         return control;
     }
+
+    @Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getY() < playerLabel.getY()){
+			playerLabel.setLocation(playerLabel.getX(),playerLabel.getY()-15);
+		}
+		else if(e.getX() > playerLabel.getX()){
+			playerLabel.setLocation(playerLabel.getX()+15, playerLabel.getY());
+		}
+		else if(e.getX() < playerLabel.getX()){
+			playerLabel.setLocation(playerLabel.getX()-15, playerLabel.getY());
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
 		
 
