@@ -23,7 +23,8 @@ public class Board {
 		this.difficulty = difficulty;
 		win = true;
 		isOcean = false;
-        
+      	
+        	
         player = new Player();
         
         int xcoord = 0;
@@ -114,6 +115,9 @@ public class Board {
 	}
 	public boolean getIsOcean(){
 		return isOcean;
+	}
+	public ArrayList<GameCharacter> getEnemies(){
+		return enemies;
 	}
 	public String toString(){
         String returnString = "This game board is " + boardHeight + " by " + boardWidth + ". The difficulty is " + difficulty + ". The win and loss booleans are: " + win + " ";
