@@ -12,15 +12,10 @@ public class GameCharacter {
 	int farRight;
 	
 	public GameCharacter(int boardWidth, int xLoc, int yLoc){
-		image = new ImageIcon("brown rectangle.png");
+		//image = new ImageIcon("images/brown rectangle.png");
         	this.xLoc=xLoc;
         	this.yLoc=yLoc;
-		width = image.getIconWidth();
-		height = image.getIconHeight();
-		//Sets bounds on how far off screen a character can go before it loops around
-		int usableWidth = (boardWidth/width) + 3*width; //335
-		farLeft = -(usableWidth)/2;
-		farRight = boardWidth+(usableWidth)/2;
+		
 			
 	}//constructor
 	
