@@ -1,4 +1,9 @@
 import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+import java.lang.Math;
+import java.awt.*;
+import javax.swing.*;
 public class Player{
 
 	
@@ -9,10 +14,12 @@ public class Player{
 	static final int BOARD_LEFT_BOUNDARY = 0;
 	static final int BOARD_RIGHT_BOUNDARY = 800;
 	static final int BOARD_HEIGHT = 800;
+	private ImageIcon image;
 
 	public Player(){
 		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
 		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
+		image = new ImageIcon("brown rectangle.png");
 	}
 
 	//Chooses a direction to move
@@ -70,5 +77,8 @@ public class Player{
 	}
 	public int getPlayerWidth(){
 		return PLAYER_WIDTH;
+	}
+	public ImageIcon getImage(){
+		return image;
 	}
 }
