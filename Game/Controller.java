@@ -15,10 +15,7 @@ public class Controller{
 		this.v = v;
 		b = new Board(v.getDifficulty());
 		System.out.println(b);
-		b.moveCharacter();
-		System.out.println(b);
-		this.v = v;
-		b = new Board(v.getDifficulty());
+        runTick();
 
 	}
 
@@ -29,6 +26,7 @@ public class Controller{
 		ArrayList<GameCharacter> boardEnemies = b.getEnemies();
 		ArrayList<GameCharacter> viewEnemies = v.getEnemies();
 		Message message;
+        System.out.println("tick");
 		for(int i=0; i<boardEnemies.size(); i++){
 			//Current enemy in the board and view arraylists
 			GameCharacter curBoardEnemy = boardEnemies.get(i);
@@ -45,6 +43,15 @@ public class Controller{
 		}//for
 	}//tick
 
+    public void runTick() {
+        for(int i = 0; i < 10; i++) {
+            tick();
+        }
+    }
+    
+    public String toString() {
+        return "Controller!!!";
+    }
 }
 
 	

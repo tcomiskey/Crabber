@@ -21,7 +21,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	public JButton easy;
 	private JButton medium;
 	private JButton hard;
-	private Controller c;
+	private Controller control;
 	private int playerX;
 	private int playerY;
 	private ArrayList<GameCharacter> enemies;
@@ -119,7 +119,7 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	}
 
 	public void setupController(){
-		c = new Controller(this);
+		control = new Controller(this);
 	}
 
 	public void setPlayerX(int x){
@@ -133,6 +133,9 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	public ArrayList<GameCharacter> getEnemies(){
 		return enemies;
 	}
+    public Controller getControl() {
+        return control;
+    }
 }
 		
 

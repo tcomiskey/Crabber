@@ -1,7 +1,8 @@
 public class MainClass{
+    private static View v;
 
 	public static void main(String[] args){
-		View v = new View();
+        v = new View();
 		v.setVisible(true);
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
@@ -11,7 +12,7 @@ public class MainClass{
 	}//main
 
 	private static void createAndShowGUI(){
-
+        
 	}//createAndShowGUI
 
 }//MainClass
