@@ -12,9 +12,14 @@ public class Player{
 	static final int PLAYER_WIDTH = 50; //Not accurate values just place holders
 	static final int PLAYER_HEIGHT = 50;
 	static final int BOARD_LEFT_BOUNDARY = 0;
-	static int BOARD_RIGHT_BOUNDARY;
-	static int BOARD_HEIGHT;
+<<<<<<< HEAD
+    static int BOARD_RIGHT_BOUNDARY;
+    static int BOARD_HEIGHT;
+=======
+	static final int BOARD_RIGHT_BOUNDARY = 800;
+	static final int BOARD_HEIGHT = 800;
 	private ImageIcon image;
+>>>>>>> 93ee84fb8e6a82e23975e17b59192dda0b2cf8d5
 
 	public Player(int boardWidth, int boardHeight){
         BOARD_RIGHT_BOUNDARY = boardWidth;

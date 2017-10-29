@@ -20,6 +20,9 @@ public class Controller{
 	public Controller(View v){
 		this.v = v;
 		b = new Board(v.getDifficulty());
+		v.setPlayerX(b.getPlayer().getX());
+		v.setPlayerY(b.getPlayer().getY());
+		v.makePlayerLabel(b.getPlayer().getImage());
 		System.out.println(b);
 		timer.start();
 

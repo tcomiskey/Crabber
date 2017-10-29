@@ -119,6 +119,8 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 			gameScreen.add(enemyLabels.get(i));
 			enemyLabels.get(i).setBounds(new Rectangle(new Point(enemies.get(i).getX(), enemies.get(i).getY()), new Dimension(enemies.get(i).getImgWidth(), enemies.get(i).getImgHeight())));			
 		}
+		gameScreen.add(playerLabel);
+		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
 		gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
 		getContentPane().add(gameScreen);
@@ -126,6 +128,11 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 		setVisible(true);
 		repaint();
 	}
+
+	public void makePlayerLabel(ImageIcon img){
+		playerLabel = new JLabel(img);
+	}
+	
 
 	public JButton getEasyButton(){
 		return easy;
