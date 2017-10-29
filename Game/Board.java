@@ -53,7 +53,7 @@ public class Board {
 		    // if you max out the number of enemies for a row, pick next row to fill (1 or 2 rows up), reset xcoord to 0
 		    if (enemiesInRow == numPerRowConstant){
 		        double randomRowSpacing = Math.random();
-		        if (randomRowSpacing < 0.6){
+		        if (randomRowSpacing < 0.4){
 		            ycoord -= player.getPlayerHeight();
 		            row++;
 		        }
