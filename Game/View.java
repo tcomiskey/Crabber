@@ -114,10 +114,10 @@ public class View extends JFrame{ //implements ActionListener,MouseListener{
 	private void startGameWindow(){
 		setEnemies();
 		gameScreen = new JPanel();
+		gameScreen.setLayout(null);
 		for(int i = 0; i < enemies.size(); i++){
-			enemyLabels.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
 			gameScreen.add(enemyLabels.get(i));
-			
+			enemyLabels.get(i).setBounds(new Rectangle(new Point(enemies.get(i).getX(), enemies.get(i).getY()), new Dimension(enemies.get(i).getImgWidth(), enemies.get(i).getImgHeight())));			
 		}
 		gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();

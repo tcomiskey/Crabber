@@ -18,8 +18,8 @@ public class Board {
 	//hella getters and setters
 	
 	public Board(int difficulty){
-		boardWidth = 1000;
-		boardHeight = 1000;
+		boardWidth = 800;
+		boardHeight = 800;
 		this.difficulty = difficulty;
 		win = true;
 		isOcean = false;
@@ -30,8 +30,8 @@ public class Board {
 		int xcoord = 0;
 		int ycoord = boardHeight-(2*player.getPlayerHeight());
 		int row = 0;
-		int numEnemiesConstant = 20;
-		int numPerRowConstant = 5;
+		int numEnemiesConstant = 40;
+		int numPerRowConstant = 7;
 		int enemiesInRow = 0;
 		
 		// first enemy will use complex constuctor to instantiate static array of questions
@@ -52,12 +52,12 @@ public class Board {
 		    // if you max out the number of enemies for a row, pick next row to fill (1 or 2 rows up), reset xcoord to 0
 		    if (enemiesInRow == numPerRowConstant){
 		        double randomRowSpacing = Math.random();
-		        if (randomRowSpacing < 0.8){
-		            ycoord += player.getPlayerHeight();
+		        if (randomRowSpacing < 0.6){
+		            ycoord -= player.getPlayerHeight();
 		            row++;
 		        }
 		        else{
-		            ycoord += 2*player.getPlayerHeight();
+		            ycoord -= 2*player.getPlayerHeight();
 		            row+=2;
 		        }
 		        xcoord = 0;

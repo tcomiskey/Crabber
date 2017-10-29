@@ -10,7 +10,7 @@ public class Controller{
 
 	Board b;
 	View v;
-	private Timer timer = new Timer(1000, new ActionListener(){
+	private Timer timer = new Timer(100, new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 			tick();
 		}
@@ -26,7 +26,7 @@ public class Controller{
 	}
 
 	public void tick(){
-	        System.out.println("tick");
+	        //System.out.println("tick");
 		Player player = b.getPlayer();
 		v.setPlayerX(player.getX());
 		v.setPlayerY(player.getY());
