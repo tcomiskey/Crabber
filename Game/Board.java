@@ -32,7 +32,7 @@ public class Board {
 		int ycoord = boardHeight-(3*player.getPlayerHeight());
 		int row = 0;
 		numberOfRows = boardHeight/player.getPlayerHeight()-1;
-		for (int i = 0; i<numberOfRows; i++){
+		for (int i = 0; i<1000; i++){
 			safeRows.add(new Boolean(true));
 		}
 		int numEnemiesConstant = 100*difficulty;
