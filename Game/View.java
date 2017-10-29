@@ -209,6 +209,17 @@ public class View extends JFrame implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+    
+    public void throwQuestion(Message currentMessage) {
+        String[] buttons = {currentMessage.getRightAnswer(), currentMessage.getWrongAnswer1(), currentMessage.getWrongAnswer2()};
+        int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[1]);
+        if (rc==0) {
+            System.out.println("RIGHT!");
+        }
+        else {
+            System.out.println("W R O N G heck u");
+        }
+    }
 
 }
 		

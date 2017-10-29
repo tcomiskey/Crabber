@@ -51,6 +51,7 @@ public class Controller{
 				message = curBoardEnemy.hit();
 				System.out.println(message);
 				timer.stop();
+                v.throwQuestion(message);
 			}
 		}//for
 		v.updateLocations();

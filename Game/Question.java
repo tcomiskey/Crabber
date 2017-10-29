@@ -17,4 +17,17 @@ public class Question extends Message{
         return question + "\n" + rightAnswer + "\n" + wrongAnswer1 + "\n" + wronganswer2 + "\n";
     }
     
+    public String getQuestion() {
+        return question;
+    }
+    public String getRightAnswer() {
+        return rightAnswer;
+    }
+    public String getWrongAnswer1() {
+        return wrongAnswer1;
+    }
+    public String getWrongAnswer2() {
+        return wronganswer2;
+    }
+    
 }
