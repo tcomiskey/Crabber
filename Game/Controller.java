@@ -4,32 +4,37 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import java.util.*;
+import java.util.ArrayList;
 
 public class Controller{
 
 	Board b;
 	View v;
-	private Timer timer = new Timer(1000, new TimerListener());
+	private Timer timer = new Timer(1000, new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+			tick();
+		}
+	}
+	);
 
 	public Controller(View v){
 		this.v = v;
 		b = new Board(v.getDifficulty());
 		System.out.println(b);
 		timer.start();
-        	runTick();
 
 	}
 
 	public void tick(){
-		Player player = b.getPlayer();
+		/*Player player = b.getPlayer();
 		v.setPlayerX(player.getX());
 		v.setPlayerY(player.getY());
 		ArrayList<GameCharacter> boardEnemies = b.getEnemies();
 		ArrayList<GameCharacter> viewEnemies = v.getEnemies();
 		Message message;
+		*/
         	System.out.println("tick");
-		for(int i=0; i<boardEnemies.size(); i++){
+		/*for(int i=0; i<boardEnemies.size(); i++){
 			//Current enemy in the board and view arraylists
 			GameCharacter curBoardEnemy = boardEnemies.get(i);
 			GameCharacter curViewEnemy = viewEnemies.get(i);
@@ -43,13 +48,9 @@ public class Controller{
 				message = curBoardEnemy.hit();
 			}
 		}//for
+		*/
 	}//tick
 
-    public void runTick() {
-        for(int i = 0; i < 10; i++) {
-            tick();
-        }
-    }
     
     public String toString() {
         return "Controller!!!";
