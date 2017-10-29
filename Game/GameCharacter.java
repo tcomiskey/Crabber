@@ -16,7 +16,6 @@ public class GameCharacter {
         	this.xLoc=xLoc;
         	this.yLoc=yLoc;
 		width = image.getIconWidth();
-        System.out.println(image.getIconWidth());
 		height = image.getIconHeight();
 		//Sets bounds on how far off screen a character can go before it loops around
 		int usableWidth = (boardWidth/width) + 3*width; //335
