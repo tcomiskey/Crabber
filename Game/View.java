@@ -28,7 +28,7 @@ public class View extends JFrame implements MouseListener{
 	
 	View(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocationRelativeTo(null);
+		//setLocationRelativeTo(null);
 		setSize(new Dimension(800,800));
 		menu = new JPanel();
 		getContentPane().add(menu);
