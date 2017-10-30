@@ -56,7 +56,7 @@ public class Board extends JFrame{
 		// since an enemy was added to this row the safeRow value is set to false
 		safeRows.set(row, new Boolean(false));
 		// looping until total number of enemies needed for game difficulty are instantiated
-		for(int i = 1; i < difficulty * numEnemiesConstant/*multiplier to get number of enemies required for the difficulty*/; i++){
+		for(int i = 1; row < numberOfRows/*multiplier to get number of enemies required for the difficulty*/; i++){
 		    if (row%2 == 1){ // odd rows will be sharks
 		        enemies.add(new Shark(boardWidth, xcoord, ycoord, currentDirection));
 		        xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
