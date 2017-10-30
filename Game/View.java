@@ -61,8 +61,7 @@ public class View extends JFrame implements MouseListener{
 		getContentPane().removeAll();
 		diffScreen = new JPanel();
 		easy = new JButton("Easy");
-		easy.addActionListener(control.getMouseClick(e);
-		playerLabel.setLocation(playerX, playerY);
+		easy.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					difficulty = 1;
