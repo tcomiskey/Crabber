@@ -233,8 +233,11 @@ public class View extends JFrame implements MouseListener{
     	private void startGameOverWindow(){
 		gameOverScreen = new JPanel();
 		gameOverScreen.setBackground(Color.red);
-		//gameOverScreen.setLayout(new FlowLayout());
-		
+		gameOverScreen.setLayout(new BoxLayout(gameOverScreen, BoxLayout.Y_AXIS));
+		JLabel gameOverText = new JLabel("Oh no! You lost.");
+		gameOverText.setFont(new Font(gameOverText.getName(),Font.PLAIN, 72));
+		gameOverText.setAlignmentX(Component.CENTER_ALIGNMENT);
+		gameOverScreen.add(gameOverText);
 		playAgain = new JButton("Play again?");
 		playAgain.addActionListener(
 			new ActionListener(){
@@ -243,6 +246,7 @@ public class View extends JFrame implements MouseListener{
 				}
 			}
 			);
+		playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
 		gameOverScreen.add(playAgain);
 		getContentPane().removeAll();
 		getContentPane().add(gameOverScreen);
