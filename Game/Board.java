@@ -178,7 +178,7 @@ public class Board extends JFrame{
         return returnString;
 	}
     
-    public static final int BUTTON1 = 1;
+    /*public static final int BUTTON1 = 1;
     public static final int MOUSE_CLICKED = 500;
     public static void main(String args[]) {
         Board b = new Board(1);
@@ -220,5 +220,5 @@ public class Board extends JFrame{
                 
             }
         }
-    }
+    }*/
 }
