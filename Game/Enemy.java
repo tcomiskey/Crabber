@@ -10,33 +10,44 @@ public class Enemy extends GameCharacter{
 	private Scanner fileScanner;
 	// made static so that all enemies will have the same question index
 	private static int questionIndex;
+	// all enemies will have the same list of questions
 	private static ArrayList<Question> questions;	
 	
 	//this constructor only called once to set the static variables for all other enemies
 	public Enemy(int boardWidth, int xLoc, int yLoc, int direction, String fileName){
+		// calls the GameCharacter constructor
 		super(boardWidth, xLoc, yLoc, direction);
+		// makes an arraylist to hold question objects
 		questions = new ArrayList<Question>();
+		// saves the file that hols the quesitons
 		File qAndAFile = new File(fileName);
 		if (qAndAFile.exists()){
 			try{
 			fileScanner = new Scanner(qAndAFile);
 			}
 			catch (FileNotFoundException e) {e.printStackTrace();}
-			
+			// while there is still information in the file
 			while(fileScanner.hasNext()){
+				// creates a temporary arraylist to hold the question and three answers
 				ArrayList <String> questionSpecifics = new ArrayList<String>(4);
+				// adds the question and the three answers to the questionSpecifics list
 				for (int newLineCount = 0; newLineCount<4; newLineCount++){
 					questionSpecifics.add(fileScanner.nextLine());
 				}
+				// adds a new Question object that contains the question and answers
 				questions.add(new Question(questionSpecifics));
 			}
 		}
+		// randomly pick a question from the list to ask first to avoid repeats with repeat playthroughs
 		questionIndex = (int) Math.floor(Math.random()*questions.size());
 	}
+	
+	// simple constructor used for all other enemies besides the first initialized
 	public Enemy(int boardWidth, int xLoc, int yLoc, int direction){
 		super(boardWidth, xLoc, yLoc, direction);
 	}
 	
+	// hit method returns the question that will be asked
 	public Message hit(){
         	questionIndex++;
         	if(questionIndex == questions.size()){

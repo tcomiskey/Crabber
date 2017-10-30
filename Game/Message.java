@@ -3,7 +3,7 @@ public class Message {
 public Message() {
 
 }
-
+// none of the methods here should be used because of polymorphism
 public String toString() {
     return "Message Object";
 }

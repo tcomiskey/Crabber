@@ -9,7 +9,8 @@ public class Player{
 	
 	private int xLocation;	//Locations are top left corner
 	private int yLocation;
-	static final int PLAYER_WIDTH = 50; //Not accurate values just place holders
+	// actual image dimensions
+	static final int PLAYER_WIDTH = 50;
 	static final int PLAYER_HEIGHT = 50;
 	static final int BOARD_LEFT_BOUNDARY = 0;
 	static int BOARD_RIGHT_BOUNDARY;
@@ -17,8 +18,8 @@ public class Player{
 	private ImageIcon image;
 
 	public Player(int boardWidth, int boardHeight){
-        BOARD_RIGHT_BOUNDARY = boardWidth;
-        BOARD_HEIGHT = boardWidth;
+        	BOARD_RIGHT_BOUNDARY = boardWidth;
+        	BOARD_HEIGHT = boardWidth;
 		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
 		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT*2;
 		image = new ImageIcon("images/brown rectangle.png");
