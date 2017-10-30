@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.lang.Math;
 import java.util.concurrent.*;
-//import jline.*;
+import java.io.*;
 
 public class Board extends JFrame{
 	private int boardWidth;
@@ -187,29 +187,38 @@ public class Board extends JFrame{
         System.out.println(player);
         b.moveCharacter();
         player.move(me);
-        //System.out.println(b);
         System.out.println(player);
         for(int i = 0; i < 100; i++){
             b.moveCharacter();
-            /*for(GameCharacter gc : b.enemies) {
+            for(GameCharacter gc : b.enemies) {
                 if (b.collisionCheck(gc)) {
                     Message message = gc.hit();
                     System.out.println(message.getQuestion());
                     System.out.println("a. "+ message.getRightAnswer());
                     System.out.println("b. "+ message.getWrongAnswer1());
                     System.out.println("c. "+ message.getWrongAnswer2());
-                    ConsoleReader starter = new ConsoleReader(System.in, new PrintWriter(System.out));
-                    char[] play = {'a', 'b', 'c'};
-                    int j  = starter.readCharacter(play);
-                    if(j == (int)'a'){
+                    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+                    System.out.print("Enter answer:");
+                    String s = "";
+                    try {
+                        s = br.readLine();
+                    }
+                    catch(IOException ex){
+                        System.err.println("Invalid Format!");
+                    }
+                    if (s.equals("a")) {
                         System.out.println("RIGHT");
+                        b.resetPlayer();
+                        System.out.println("Player Reset");
                     }
-                    else{
-                        Sytem.out.println("WRONG");
+                    else {
+                        System.out.println("YOU LOSE");
+                        break;
                     }
+                    
                 }
                 
-            }*/
+            }
         }
     }
 }
