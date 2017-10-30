@@ -19,9 +19,13 @@ public class Player{
 
 	public Player(int boardWidth, int boardHeight){
         	BOARD_RIGHT_BOUNDARY = boardWidth;
-        	BOARD_HEIGHT = boardWidth;
+        	BOARD_HEIGHT = boardHeight;
 		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
-		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT*2;
+		
+		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
+		System.out.println(yLocation);
+		
+		
 		image = new ImageIcon("images/brown rectangle.png");
 	}
 

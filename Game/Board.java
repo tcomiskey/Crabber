@@ -26,7 +26,7 @@ public class Board extends JFrame{
 	public Board(int difficulty){
 		// set the initial values for the board attributes
 		boardWidth = 800;
-		boardHeight = 800;
+		boardHeight = 700;
 		this.difficulty = difficulty;
 		win = true;
 		isOcean = false;	
@@ -35,11 +35,11 @@ public class Board extends JFrame{
 		
 		// xcoord and ycoord are variables to hold the values of the enemy coordinates
 		int xcoord = 0;
-		int ycoord = boardHeight-(3*player.getPlayerHeight());
+		int ycoord = boardHeight-(2*player.getPlayerHeight());
 		// row is a counter for what row the enemies are in
-		int row = 0;
+		int row = 1;
 		// set all rows to safe until they get populated with an enemy
-		for (int i = 0; i<1000; i++){
+		for (int i = 0; i<300; i++){
 			safeRows.add(new Boolean(true));
 		}
 		// set a number of enemies and how many per row based on difficulty
@@ -54,14 +54,14 @@ public class Board extends JFrame{
 		// xcoord will be incremented based on the game difficulty*width of the player
 		xcoord += enemies.get(0).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		// since an enemy was added to this row the safeRow value is set to false
-		safeRows.set(1, new Boolean(false));
+		safeRows.set(row, new Boolean(false));
 		// looping until total number of enemies needed for game difficulty are instantiated
 		for(int i = 1; i < difficulty * numEnemiesConstant/*multiplier to get number of enemies required for the difficulty*/; i++){
-		    if (row%2 == 0){ // even rows will be sharks
+		    if (row%2 == 1){ // odd rows will be sharks
 		        enemies.add(new Shark(boardWidth, xcoord, ycoord, currentDirection));
 		        xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		    }
-		    else{ // odd rows will be trash
+		    else{ // even rows will be trash
 		        enemies.add(new Trash(boardWidth, xcoord, ycoord, currentDirection));
 		        xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		    }
@@ -74,13 +74,13 @@ public class Board extends JFrame{
 		            ycoord -= player.getPlayerHeight();
 		            row++;
 		            //sets the next row to be used as unsafe
-		            safeRows.set(row+1, new Boolean(false));
+		            safeRows.set(row, new Boolean(false));
 		        }
 		        else{
 		            ycoord -= 2*player.getPlayerHeight();
 		            row+=2;
 		            //sets the next row to be used as unsafe
-		            safeRows.set(row+1, new Boolean(false));
+		            safeRows.set(row, new Boolean(false));
 		        }
 		        // picks a random new xcoord to use when starting a new row to create staggered enemies
 		        xcoord = (int) Math.floor(Math.random() * 4 * player.getPlayerWidth());
@@ -97,6 +97,8 @@ public class Board extends JFrame{
 		    }  
 		    
         	}
+        	
+        	
 		
 	}
     	//move method that is called to move all of the enemy characters
@@ -113,7 +115,7 @@ public class Board extends JFrame{
 		// loops backwards from the current row until finding a safe row and resets the ylocation of the player
 		for (int i = currentRow; i>=0; i--){
 			if(safeRows.get(i)){
-				player.setY((numberOfRows-i+1)*player.getPlayerHeight());
+				player.setY((numberOfRows-i)*player.getPlayerHeight());
 				break;
 			}
 		}
