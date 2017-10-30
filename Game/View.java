@@ -61,7 +61,8 @@ public class View extends JFrame implements MouseListener{
 		getContentPane().removeAll();
 		diffScreen = new JPanel();
 		easy = new JButton("Easy");
-		easy.addActionListener(
+		easy.addActionListener(control.getMouseClick(e);
+		playerLabel.setLocation(playerX, playerY);
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					difficulty = 1;
@@ -176,7 +177,7 @@ public class View extends JFrame implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		control.getMouseClick(e);
 		playerLabel.setLocation(playerX, playerY);
-	/*
+		/*
 		if(e.getY() < playerLabel.getY()){
 			playerLabel.setLocation(playerLabel.getX(),playerLabel.getY()-playerLabel.getIcon().getIconHeight());
 		}
@@ -203,7 +204,7 @@ public class View extends JFrame implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
+		
 	}
 
 	@Override
@@ -233,22 +234,21 @@ public class View extends JFrame implements MouseListener{
     	private void startGameOverWindow(){
 		gameOverScreen = new JPanel();
 		gameOverScreen.setBackground(Color.red);
-		gameOverScreen.setLayout(new FlowLayout());
-		gameOverScreen.setVisible(true);
+		//gameOverScreen.setLayout(new FlowLayout());
+		
 		playAgain = new JButton("Play again?");
 		playAgain.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					//send back to beginning here
+					createDiffScreen();
 				}
 			}
 			);
-		playAgain.setVisible(true);
-		gameOverScreen.setVisible(true);
+		gameOverScreen.add(playAgain);
 		getContentPane().removeAll();
 		getContentPane().add(gameOverScreen);
 		//diffScreen.setOpaque(true);
-		getContentPane().setVisible(true);
+		setVisible(true);
 		repaint();
 	}
 
