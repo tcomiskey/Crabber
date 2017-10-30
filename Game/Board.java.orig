@@ -10,12 +10,22 @@ public class Board extends JFrame{
 	private int boardWidth;
 	private int boardHeight;
 	private int difficulty; //1 = easy, 2 = medium, 3 = hard
+<<<<<<< HEAD
+	private boolean win;
+	private static Player player;
+	private ArrayList<GameCharacter> enemies = new ArrayList<GameCharacter>(50);
+	private boolean isOcean; //false for land, true for ocean
+	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>();
+	private int numberOfRows;
+=======
 	private int numberOfRows; // number of rows in the game board
 	private boolean win; // parameter used for stopping game
 	private boolean isOcean; // false for land, true for ocean to change background and enemy types
-	private static Player player; // the controllable player
+	private Player player; // the controllable player
 	private ArrayList<GameCharacter> enemies = new ArrayList<GameCharacter>(50); // the list of enemies
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>(); // a list of all of the rows that do not contain enemies used for checkpoints
+>>>>>>> c30dd73e83886890c952bd3275a6c96710bdff43
+	
 	
 	/* Board Constructor sets up the model by creating the player and 
 	filling an ArrayList of enemies that will represent every obstacle in 
@@ -98,8 +108,15 @@ public class Board extends JFrame{
 		    
         	}
 		
+<<<<<<< HEAD
+	} //Board constructor
+    
+    
+    //move method
+=======
 	}
     	//move method that is called to move all of the enemy characters
+>>>>>>> c30dd73e83886890c952bd3275a6c96710bdff43
 	public void moveCharacter(){
 		Iterator<GameCharacter> enemyIterator = enemies.iterator();
 		while (enemyIterator.hasNext()){
@@ -110,13 +127,22 @@ public class Board extends JFrame{
 	public void resetPlayer(){
 		// finds the current row of the character based on current location
 		int currentRow = numberOfRows-player.getY()/player.getPlayerHeight();
+<<<<<<< HEAD
+        System.out.println("row " + currentRow);
+=======
 		// loops backwards from the current row until finding a safe row and resets the ylocation of the player
+>>>>>>> c30dd73e83886890c952bd3275a6c96710bdff43
 		for (int i = currentRow; i>=0; i--){
 			if(safeRows.get(i)){
 				player.setY((numberOfRows-i+1)*player.getPlayerHeight());
 				break;
 			}
 		}
+<<<<<<< HEAD
+		System.out.println("safe rows" + safeRows);
+        System.out.println("row " + currentRow);
+=======
+>>>>>>> c30dd73e83886890c952bd3275a6c96710bdff43
 	
 	}
     
