@@ -55,6 +55,7 @@ public class Controller{
 			curViewEnemy.setX(curBoardEnemy.getX());
 			curViewEnemy.setY(curBoardEnemy.getY());
 			//Determine if there is a collision
+<<<<<<< HEAD
             if (b.collisionCheck(curBoardEnemy)) {
                 message = curBoardEnemy.hit();
                 //System.out.println(message);
@@ -62,6 +63,10 @@ public class Controller{
                 v.throwQuestion(message);
             }
 			/*if(player.getY() == curBoardEnemy.getY() && player.getX()+player.getPlayerWidth() > curBoardEnemy.getX() && player.getX() < curBoardEnemy.getX()+curBoardEnemy.getImgWidth()){
+=======
+			if(player.getY() == curBoardEnemy.getY() && player.getX()+player.getPlayerWidth() > curBoardEnemy.getX() && player.getX() < curBoardEnemy.getX()+curBoardEnemy.getImgWidth()){
+				//if the player is hit call the hit method of the gamecharacter
+>>>>>>> c30dd73e83886890c952bd3275a6c96710bdff43
 				message = curBoardEnemy.hit();
 				System.out.println(message);
 				// stop the game and show the question or bonus message

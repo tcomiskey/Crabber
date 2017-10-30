@@ -214,7 +214,7 @@ public class View extends JFrame implements MouseListener{
     
     public void throwQuestion(Message currentMessage) {
         String[] buttons = {currentMessage.getRightAnswer(), currentMessage.getWrongAnswer1(), currentMessage.getWrongAnswer2()};
-        int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[1]);
+        int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, null);
         if (rc==0) {
             System.out.println("RIGHT!");
             control.resetPlayer();

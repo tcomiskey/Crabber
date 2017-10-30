@@ -7,17 +7,14 @@ public class GameCharacter {
 	int height;
 	int xLoc;
 	int yLoc;
-	int dir = -1;
+	int dir;
 	int farLeft;
 	int farRight;
 	
 	public GameCharacter(int boardWidth, int xLoc, int yLoc, int direction){
-		//image = new ImageIcon("images/brown rectangle.png");
         	this.xLoc=xLoc;
         	this.yLoc=yLoc;
-        dir = direction;
-		
-			
+        	dir = direction;
 	}//constructor
 	
 	public Message hit(){

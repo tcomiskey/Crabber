@@ -15,7 +15,12 @@ public class Shark extends Enemy{
 	}
 	public Shark(int boardWidth, int xLoc, int yLoc, int direction){
 		super(boardWidth, xLoc, yLoc, direction);
+        if (direction == -1) {
        	 	image = new ImageIcon("images/shark.png");
+        }
+        else {
+            image = new ImageIcon("images/reverseShark.png");
+        }
        	 	width = image.getIconWidth();
 		height = image.getIconHeight();
 		//Sets bounds on how far off screen a character can go before it loops around
