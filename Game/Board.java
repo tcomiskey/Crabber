@@ -3,13 +3,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.lang.Math;
+import java.util.concurrent.*;
+//import jline.*;
 
-public class Board {
+public class Board extends JFrame{
 	private int boardWidth;
 	private int boardHeight;
 	private int difficulty; //1 = easy, 2 = medium, 3 = hard
 	private boolean win;
-	private Player player;
+	private static Player player;
 	private ArrayList<GameCharacter> enemies = new ArrayList<GameCharacter>(50);
 	private boolean isOcean; //false for land, true for ocean
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>();
@@ -83,7 +85,9 @@ public class Board {
 		    
         }
 		
-	}
+	} //Board constructor
+    
+    
     //move method
 	public void moveCharacter(){
 		GameCharacter c;
@@ -95,16 +99,26 @@ public class Board {
 	}
 	public void resetPlayer(){
 		int currentRow = numberOfRows-player.getY()/player.getPlayerHeight();
+        System.out.println("row " + currentRow);
 		for (int i = currentRow; i>=0; i--){
 			if(safeRows.get(i)){
 				player.setY((numberOfRows-i+1)*player.getPlayerHeight());
 				break;
 			}
 		}
-		System.out.println(safeRows);
-		System.out.println(currentRow);
+		System.out.println("safe rows" + safeRows);
+        System.out.println("row " + currentRow);
 	
 	}
+    
+    public boolean collisionCheck(GameCharacter collisionCheckCharacter) {
+        if(player.getY() == collisionCheckCharacter.getY() && player.getX()+player.getPlayerWidth() > collisionCheckCharacter.getX() && player.getX() < collisionCheckCharacter.getX()+collisionCheckCharacter.getImgWidth()){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
     
 	//setters
 	public void setBoardWidth(int boardWidth){
@@ -154,4 +168,39 @@ public class Board {
         }
         return returnString;
 	}
+    
+    public static final int BUTTON1 = 1;
+    public static final int MOUSE_CLICKED = 500;
+    public static void main(String args[]) {
+        Board b = new Board(1);
+        MouseEvent me = new MouseEvent(b, MOUSE_CLICKED, 100, 0, 400, 400, 1, false, BUTTON1);
+        System.out.println(b);
+        System.out.println(player);
+        b.moveCharacter();
+        player.move(me);
+        //System.out.println(b);
+        System.out.println(player);
+        for(int i = 0; i < 100; i++){
+            b.moveCharacter();
+            /*for(GameCharacter gc : b.enemies) {
+                if (b.collisionCheck(gc)) {
+                    Message message = gc.hit();
+                    System.out.println(message.getQuestion());
+                    System.out.println("a. "+ message.getRightAnswer());
+                    System.out.println("b. "+ message.getWrongAnswer1());
+                    System.out.println("c. "+ message.getWrongAnswer2());
+                    ConsoleReader starter = new ConsoleReader(System.in, new PrintWriter(System.out));
+                    char[] play = {'a', 'b', 'c'};
+                    int j  = starter.readCharacter(play);
+                    if(j == (int)'a'){
+                        System.out.println("RIGHT");
+                    }
+                    else{
+                        Sytem.out.println("WRONG");
+                    }
+                }
+                
+            }*/
+        }
+    }
 }

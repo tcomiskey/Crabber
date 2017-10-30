@@ -47,12 +47,18 @@ public class Controller{
 			curViewEnemy.setX(curBoardEnemy.getX());
 			curViewEnemy.setY(curBoardEnemy.getY());
 			//Determine if there is a collision
-			if(player.getY() == curBoardEnemy.getY() && player.getX()+player.getPlayerWidth() > curBoardEnemy.getX() && player.getX() < curBoardEnemy.getX()+curBoardEnemy.getImgWidth()){
+            if (b.collisionCheck(curBoardEnemy)) {
+                message = curBoardEnemy.hit();
+                //System.out.println(message);
+                timer.stop();
+                v.throwQuestion(message);
+            }
+			/*if(player.getY() == curBoardEnemy.getY() && player.getX()+player.getPlayerWidth() > curBoardEnemy.getX() && player.getX() < curBoardEnemy.getX()+curBoardEnemy.getImgWidth()){
 				message = curBoardEnemy.hit();
 				System.out.println(message);
 				timer.stop();
                 		v.throwQuestion(message);
-			}
+			}*/
 		}//for
 		v.updateLocations();
 		
