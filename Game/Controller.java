@@ -61,6 +61,10 @@ public class Controller{
                 timer.stop();
                 v.throwQuestion(message);
             }
+
+            if(b.playerAtFinish()){
+            	v.startWinWindow();
+            }
 			/*if(player.getY() == curBoardEnemy.getY() && player.getX()+player.getPlayerWidth() > curBoardEnemy.getX() && player.getX() < curBoardEnemy.getX()+curBoardEnemy.getImgWidth()){
 				message = curBoardEnemy.hit();
 				System.out.println(message);

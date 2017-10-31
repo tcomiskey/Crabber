@@ -19,7 +19,7 @@ public class View extends JFrame implements MouseListener{
 	private JLabel playerLabel;
 	private ArrayList<JLabel> enemyLabels;
 	private JButton start;
-	public JButton easy;
+	private JButton easy;
 	private JButton medium;
 	private JButton hard;
 	private JButton playAgain;
@@ -215,8 +215,7 @@ public class View extends JFrame implements MouseListener{
     public void throwQuestion(Message currentMessage) {
         String[] buttons = {currentMessage.getRightAnswer(), currentMessage.getWrongAnswer1(), currentMessage.getWrongAnswer2()};
         int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, null);
-        if (rc==0) {
-            System.out.println("RIGHT!");          
+        if (rc==0) {         
             control.resetPlayer();
             playerLabel.setLocation(playerX, playerY);
             System.out.println(playerLabel.getX());
@@ -225,7 +224,6 @@ public class View extends JFrame implements MouseListener{
             
         }
         else {
-            System.out.println("W R O N G heck u");
             startGameOverWindow();
         }
     }
@@ -265,7 +263,8 @@ public class View extends JFrame implements MouseListener{
 		winScreen.add(winText);
 		playAgain = new JButton("Play again?");
 		playAgain.addActionListener(
-			new ActionListener(){
+	
+	private JLabel playerLabel;		new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					createDiffScreen();
 				}
