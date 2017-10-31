@@ -216,7 +216,7 @@ public class View extends JFrame implements MouseListener{
         String[] buttons = {currentMessage.getRightAnswer(), currentMessage.getWrongAnswer1(), currentMessage.getWrongAnswer2()};
         int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, null);
         if (rc==0) {
-            System.out.println("RIGHT!");
+            System.out.println("RIGHT!");          
             control.resetPlayer();
             playerLabel.setLocation(playerX, playerY);
             System.out.println(playerLabel.getX());
@@ -250,6 +250,31 @@ public class View extends JFrame implements MouseListener{
 		gameOverScreen.add(playAgain);
 		getContentPane().removeAll();
 		getContentPane().add(gameOverScreen);
+		//diffScreen.setOpaque(true);
+		setVisible(true);
+		repaint();
+	}
+
+	private void startWinWindow(){
+		JPanel winScreen = new JPanel();
+		winScreen.setBackground(Color.yellow);
+		winScreen.setLayout(new BoxLayout(winScreen, BoxLayout.Y_AXIS));
+		JLabel winText = new JLabel("Congrats!!! You won!");
+		winText.setFont(new Font(winText.getName(),Font.PLAIN, 72));
+		winText.setAlignmentX(Component.CENTER_ALIGNMENT);
+		winScreen.add(winText);
+		playAgain = new JButton("Play again?");
+		playAgain.addActionListener(
+			new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					createDiffScreen();
+				}
+			}
+			);
+		playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
+		winScreen.add(playAgain);
+		getContentPane().removeAll();
+		getContentPane().add(winScreen);
 		//diffScreen.setOpaque(true);
 		setVisible(true);
 		repaint();
