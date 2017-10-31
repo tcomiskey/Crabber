@@ -61,6 +61,7 @@ public class View extends JFrame implements MouseListener{
 		getContentPane().removeAll();
 		diffScreen = new JPanel();
 		easy = new JButton("Easy");
+		easy.setFont(new Font(start.getName(),Font.PLAIN, 72));
 		easy.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
@@ -72,6 +73,7 @@ public class View extends JFrame implements MouseListener{
 			}
 			);
 		medium = new JButton("Medium");
+		medium.setFont(new Font(start.getName(),Font.PLAIN, 72));
 		medium.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
@@ -83,6 +85,7 @@ public class View extends JFrame implements MouseListener{
 			}
 			);
 		hard = new JButton("Hard");
+		hard.setFont(new Font(start.getName(),Font.PLAIN, 72));
 		hard.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
