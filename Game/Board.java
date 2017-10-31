@@ -130,6 +130,10 @@ public class Board extends JFrame{
             return false;
         }
     }
+
+    public boolean playerAtFinish(){
+    	return player.getY() == 0;
+    }
     
 	//setters
 	public void setBoardWidth(int boardWidth){

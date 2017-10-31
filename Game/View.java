@@ -253,7 +253,7 @@ public class View extends JFrame implements MouseListener{
 		repaint();
 	}
 
-	private void startWinWindow(){
+	public void startWinWindow(){
 		JPanel winScreen = new JPanel();
 		winScreen.setBackground(Color.yellow);
 		winScreen.setLayout(new BoxLayout(winScreen, BoxLayout.Y_AXIS));
@@ -264,7 +264,7 @@ public class View extends JFrame implements MouseListener{
 		playAgain = new JButton("Play again?");
 		playAgain.addActionListener(
 	
-	private JLabel playerLabel;		new ActionListener(){
+			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					createDiffScreen();
 				}
