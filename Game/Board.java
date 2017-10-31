@@ -184,7 +184,7 @@ public class Board extends JFrame{
         return returnString;
 	}
     
-    /*public static final int BUTTON1 = 1;
+    public static final int BUTTON1 = 1;
     public static final int MOUSE_CLICKED = 500;
     public static void main(String args[]) {
         Board b = new Board(1);
@@ -194,6 +194,7 @@ public class Board extends JFrame{
         b.moveCharacter();
         player.move(me);
         System.out.println(player);
+        int lost = 0;
         for(int i = 0; i < 100; i++){
             b.moveCharacter();
             for(GameCharacter gc : b.enemies) {
@@ -219,12 +220,16 @@ public class Board extends JFrame{
                     }
                     else {
                         System.out.println("YOU LOSE");
+                        lost = 1;
                         break;
-                    }
+                    }//else
                     
-                }
+                }//if
                 
+            }//for
+            if(lost == 1){
+            	break;
             }
         }
-    }*/
+    }
 }
