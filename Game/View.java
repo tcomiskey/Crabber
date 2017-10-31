@@ -10,7 +10,6 @@ import java.util.*;
 //import components.LayeredPaneDemo2;
 
 public class View extends JFrame implements MouseListener{
-
 	private int difficulty;
 	private JPanel menu;
 	private JPanel diffScreen;
@@ -266,6 +265,7 @@ public class View extends JFrame implements MouseListener{
 	
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
+					control.setPlayerToStart();
 					createDiffScreen();
 				}
 			}

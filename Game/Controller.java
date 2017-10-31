@@ -106,6 +106,10 @@ public class Controller{
         	return "Controller!";
     	}
 
+    	public void setPlayerToStart(){
+    		b.getPlayer().sendPlayerToStart();
+    	}
+
     	
 
 }
