@@ -63,6 +63,7 @@ public class Controller{
             }
 
             if(b.playerAtFinish()){
+		timer.stop();
             	v.startWinWindow();
             }
 			/*if(player.getY() == curBoardEnemy.getY() && player.getX()+player.getPlayerWidth() > curBoardEnemy.getX() && player.getX() < curBoardEnemy.getX()+curBoardEnemy.getImgWidth()){
