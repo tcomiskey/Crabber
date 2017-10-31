@@ -67,6 +67,12 @@ public class Player{
 	public String toString(){
 		return "Player's Location: "+"("+xLocation+","+yLocation+")";
 	}	
+
+	public void sendPlayerToStart(){
+		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
+		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
+	}
+	
 	public int getX(){
 		return xLocation;
 	}
