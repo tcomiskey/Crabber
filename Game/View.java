@@ -34,6 +34,7 @@ public class View extends JFrame implements MouseListener{
 		menu = new JPanel();
 		getContentPane().add(menu);
 		start = new JButton("Start");
+		start.setFont(new Font(start.getName(),Font.PLAIN, 72));
 		start.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
