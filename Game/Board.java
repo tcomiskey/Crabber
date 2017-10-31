@@ -177,7 +177,7 @@ public class Board extends JFrame{
 		return enemies;
 	}
 	public String toString(){
-        String returnString = "This game board is " + boardHeight + " by " + boardWidth + ". The difficulty is " + difficulty + ". The win and loss booleans are: " + win + " ";
+        String returnString = "";
         for (GameCharacter character: enemies){
             returnString += character.toString() + "\n";
         }
@@ -188,17 +188,22 @@ public class Board extends JFrame{
     public static final int MOUSE_CLICKED = 500;
     public static void main(String args[]) {
         Board b = new Board(1);
-        MouseEvent me = new MouseEvent(b, MOUSE_CLICKED, 100, 0, 400, 400, 1, false, BUTTON1);
+        MouseEvent me1 = new MouseEvent(b, MOUSE_CLICKED, 100, 0, 100, b.getPlayer().getY(), 1, false, BUTTON1);
+        MouseEvent me2 = new MouseEvent(b, MOUSE_CLICKED, 100, 0, 600, b.getPlayer().getY(), 1, false, BUTTON1);
+        MouseEvent me3 = new MouseEvent(b, MOUSE_CLICKED, 100, 0, 400, 400, 1, false, BUTTON1);
         System.out.println(b);
         System.out.println(player);
         b.moveCharacter();
-        player.move(me);
-        System.out.println(player);
+        player.move(me1);
+        player.move(me2);
+        player.move(me3);
         int lost = 0;
         for(int i = 0; i < 100; i++){
             b.moveCharacter();
+            System.out.println(b);
             for(GameCharacter gc : b.enemies) {
                 if (b.collisionCheck(gc)) {
+                    System.out.println("COLLISION:");
                     Message message = gc.hit();
                     System.out.println(message.getQuestion());
                     System.out.println("a. "+ message.getRightAnswer());
