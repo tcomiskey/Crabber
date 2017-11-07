@@ -4,6 +4,11 @@ import java.lang.Math;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+* An Enemy object is a subclass of GameCharacter.
+* All obstacles that should be avoided are subclasses of Enemy
+* @author Tom Comiskey
+*/
 public class Enemy extends GameCharacter{
         private ImageIcon image;
 	
@@ -14,6 +19,16 @@ public class Enemy extends GameCharacter{
 	private static ArrayList<Question> questions;	
 	
 	//this constructor only called once to set the static variables for all other enemies
+	/**
+	* Enemy constructor that calls the GameCharacter contructor.
+	* (Will not in the future but currently) Reads in a filename to
+	* to create the list of questions that will be asked during gameplay
+	* @param boardWidth is the size of the game board
+	* @param xLoc is the x location of the top left of the enemy image
+	* @param yLoc is the y location of the top left of the enemy image
+	* @param direction is which direction this enemy will move in
+	* @param fileName is the txt file that contains the question list	
+	*/
 	public Enemy(int boardWidth, int xLoc, int yLoc, int direction, String fileName){
 		// calls the GameCharacter constructor
 		super(boardWidth, xLoc, yLoc, direction);
@@ -43,11 +58,23 @@ public class Enemy extends GameCharacter{
 	}
 	
 	// simple constructor used for all other enemies besides the first initialized
+	
+	/**
+	* Simple constructor that does not instantiate question array.
+	* @param boardWidth is the size of the game board
+	* @param xLoc is the x location of the top left of the enemy image
+	* @param yLoc is the y location of the top left of the enemy image
+	* @param direction is which direction this enemy will move in
+	*/
 	public Enemy(int boardWidth, int xLoc, int yLoc, int direction){
 		super(boardWidth, xLoc, yLoc, direction);
 	}
 	
-	// hit method returns the question that will be asked
+	/**
+	* Method that is called if Player collides with Enemy
+	* Picks a question to ask the Player
+	* @return Message object that contains a question that will be asked.
+	*/
 	public Message hit(){
         	questionIndex++;
         	if(questionIndex == questions.size()){
