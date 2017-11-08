@@ -9,6 +9,15 @@ import java.util.*;
 
 //import components.LayeredPaneDemo2;
 
+
+/**
+* This class contains all necessary fields and methods to create the
+* user interface for the Crabber game. It handles all of the Swing painting
+* and is passed data and images from a controller. 
+*
+* @author John Malone
+* @author Maura Swift
+*/
 public class View extends JFrame implements MouseListener{
 	private int difficulty;
 	private JPanel menu;
@@ -26,8 +35,13 @@ public class View extends JFrame implements MouseListener{
 	private int playerX;
 	private int playerY;
 	private ArrayList<GameCharacter> enemies;
-	
-	View(){
+
+	/**
+	* This is the main View constructor that creates a new JPanel onto which a start button
+	* is placed. This start button is able to begin the game and 
+	* create all other necessary JPanels.
+	*/
+	public View(){
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		//setLocationRelativeTo(null);
 		setSize(new Dimension(800,700));
@@ -55,7 +69,13 @@ public class View extends JFrame implements MouseListener{
 			}
 		});
 	}*/
-
+	/**
+	* Method to create the difficulty screen.
+	* This method can either be called by the player clicking the
+	* start button or by the player clicking any "Play again"
+	* button. Once a difficulty is selected, a new controller is 
+	* created and the startGameWindow() method is called.
+	*/
 	private void createDiffScreen(){
 		//this clears old screen
 		getContentPane().removeAll();
@@ -105,6 +125,10 @@ public class View extends JFrame implements MouseListener{
 		setVisible(true);
 		repaint();
 	}
+	/**
+	* Method to relocate the enemy images across the gameboard. Takes 
+	* no inputs or outputs and repaints using Swing repaint.
+	*/
 	public void updateLocations(){
 		for(int i = 0; i < enemies.size(); i++){
 			enemyLabels.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
@@ -112,7 +136,13 @@ public class View extends JFrame implements MouseListener{
 		repaint();
 		
 	}
-		
+	/**
+	* Method that returns that the difficulty that is selected by
+	* the player. Required so that the controller knows which difficulty
+	* the user selects.
+	*
+	* @return	the difficulty selected by the user
+	*/
 	public int getDifficulty(){
 		return difficulty;
 	}

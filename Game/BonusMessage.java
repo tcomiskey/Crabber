@@ -1,3 +1,7 @@
+/**
+* 
+*/
+
 public class BonusMessage extends Message{
 
 	private String bonusMessage;
