@@ -11,7 +11,7 @@ import javax.swing.*;
 */
 public class Enemy extends GameCharacter{
         private ImageIcon image;
-	
+	// testing branch things
 	private Scanner fileScanner;
 	// made static so that all enemies will have the same question index
 	private static int questionIndex;
