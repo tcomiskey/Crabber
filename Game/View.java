@@ -26,6 +26,7 @@ public class View extends JFrame implements MouseListener{
 	private JPanel gameOverScreen;
 	private JLabel playerLabel;
 	private ArrayList<JLabel> enemyLabels;
+	private JLabel bonusLabel;
 	private JButton start;
 	private JButton easy;
 	private JButton medium;

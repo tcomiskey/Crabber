@@ -16,6 +16,7 @@ public class Board extends JFrame{
 	private static Player player; // the controllable player
 	private ArrayList<GameCharacter> enemies = new ArrayList<GameCharacter>(50); // the list of enemies
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>(); // a list of all of the rows that do not contain enemies used for checkpoints
+	private Bonus bonus;
 	
 	/* Board Constructor sets up the model by creating the player and 
 	filling an ArrayList of enemies that will represent every obstacle in 
@@ -134,6 +135,13 @@ public class Board extends JFrame{
     public boolean playerAtFinish(){
     	return player.getY() == 0;
     }
+
+	public void generateBonus(){
+    		double r = Math.random();
+            	if(r < .25/difficulty){
+            		bonus = Bonus.makeBonus(bonus, boardWidth, player.getY()-player.getPlayerHeight()*2);
+            	}
+        }
     
 	//setters
 	public void setBoardWidth(int boardWidth){
