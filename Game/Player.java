@@ -31,7 +31,14 @@ public class Player{
 
 	//Chooses a direction to move
 	public void move(MouseEvent e){
-		if(e.getY() < yLocation-PLAYER_HEIGHT/2){
+		System.out.println("Mouse click at (" + e.getX() + ", " + e.getY() + ")");
+		if(e.getX() == xLocation && e.getY() < yLocation){
+			moveForward();
+		}
+		else if(e.getX() == xLocation){
+			moveLeft();
+		}
+		else if(e.getY() < yLocation && ((e.getY()-yLocation)/(e.getX()-(xLocation)) > .5 || (e.getY()-yLocation)/(e.getX()-(xLocation)) < -.5)){
 			moveForward();
 		}
 		else if(e.getX() > xLocation + PLAYER_WIDTH){
