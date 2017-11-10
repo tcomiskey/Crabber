@@ -5,7 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /**
-* An Enemy object is a subclass of GameCharacter
+* An Enemy object is a subclass of GameCharacter.
 * All obstacles that should be avoided are subclasses of Enemy
 * @author Tom Comiskey
 */
