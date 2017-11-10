@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.lang.Math;
 import java.util.concurrent.*;
 import java.io.*;
+import Shark.sharkFactory;
+import Trash.trashFactory;
 
 public class Board extends JFrame{
 	private int boardWidth;
@@ -14,7 +16,6 @@ public class Board extends JFrame{
 	private boolean win; // parameter used for stopping game
 	private boolean isOcean; // false for land, true for ocean to change background and enemy types
 	private static Player player; // the controllable player
-	private ArrayList<GameCharacter> enemies = new ArrayList<GameCharacter>(50); // the list of enemies
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>(); // a list of all of the rows that do not contain enemies used for checkpoints
 	
 	/* Board Constructor sets up the model by creating the player and 
@@ -48,18 +49,18 @@ public class Board extends JFrame{
 		// picks left as the current direction of movement;
         	int currentDirection = -1;
 		// first enemy will use complex constuctor to instantiate static array of questions
-		enemies.add(new Shark(boardWidth, xcoord, ycoord, currentDirection, "QuestionAndAnswerList.txt"));
+		Shark theOneAndOnlyShark = sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
 		// counter for how many enemies have been placed in the current row
 		int enemiesInRow = 1;
 		// xcoord will be incremented based on the game difficulty*width of the player
-		xcoord += enemies.get(0).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+		xcoord += theOneAndOnlyShark.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		// since an enemy was added to this row the safeRow value is set to false
 		safeRows.set(row, new Boolean(false));
 		// looping until total number of enemies needed for game difficulty are instantiated
 		for(int i = 1; row < numberOfRows/*multiplier to get number of enemies required for the difficulty*/; i++){
 		    if (row%2 == 1){ // odd rows will be sharks
-		        enemies.add(new Shark(boardWidth, xcoord, ycoord, currentDirection));
-		        xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+		        sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
+		        xcoord += theOneAndOnlyShark.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		    }
 		    else{ // even rows will be trash
 		        enemies.add(new Trash(boardWidth, xcoord, ycoord, currentDirection));

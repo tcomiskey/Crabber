@@ -1,12 +1,13 @@
 import javax.swing.*;
-
+import java.util.*;
 /**
 The parent class of all the characters in the game except the player.
 
 @author Maura Swift
 */
 public class GameCharacter {
-	ImageIcon image;
+	ImageIcon leftImage;
+	ImageIcon rightImage;
 	int width;
 	int height;
 	int xLoc;
@@ -14,7 +15,7 @@ public class GameCharacter {
 	int dir;
 	int farLeft;
 	int farRight;
-
+	private static ArrayList<int[]> enemyAtt = new ArrayList<int[]>(); 
 
 	/**
 	Constructs a GameCharacter with a given location and direction
@@ -45,16 +46,21 @@ public class GameCharacter {
 
 	@return the x-coordinate of the character after moving
 	*/
-	public int move(){
-		xLoc += dir*5;
-		if(xLoc < farLeft){
-			xLoc = farRight;
+	public void move(){
+		int counter = 0;
+		Iterator xIterator = xLocations.iterator();
+		while (xIterator.hasNext()){
+			enemiesAtt.get(counter)[0] += directions.get(counter)*5;
+			//enemiesAtt.set(counter, enemiesAtt.get(counter)[0] += directions.get(counter)*5);
+			if(enemiesAtt.get(counter)[0] < farLeft){
+				enemiesAtt.get(counter)[0] = farRight;
+			}
+			else if(xLocations.get(counter) > farRight){
+				enemiesAtt.get(counter)[0] = farLeft;
+			}
+			counter++;
+			xIterator.next();
 		}
-		else if(xLoc > farRight){
-			xLoc = farLeft;
-		}
-			
-		return xLoc;
 	}//move
 
 	/**
@@ -108,10 +114,17 @@ public class GameCharacter {
 
 	@return the ImageIcon for the character
 	*/
-	public ImageIcon getImage(){
-		return image;
+	public ImageIcon getRightImage(){
+		return rightImage;
+	}//getImage
+	
+	public ImageIcon getLeftImage(){
+		return leftImage;
 	}//getImage
 
+	public ArrayList<int[]> getXLocations(){
+		return enemiesAtt;
+	}
 	/**
 	Returns the width of the character image
 

@@ -10,15 +10,11 @@ import javax.swing.*;
 * @author Tom Comiskey
 */
 public class Enemy extends GameCharacter{
-        private ImageIcon image;
-	// testing branch things
 	private Scanner fileScanner;
 	// made static so that all enemies will have the same question index
 	private static int questionIndex;
 	// all enemies will have the same list of questions
 	private static ArrayList<Question> questions;
-	
-	private static int[50][50] xyLocations;	
 	
 	// simple constructor used for all other enemies besides the first initialized
 	

@@ -1,53 +1,45 @@
 import javax.swing.*;
 
 public class Trash extends Enemy{
-	private ImageIcon image;
-	
-	public Trash(int boardWidth, int xLoc, int yLoc, int direction, String fileName){
-		super(boardWidth, xLoc, yLoc, direction, fileName);
-	        image = new ImageIcon("images/Trash.png");
-		width = image.getIconWidth();
-		height = image.getIconHeight();
-		//Sets bounds on how far off screen a character can go before it loops around
-		int usableWidth = (boardWidth/width) + 3*width; //335
-		farLeft = -(usableWidth)/2;
-		farRight = boardWidth+(usableWidth)/2;
-	}
-	public Trash(int boardWidth, int xLoc, int yLoc, int direction){
+	private boolean noTrash = true;
+
+	private Trash(int boardWidth, int xLoc, int yLoc, int direction){
 		super(boardWidth, xLoc, yLoc, direction);
-		image = new ImageIcon("images/Trash.png");
-		width = image.getIconWidth();
-		height = image.getIconHeight();
+		rightImage = new ImageIcon("images/Trash.png");
+		leftImage = new ImageIcon("images/Trash.png");
+		width = rightImage.getIconWidth();
+		height = rightImage.getIconHeight();
 		//Sets bounds on how far off screen a character can go before it loops around
 		int usableWidth = (boardWidth/width) + 3*width; //335
 		farLeft = -(usableWidth)/2;
 		farRight = boardWidth+(usableWidth)/2;
+		int[] xydir = new int[3];
+		xydir[0] = xLocation;
+		xydir[1] = yLocation;
+		xydir[2] = direction;
+		enemiesAtt.add(xydir);
 	}
-	
-	public int getX(){
-		return xLoc;
-	}//getX
-	
-	public int getY(){
-		return yLoc;
-	}//getY
-	
-	public void setX(int x){
-		xLoc = x;
-	}//setX
-	
-	public void setY(int y){
-		yLoc = y;
-	}//setY
-	
-	public void setDir(int dir){
-		this.dir = dir;
-	}//setDir
-	
-	public ImageIcon getImage(){
-		return image;
-	}//getImage
-	
+	public Trash trashFactory(int boardWidth, int xLoc, int yLoc, int direction){
+		if (noTrash){
+			return new Trash(boardWidth, xLoc, yLoc, direction);
+		}
+		else{
+			addTrash(xLocation, yLocation, direction);
+			return null;
+		}
+		
+	}
+	private void addTrash(int xLocation, int yLocation, int direction){
+		int[] xydir = new int[3];
+		xydir[0] = xLocation;
+		xydir[1] = yLocation;
+		xydir[2] = direction;
+		enemiesAtt.add(xydir);
+		
+	}
+	public boolean getNoTrash(){
+		return noTrash;
+	}	
 	public String toString(){
 		return "Trash located at x = " +  xLoc + " y = " + yLoc;
 	}
