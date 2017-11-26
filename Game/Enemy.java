@@ -10,11 +10,11 @@ import javax.swing.*;
 * @author Tom Comiskey
 */
 public class Enemy extends GameCharacter{
-	private Scanner fileScanner;
+	Scanner fileScanner;
 	// made static so that all enemies will have the same question index
-	private static int questionIndex;
+	static int questionIndex;
 	// all enemies will have the same list of questions
-	private static ArrayList<Question> questions;
+	static ArrayList<Question> questions;
 	
 	// simple constructor used for all other enemies besides the first initialized
 	
@@ -25,7 +25,7 @@ public class Enemy extends GameCharacter{
 	* @param yLoc is the y location of the top left of the enemy image
 	* @param direction is which direction this enemy will move in
 	*/
-	private Enemy(int boardWidth, int xLoc, int yLoc, int direction){
+	Enemy(int boardWidth, int xLoc, int yLoc, int direction){
 		super(boardWidth, xLoc, yLoc, direction);
 		
 	}
@@ -61,10 +61,6 @@ public class Enemy extends GameCharacter{
 	public void setDir(int dir){
 		this.dir = dir;
 	}//setDir
-	
-	public ImageIcon getImage(){
-		return image;
-	}//getImage
 	public String toString(){
 		return "Enemy located at x = " + xLoc + "y = " + yLoc;
 	}

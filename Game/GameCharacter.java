@@ -15,7 +15,7 @@ public class GameCharacter {
 	int dir;
 	int farLeft;
 	int farRight;
-	private static ArrayList<int[]> enemyAtt = new ArrayList<int[]>(); 
+	static ArrayList<int[]> enemyAtt = new ArrayList<int[]>(); 
 
 	/**
 	Constructs a GameCharacter with a given location and direction
@@ -50,11 +50,20 @@ public class GameCharacter {
 		int counter = 0;
 		Iterator enemyAttIterator = enemyAtt.iterator();
 		while (enemyAttIterator.hasNext()){
+<<<<<<< HEAD
 			enemyAtt.get(counter)[0] += directions.get(counter)*5;
 			if(enemyAtt.get(counter)[0] < farLeft){
 				enemyAtt.get(counter)[0] = farRight;
 			}
 			else if(xLocations.get(counter) > farRight){
+=======
+			enemyAtt.get(counter)[0] += enemyAtt.get(counter)[2]*5;
+			//enemiesAtt.set(counter, enemiesAtt.get(counter)[0] += enemyAtt.get(counter)[2]*5);
+			if(enemyAtt.get(counter)[0] < farLeft){
+				enemyAtt.get(counter)[0] = farRight;
+			}
+			else if(enemyAtt.get(counter)[0] > farRight){
+>>>>>>> ab13d812f4b278a68ff8bb0756b3b4decab0a5b9
 				enemyAtt.get(counter)[0] = farLeft;
 			}
 			counter++;
