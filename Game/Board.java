@@ -124,8 +124,8 @@ public class Board extends JFrame{
         	Iterator enemyAttIterator = theOneAndOnlyShark.getEnemyAtt().iterator();
 		while (enemyAttIterator.hasNext()){
 			//HOW DO WE KNOW ENEMY WIDTH
-            int[] currentEnemy = enemyAttIterator.next()
-			if(player.getX()+player.getPlayeWidth() > currentEnemy[0] && player.getX() < currentEnemy[0] + currentEnemy[3] && player.getY() = currentEnemy[1]){
+            int[] currentEnemy = (int[]) enemyAttIterator.next();
+			if(player.getX()+player.getPlayerWidth() > currentEnemy[0] && player.getX() < currentEnemy[0] + currentEnemy[3] && player.getY() == currentEnemy[1]){
 				return true;
 			}
             	}
@@ -152,7 +152,7 @@ public class Board extends JFrame{
 	public void setPlayer(Player player){
 		this.player = player;
 	}
-	public void setIsOcean(boolean isOcean){1
+	public void setIsOcean(boolean isOcean){
 		this.isOcean = isOcean;
 	}
 	//getters
@@ -175,7 +175,7 @@ public class Board extends JFrame{
 		return isOcean;
 	}
 	public Shark getTheOneAndOnlyShark(){
-		return theOneAndOnlyShark();
+		return theOneAndOnlyShark;
 	}
 	public Trash getTheOneAndOnlyTrash(){
 		return theOneAndOnlyTrash;

@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.*;
+import java.io.*;
 
 public class Shark extends Enemy{
 	//boolean to keep track if a shark object has been made
@@ -26,7 +27,7 @@ public class Shark extends Enemy{
 		xydir[2] = direction;
 		xydir[3] = width;
 		xydir[4] = height;
-		enemiesAtt.add(xydir);
+		enemyAtt.add(xydir);
 		
 		
 	}
