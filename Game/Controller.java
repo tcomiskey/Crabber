@@ -41,22 +41,23 @@ public class Controller{
 		Player player = b.getPlayer();
 		v.setPlayerX(player.getX());
 		v.setPlayerY(player.getY());
-		ArrayList<GameCharacter> boardEnemies = b.getEnemies();
-		ArrayList<GameCharacter> viewEnemies = v.getEnemies();
+		ArrayList<int[]> boardEnemies = b.getTheOneAndOnlyShark().getEnemyAtt();
+        ArrayList<int[]> viewEnemies = v.getEnemyAtt();
 		Message message;
 
+        //Move enemies
+        b.getTheOneAndOnlyShark().move();
+        
 		for(int i=0; i<boardEnemies.size(); i++){
 			//Current enemy in the board and view arraylists
-			GameCharacter curBoardEnemy = boardEnemies.get(i);
-			GameCharacter curViewEnemy = viewEnemies.get(i);
-			//Move enemies
-			curBoardEnemy.move();
+			int[] curBoardEnemy = boardEnemies.get(i);
+			int[] curViewEnemy = viewEnemies.get(i);
 			//Update enemy locations in view
-			curViewEnemy.setX(curBoardEnemy.getX());
-			curViewEnemy.setY(curBoardEnemy.getY());
+			curViewEnemy[0] = curBoardEnemy[0];
+			curViewEnemy[1] = curBoardEnemy[1];
 			//Determine if there is a collision
-			if (b.collisionCheck(curBoardEnemy)) {
-				message = curBoardEnemy.hit();
+			if (b.collisionCheck()) {
+				message = b.getTheOneAndOnlyShark().hit();
 				//System.out.println(message);
 				timer.stop();
 				v.throwQuestion(message);

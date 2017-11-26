@@ -39,9 +39,14 @@ public class Human extends Enemy{
         this.dir = dir;
     }//setDir
     
-    public ImageIcon getImage(){
-        return image;
+    public ImageIcon getLeftImage(){
+        return leftImage;
     }//getImage
+    
+    public ImageIcon getRightImage(){
+        return rightImage;
+    }//getImage
+    
 	public String toString(){
 		return "Human located at x = " + xLoc + " y = " + yLoc;
 	}
