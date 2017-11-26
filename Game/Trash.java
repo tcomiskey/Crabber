@@ -19,7 +19,7 @@ public class Trash extends Enemy{
 		xydir[2] = direction;
 		enemiesAtt.add(xydir);
 	}
-	public Trash trashFactory(int boardWidth, int xLoc, int yLoc, int direction){
+	public static Trash trashFactory(int boardWidth, int xLoc, int yLoc, int direction){
 		if (noTrash){
 			return new Trash(boardWidth, xLoc, yLoc, direction);
 		}

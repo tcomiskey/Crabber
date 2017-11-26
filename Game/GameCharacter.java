@@ -48,8 +48,8 @@ public class GameCharacter {
 	*/
 	public void move(){
 		int counter = 0;
-		Iterator xIterator = xLocations.iterator();
-		while (xIterator.hasNext()){
+		Iterator enemyAttIterator = enemyAtt.iterator();
+		while (enemyAttIterator.hasNext()){
 			enemiesAtt.get(counter)[0] += directions.get(counter)*5;
 			//enemiesAtt.set(counter, enemiesAtt.get(counter)[0] += directions.get(counter)*5);
 			if(enemiesAtt.get(counter)[0] < farLeft){
@@ -59,7 +59,7 @@ public class GameCharacter {
 				enemiesAtt.get(counter)[0] = farLeft;
 			}
 			counter++;
-			xIterator.next();
+			enemyAttIterator.next();
 		}
 	}//move
 
@@ -122,7 +122,7 @@ public class GameCharacter {
 		return leftImage;
 	}//getImage
 
-	public ArrayList<int[]> getXLocations(){
+	public ArrayList<int[]> getEnemiesAtt(){
 		return enemiesAtt;
 	}
 	/**

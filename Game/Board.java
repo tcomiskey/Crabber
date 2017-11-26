@@ -5,8 +5,6 @@ import javax.swing.*;
 import java.lang.Math;
 import java.util.concurrent.*;
 import java.io.*;
-import Shark.sharkFactory;
-import Trash.trashFactory;
 
 public class Board extends JFrame{
 	private int boardWidth;
@@ -17,7 +15,8 @@ public class Board extends JFrame{
 	private boolean isOcean; // false for land, true for ocean to change background and enemy types
 	private static Player player; // the controllable player
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>(); // a list of all of the rows that do not contain enemies used for checkpoints
-	
+	private Shark theOneAndOnlyShark;
+	private Trash theOneAndOnlyTrash;
 	/* Board Constructor sets up the model by creating the player and 
 	filling an ArrayList of enemies that will represent every obstacle in 
 	the game. Also sets the size of the game board and the difficulty is used
@@ -49,7 +48,8 @@ public class Board extends JFrame{
 		// picks left as the current direction of movement;
         	int currentDirection = -1;
 		// first enemy will use complex constuctor to instantiate static array of questions
-		Shark theOneAndOnlyShark = sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
+		theOneAndOnlyShark = Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
+		theOneAndOnlyTrash = Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection);
 		// counter for how many enemies have been placed in the current row
 		int enemiesInRow = 1;
 		// xcoord will be incremented based on the game difficulty*width of the player
@@ -59,12 +59,12 @@ public class Board extends JFrame{
 		// looping until total number of enemies needed for game difficulty are instantiated
 		for(int i = 1; row < numberOfRows/*multiplier to get number of enemies required for the difficulty*/; i++){
 		    if (row%2 == 1){ // odd rows will be sharks
-		        sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
+		        Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
 		        xcoord += theOneAndOnlyShark.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		    }
 		    else{ // even rows will be trash
-		        enemies.add(new Trash(boardWidth, xcoord, ycoord, currentDirection));
-		        xcoord += enemies.get(i).getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+		       	Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection);
+		        xcoord += theOneAndOnlyTrash.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
 		    }
 		    enemiesInRow++;
 		    // if you max out the number of enemies for a row, pick next row to fill (1 or 2 rows up)
@@ -104,10 +104,7 @@ public class Board extends JFrame{
 	}
     	//move method that is called to move all of the enemy characters
 	public void moveCharacter(){
-		Iterator<GameCharacter> enemyIterator = enemies.iterator();
-		while (enemyIterator.hasNext()){
-			enemyIterator.next().move();
-		}
+		theOneAndOnlyShark.move();
 	}
 	// method called when placing the player back to the last visited safe row
 	public void resetPlayer(){
@@ -123,13 +120,15 @@ public class Board extends JFrame{
 	
 	}
     
-    public boolean collisionCheck(GameCharacter collisionCheckCharacter) {
-        if(player.getY() == collisionCheckCharacter.getY() && player.getX()+player.getPlayerWidth() > collisionCheckCharacter.getX() && player.getX() < collisionCheckCharacter.getX()+collisionCheckCharacter.getImgWidth()){
-            return true;
-        }
-        else {
+    public boolean collisionCheck() {
+        	Iterator enemyAttIterator = theOneAndOnlyShark.getEnemyAtt().iterator();
+		while (enemyAttIterator.hasNext()){
+			//HOW DO WE KNOW ENEMY WIDTH
+			if(player.getX()+player.getPlayeWidth()> enemyAttIterator.next()[0] && player.getX() < enemyAttIterator.next()[0] + theOneAndOnlyShark.getImageWidth() && player.getY() = enemyAttIterator.next()[1]){
+				return true;
+			}
+            	}
             return false;
-        }
     }
 
     public boolean playerAtFinish(){
@@ -174,20 +173,24 @@ public class Board extends JFrame{
 	public boolean getIsOcean(){
 		return isOcean;
 	}
-	public ArrayList<GameCharacter> getEnemies(){
-		return enemies;
+	public Shark getTheOneAndOnlyShark(){
+		return theOneAndOnlyShark();
+	}
+	public Trash getTheOneAndOnlyTrash(){
+		return theOneAndOnlyTrash;
+		
 	}
 	public String toString(){
         String returnString = "";
-        for (GameCharacter character: enemies){
-            returnString += character.toString() + "\n";
-        }
+        //for (GameCharacter character: enemies){
+        //   returnString += character.toString() + "\n";
+        //}
         return returnString;
 	}
-    
+/*    
     public static final int BUTTON1 = 1;
     public static final int MOUSE_CLICKED = 500;
-    public static void main(String args[]) {
+   public static void main(String args[]) {
         Board b = new Board(1);
         MouseEvent me1 = new MouseEvent(b, MOUSE_CLICKED, 100, 0, 100, b.getPlayer().getY(), 1, false, BUTTON1);
         MouseEvent me2 = new MouseEvent(b, MOUSE_CLICKED, 100, 0, 600, b.getPlayer().getY(), 1, false, BUTTON1);
@@ -202,7 +205,7 @@ public class Board extends JFrame{
         for(int i = 0; i < 100; i++){
             b.moveCharacter();
             System.out.println(b);
-            for(GameCharacter gc : b.enemies) {
+            for() {
                 if (b.collisionCheck(gc)) {
                     System.out.println("COLLISION:");
                     Message message = gc.hit();
@@ -238,4 +241,5 @@ public class Board extends JFrame{
             }
         }
     }
+   */ 
 }
