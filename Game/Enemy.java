@@ -10,7 +10,6 @@ import javax.swing.*;
 * @author Tom Comiskey
 */
 public class Enemy extends GameCharacter{
-	Scanner fileScanner;
 	// made static so that all enemies will have the same question index
 	static int questionIndex;
 	// all enemies will have the same list of questions
