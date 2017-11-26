@@ -34,13 +34,8 @@ public class Shark extends Enemy{
         }
         // randomly pick a question from the list to ask first to avoid repeats with repeat playthroughs
         questionIndex = (int) Math.floor(Math.random()*questions.size());
-        
-		if (direction == -1) {
-	       	 	leftImage = new ImageIcon("images/shark.png");
-		}
-		else {
-		    	rightImage = new ImageIcon("images/reverseShark.png");
-		}
+        leftImage = new ImageIcon("images/shark.png");
+        rightImage = new ImageIcon("images/reverseShark.png");
         width = leftImage.getIconWidth();
 		height = rightImage.getIconHeight();
         sharkWidth = width;
