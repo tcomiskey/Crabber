@@ -50,13 +50,12 @@ public class GameCharacter {
 		int counter = 0;
 		Iterator enemyAttIterator = enemyAtt.iterator();
 		while (enemyAttIterator.hasNext()){
-			enemiesAtt.get(counter)[0] += directions.get(counter)*5;
-			//enemiesAtt.set(counter, enemiesAtt.get(counter)[0] += directions.get(counter)*5);
-			if(enemiesAtt.get(counter)[0] < farLeft){
-				enemiesAtt.get(counter)[0] = farRight;
+			enemyAtt.get(counter)[0] += directions.get(counter)*5;
+			if(enemyAtt.get(counter)[0] < farLeft){
+				enemyAtt.get(counter)[0] = farRight;
 			}
 			else if(xLocations.get(counter) > farRight){
-				enemiesAtt.get(counter)[0] = farLeft;
+				enemyAtt.get(counter)[0] = farLeft;
 			}
 			counter++;
 			enemyAttIterator.next();
@@ -122,8 +121,8 @@ public class GameCharacter {
 		return leftImage;
 	}//getImage
 
-	public ArrayList<int[]> getEnemiesAtt(){
-		return enemiesAtt;
+	public ArrayList<int[]> getEnemyAtt(){
+		return enemyAtt;
 	}
 	/**
 	Returns the width of the character image
