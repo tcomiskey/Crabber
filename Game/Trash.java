@@ -14,19 +14,19 @@ public class Trash extends Enemy{
 		farLeft = -(usableWidth)/2;
 		farRight = boardWidth+(usableWidth)/2;
 		int[] xydir = new int[5];
-		xydir[0] = xLocation;
-		xydir[1] = yLocation;
+		xydir[0] = xLoc;
+		xydir[1] = yLoc;
 		xydir[2] = direction;
 		xydir[3] = width;
 		xydir[4] = height;
-		enemiesAtt.add(xydir);
+		enemyAtt.add(xydir);
 	}
 	public static Trash trashFactory(int boardWidth, int xLoc, int yLoc, int direction){
 		if (noTrash){
 			return new Trash(boardWidth, xLoc, yLoc, direction);
 		}
 		else{
-			addTrash(xLocation, yLocation, direction);
+			addTrash(xLoc, yLoc, direction);
 			return null;
 		}
 		
@@ -38,7 +38,7 @@ public class Trash extends Enemy{
 		xydir[2] = direction;
 		xydir[3] = width;
 		xydir[4] = height;
-		enemiesAtt.add(xydir);
+		enemyAtt.add(xydir);
 		
 	}
 	public boolean getNoTrash(){

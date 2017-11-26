@@ -123,12 +123,7 @@ public class Board extends JFrame{
     public boolean collisionCheck() {
         	Iterator enemyAttIterator = theOneAndOnlyShark.getEnemyAtt().iterator();
 		while (enemyAttIterator.hasNext()){
-<<<<<<< HEAD
             		int[] currentEnemy = (int[]) enemyAttIterator.next();
-=======
-			//HOW DO WE KNOW ENEMY WIDTH
-            int[] currentEnemy = (int[]) enemyAttIterator.next();
->>>>>>> ab13d812f4b278a68ff8bb0756b3b4decab0a5b9
 			if(player.getX()+player.getPlayerWidth() > currentEnemy[0] && player.getX() < currentEnemy[0] + currentEnemy[3] && player.getY() == currentEnemy[1]){
 				return true;
 			}

@@ -75,7 +75,7 @@ public class Shark extends Enemy{
 		xydir[2] = direction;
 		xydir[3] = sharkWidth;
 		xydir[4] = sharkHeight;
-		enemiesAtt.add(xydir);
+		enemyAtt.add(xydir);
 		
 	}
 	
