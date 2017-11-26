@@ -124,6 +124,11 @@ public class GameCharacter {
 	public ArrayList<int[]> getEnemyAtt(){
 		return enemyAtt;
 	}
+    
+    public void clearEnemyAtt(){
+        ArrayList<int[]> tempArrayList = enemyAtt;
+        enemyAtt.removeAll(tempArrayList);
+    }
 	/**
 	Returns the width of the character image
 

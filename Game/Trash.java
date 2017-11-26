@@ -47,7 +47,12 @@ public class Trash extends Enemy{
 	}
 	public boolean getNoTrash(){
 		return noTrash;
-	}	
+	}
+    
+    public void setNoTrash(boolean trashBoolean) {
+        noTrash = trashBoolean;
+    }
+    
 	public String toString(){
 		return "Trash located at x = " +  xLoc + " y = " + yLoc;
 	}

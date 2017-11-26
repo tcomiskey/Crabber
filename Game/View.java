@@ -192,6 +192,7 @@ public class View extends JFrame implements MouseListener{
    	enemyLabels = new ArrayList<JLabel>();
         Iterator<int[]> enemyIterator = control.getBoard().getTheOneAndOnlyShark().getEnemyAtt().iterator();
         while (enemyIterator.hasNext()) {
+            System.out.println("enemy");
         	int [] currentEnemy = enemyIterator.next();
               	enemyAtt.add(currentEnemy);
               	if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
@@ -288,6 +289,7 @@ public class View extends JFrame implements MouseListener{
 		playAgain.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
+                    clearStaticEnemies();
 					createDiffScreen();
 				}
 			}
@@ -314,10 +316,11 @@ public class View extends JFrame implements MouseListener{
 	
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
+                    clearStaticEnemies();
 					createDiffScreen();
 				}
 			}
-			);
+        );
 		playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
 		winScreen.add(playAgain);
 		getContentPane().removeAll();
@@ -326,6 +329,13 @@ public class View extends JFrame implements MouseListener{
 		setVisible(true);
 		repaint();
 	}
+    
+    public void clearStaticEnemies() {
+        // SET NOTRASH AND NOSHARK TO TRUE AGAIN BEFORE DELETING EVERYTHING
+        control.getBoard().getTheOneAndOnlyShark().setNoSharks(true);
+        control.getBoard().getTheOneAndOnlyTrash().setNoTrash(true);
+        control.getBoard().getTheOneAndOnlyShark().clearEnemyAtt();
+    }
 
 }
 		

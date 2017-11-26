@@ -61,6 +61,7 @@ public class Controller{
 				//System.out.println(message);
 				timer.stop();
 				v.throwQuestion(message);
+                break;
 			}
 
 			if(b.playerAtFinish()){
