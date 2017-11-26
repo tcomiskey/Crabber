@@ -151,9 +151,9 @@ public class View extends JFrame implements MouseListener{
 		setEnemies();
 		gameScreen = new JPanel();
 		gameScreen.setLayout(null);
-		for(int i = 0; i < enemies.size(); i++){
+		for(int i = 0; i < enemyAtt.size(); i++){
 			gameScreen.add(enemyLabels.get(i));
-			enemyLabels.get(i).setBounds(new Rectangle(new Point(enemies.get(i).getX(), enemies.get(i).getY()), new Dimension(enemies.get(i).getImgWidth(), enemies.get(i).getImgHeight())));			
+			enemyLabels.get(i).setBounds(new Rectangle(new Point(enemyAtt.get(i)[0], enemyAtt.get(i)[1]), new Dimension(enemyAtt.get(i)[3], enemyAtt.get(i)[4])));			
 		}
 		gameScreen.add(playerLabel);
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
@@ -190,7 +190,7 @@ public class View extends JFrame implements MouseListener{
     public void setEnemies() {
     	enemyAtt = new ArrayList<int[]>();
    	enemyLabels = new ArrayList<JLabel>();
-        Iterator<int[]> enemyIterator = (int) control.getBoard().getEnemyAtt().iterator();
+        Iterator<int[]> enemyIterator = control.getBoard().getTheOneAndOnlyShark().getEnemyAtt().iterator();
         while (enemyIterator.hasNext()) {
         	int [] currentEnemy = enemyIterator.next();
               	enemyAtt.add(currentEnemy);
@@ -213,7 +213,7 @@ public class View extends JFrame implements MouseListener{
         }
     }
 
-	public ArrayList<GameCharacter> getEnemyAtt(){
+	public ArrayList<int[]> getEnemyAtt(){
 		return enemyAtt;
 	}
     public Controller getControl() {
