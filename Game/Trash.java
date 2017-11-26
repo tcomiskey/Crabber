@@ -1,7 +1,9 @@
 import javax.swing.*;
 
 public class Trash extends Enemy{
-	private boolean noTrash = true;
+	private static boolean noTrash = true;
+    static int trashWidth;
+    static int trashHeight;
 
 	private Trash(int boardWidth, int xLoc, int yLoc, int direction){
 		super(boardWidth, xLoc, yLoc, direction);
@@ -9,6 +11,8 @@ public class Trash extends Enemy{
 		leftImage = new ImageIcon("images/Trash.png");
 		width = rightImage.getIconWidth();
 		height = rightImage.getIconHeight();
+        trashWidth = width;
+        trashHeight = height;
 		//Sets bounds on how far off screen a character can go before it loops around
 		int usableWidth = (boardWidth/width) + 3*width; //335
 		farLeft = -(usableWidth)/2;
@@ -26,18 +30,18 @@ public class Trash extends Enemy{
 			return new Trash(boardWidth, xLoc, yLoc, direction);
 		}
 		else{
-			addTrash(xLoc, yLoc, direction);
+			addTrash(xLoc, yLoc, direction, trashWidth, trashHeight);
 			return null;
 		}
 		
 	}
-	private void addTrash(int xLocation, int yLocation, int direction){
+	private static void addTrash(int xLocation, int yLocation, int direction, int currentWidth, int currentHeight){
 		int[] xydir = new int[5];
 		xydir[0] = xLocation;
 		xydir[1] = yLocation;
 		xydir[2] = direction;
-		xydir[3] = width;
-		xydir[4] = height;
+		xydir[3] = currentWidth;
+		xydir[4] = currentHeight;
 		enemyAtt.add(xydir);
 		
 	}

@@ -5,11 +5,12 @@ import java.io.*;
 public class Shark extends Enemy{
 	//boolean to keep track if a shark object has been made
 	private static boolean noSharks = true;
-	// arraylists for all xlocations and ylocations of sharks even though only one real object
+    static int sharkWidth;
+    static int sharkHeight;
+    Scanner fileScanner;
 	
 	private Shark(int boardWidth, int xLocation, int yLocation, int direction){
 		super(boardWidth, xLocation, yLocation, direction);
-        Scanner fileScanner;
         // makes an arraylist to hold question objects
         questions = new ArrayList<Question>();
         // saves the file that hols the quesitons
@@ -42,6 +43,8 @@ public class Shark extends Enemy{
 		}
         width = leftImage.getIconWidth();
 		height = rightImage.getIconHeight();
+        sharkWidth = width;
+        sharkHeight = height;
 		//Sets bounds on how far off screen a character can go before it loops around
 		int usableWidth = (boardWidth/width) + 3*width; 
 		farLeft = -(usableWidth)/2;
@@ -63,18 +66,18 @@ public class Shark extends Enemy{
 			return new Shark(boardWidth, xLocation, yLocation, direction);
 		}
 		else{
-			addShark(xLocation, yLocation, direction, width, height);
+			addShark(xLocation, yLocation, direction, sharkWidth, sharkHeight);
 			return null;
 		}
 		
 	}
-	private static void addShark(int xLocation, int yLocation, int direction, int sharkWidth, int sharkHeight){
+	private static void addShark(int xLocation, int yLocation, int direction, int currentWidth, int currentHeight){
 		int[] xydir = new int[5];
 		xydir[0] = xLocation;
 		xydir[1] = yLocation;
 		xydir[2] = direction;
-		xydir[3] = sharkWidth;
-		xydir[4] = sharkHeight;
+		xydir[3] = currentWidth;
+		xydir[4] = currentHeight;
 		enemyAtt.add(xydir);
 		
 	}
