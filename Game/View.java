@@ -34,7 +34,7 @@ public class View extends JFrame implements MouseListener{
 	private Controller control;
 	private int playerX;
 	private int playerY;
-	private ArrayList<GameCharacter> enemies;
+	private ArrayList<int[]> enemyAtt;
 
 	/**
 	* This is the main View constructor that creates a new JPanel onto which a start button
@@ -130,8 +130,8 @@ public class View extends JFrame implements MouseListener{
 	* no inputs or outputs and repaints using Swing repaint.
 	*/
 	public void updateLocations(){
-		for(int i = 0; i < enemies.size(); i++){
-			enemyLabels.get(i).setLocation(enemies.get(i).getX(), enemies.get(i).getY());
+		for(int i = 0; i < enemyAtt.size(); i++){
+			enemyLabels.get(i).setLocation(enemyAtt.get(i)[0], enemyAtt.get(i)[1]);
 		}
 		repaint();
 		
@@ -188,18 +188,33 @@ public class View extends JFrame implements MouseListener{
 	}
     
     public void setEnemies() {
-    	enemies = new ArrayList<GameCharacter>();
+    	enemyAtt = new ArrayList<int[]>();
    	enemyLabels = new ArrayList<JLabel>();
-        Iterator<GameCharacter> enemyIterator = control.getBoard().getEnemies().iterator();
+        Iterator<int[]> enemyIterator = (int) control.getBoard().getEnemyAtt().iterator();
         while (enemyIterator.hasNext()) {
-        	GameCharacter gc = enemyIterator.next();
-            	enemies.add(gc);
-            	enemyLabels.add(new JLabel(gc.getImage()));
+        	int [] currentEnemy = enemyIterator.next();
+              	enemyAtt.add(currentEnemy);
+              	if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
+              		if(currentEnemy[2] == -1){
+              			enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyShark().getLeftImage()));
+              		}
+              		else{
+              			enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyShark().getRightImage()));
+              		}
+              	}
+              	else{
+              		if(currentEnemy[2] == -1){
+              			enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyTrash().getLeftImage()));
+              		}
+              		else{
+              			enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyTrash().getRightImage()));
+              		}
+              	}
         }
     }
 
-	public ArrayList<GameCharacter> getEnemies(){
-		return enemies;
+	public ArrayList<GameCharacter> getEnemyAtt(){
+		return enemyAtt;
 	}
     public Controller getControl() {
         return control;
