@@ -151,7 +151,7 @@ public class Board extends JFrame{
 	public void setPlayer(Player player){
 		this.player = player;
 	}
-	public void setIsOcean(boolean isOcean){
+	public void setIsOcean(boolean isOcean){1
 		this.isOcean = isOcean;
 	}
 	//getters

@@ -13,10 +13,12 @@ public class Trash extends Enemy{
 		int usableWidth = (boardWidth/width) + 3*width; //335
 		farLeft = -(usableWidth)/2;
 		farRight = boardWidth+(usableWidth)/2;
-		int[] xydir = new int[3];
+		int[] xydir = new int[5];
 		xydir[0] = xLocation;
 		xydir[1] = yLocation;
 		xydir[2] = direction;
+		xydir[3] = width;
+		xydir[4] = height;
 		enemiesAtt.add(xydir);
 	}
 	public static Trash trashFactory(int boardWidth, int xLoc, int yLoc, int direction){
@@ -30,10 +32,12 @@ public class Trash extends Enemy{
 		
 	}
 	private void addTrash(int xLocation, int yLocation, int direction){
-		int[] xydir = new int[3];
+		int[] xydir = new int[5];
 		xydir[0] = xLocation;
 		xydir[1] = yLocation;
 		xydir[2] = direction;
+		xydir[3] = width;
+		xydir[4] = height;
 		enemiesAtt.add(xydir);
 		
 	}
