@@ -2,12 +2,6 @@ import javax.swing.*;
 
 public class Human extends Enemy{
     private ImageIcon image;
-    
-    public Human(int boardWidth, int xLoc, int yLoc, int direction, String fileName){
-    	super(boardWidth, xLoc, yLoc, direction, fileName);
-        image = new ImageIcon("images/Sonny stand west.png");
-    }
-              
     public Human(int boardWidth, int xLoc, int yLoc, int direction){
         super(boardWidth, xLoc, yLoc, direction);
         image = new ImageIcon("images/Sonny stand west.png");
