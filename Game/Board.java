@@ -170,7 +170,7 @@ public class Board extends JFrame{
     
     public void generateBonus(){
         int r = (int)(Math.random()*6)+2;
-        bonus = Bonus.makeBonus(bonus, boardWidth, player.getY()-player.getPlayerHeight()*r);
+        bonus = Bonus.makeBonus(boardWidth, player.getY()-player.getPlayerHeight()*r);
     }
     
     public void removeBonus(){

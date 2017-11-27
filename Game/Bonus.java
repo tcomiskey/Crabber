@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 public class Bonus extends GameCharacter{
     private static BufferedImage leftImage;
     private static BufferedImage rightImage;
+    private static boolean noBonus = true;
     
     // Bonus character constructor
     private Bonus(int boardWidth, int xLoc, int yLoc, int direction) {
@@ -27,17 +28,14 @@ public class Bonus extends GameCharacter{
         return new BonusMessage();
     }
     
-    public static Bonus makeBonus(Bonus b, int boardWidth, int y){
-        int x = (int)(Math.random()*(boardWidth-leftImage.getWidth()));
+    public static Bonus makeBonus(int boardWidth, int y){
+        int x = (int)(Math.random()*(boardWidth-50)); // hardcoded width???
         System.out.println("Bonus made at "+x+" "+y);
-        if(b == null){
+        if(noBonus == true){
+            noBonus = false;
             return new Bonus(boardWidth, x, y, 0);
         }
-        else{
-            b.setX(x);
-            b.setY(y);
-            return b;
-        }
+        return null;
     }
     
     

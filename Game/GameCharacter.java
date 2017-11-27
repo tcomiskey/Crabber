@@ -14,10 +14,10 @@ The parent class of all the characters in the game except the player.
 public class GameCharacter {
 	BufferedImage leftImage;
 	BufferedImage rightImage;
-    BufferedImage[] leftImageArray;
-    BufferedImage[] rightImageArray;
-    int frameCount = 4;
-    int picNum = 0;
+    int frameCount = 10;
+    BufferedImage[] leftImageArray = new BufferedImage[frameCount];
+    BufferedImage[] rightImageArray = new BufferedImage[frameCount];
+    static int picNum = 0;
 	int width;
 	int height;
 	int xLoc;
@@ -130,6 +130,14 @@ public class GameCharacter {
 	public BufferedImage getLeftImage(){
 		return leftImage;
 	}//getImage
+    
+    public BufferedImage[] getRightImageArray(){
+        return rightImageArray;
+    }//getImage
+    
+    public BufferedImage[] getLeftImageArray(){
+        return leftImageArray;
+    }//getImage
 
 	public ArrayList<int[]> getEnemyAtt(){
 		return enemyAtt;
@@ -177,6 +185,18 @@ public class GameCharacter {
         return null;
         
         // TODO: Change this method so you can load other orc animation bitmaps
+    }
+    
+    public int getPicNum() {
+        return picNum;
+    }
+    
+    public int getFrameCount() {
+        return frameCount;
+    }
+    
+    public void increasePicNum() {
+        picNum = (picNum + 1) % frameCount;
     }
     
 }//GameCharacter
