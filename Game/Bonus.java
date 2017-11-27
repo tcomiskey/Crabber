@@ -2,16 +2,24 @@ import java.io.*;
 import java.util.*;
 import java.lang.Math;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
+import javax.imageio.ImageIO;
 
 public class Bonus extends GameCharacter{
-    private static ImageIcon leftImage = new ImageIcon("images/clam.png");
-    private static ImageIcon rightImage = new ImageIcon("images/clam.png");
+    private static BufferedImage leftImage;
+    private static BufferedImage rightImage;
     
     // Bonus character constructor
     private Bonus(int boardWidth, int xLoc, int yLoc, int direction) {
         // need to find an image and use it here
         super(boardWidth, xLoc, yLoc, direction);
+        try {
+            leftImage = ImageIO.read(new File("images/clam.png"));
+            rightImage = ImageIO.read(new File("images/clam.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     
     // Hit method that is called when the player collides with a bonus
@@ -20,7 +28,7 @@ public class Bonus extends GameCharacter{
     }
     
     public static Bonus makeBonus(Bonus b, int boardWidth, int y){
-        int x = (int)(Math.random()*(boardWidth-leftImage.getIconWidth()));
+        int x = (int)(Math.random()*(boardWidth-leftImage.getWidth()));
         System.out.println("Bonus made at "+x+" "+y);
         if(b == null){
             return new Bonus(boardWidth, x, y, 0);
@@ -53,18 +61,18 @@ public class Bonus extends GameCharacter{
     }//setDir
     
     public int getWidth(){
-        return leftImage.getIconWidth();
+        return leftImage.getWidth();
     }
     
     public int getHeight(){
-        return leftImage.getIconHeight();
+        return leftImage.getHeight();
     }
     
-    public ImageIcon getLeftImage(){
+    public BufferedImage getLeftImage(){
         return leftImage;
     }//getImage
     
-    public ImageIcon getRightImage(){
+    public BufferedImage getRightImage(){
         return rightImage;
     }//getImage
 }

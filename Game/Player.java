@@ -1,10 +1,13 @@
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import javax.imageio.ImageIO;
 import java.util.*;
 import java.lang.Math;
 import java.awt.*;
 import javax.swing.*;
-public class Player{
+
+public class Player {
 
 	
 	private int xLocation;	//Locations are top left corner
@@ -15,7 +18,7 @@ public class Player{
 	static final int BOARD_LEFT_BOUNDARY = 0;
 	static int BOARD_RIGHT_BOUNDARY;
 	static int BOARD_HEIGHT;
-	private ImageIcon image;
+	private BufferedImage image;
 
 	public Player(int boardWidth, int boardHeight){
         	BOARD_RIGHT_BOUNDARY = boardWidth;
@@ -25,8 +28,11 @@ public class Player{
 		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
 		System.out.println(yLocation);
 		
-		
-		image = new ImageIcon("images/brown rectangle.png");
+        try {
+            image = ImageIO.read(new File("images/brown rectangle.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 	//Chooses a direction to move
@@ -91,7 +97,7 @@ public class Player{
 	public int getPlayerWidth(){
 		return PLAYER_WIDTH;
 	}
-	public ImageIcon getImage(){
+	public BufferedImage getImage(){
 		return image;
 	}
 }

@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.util.*;
 import java.io.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Shark extends Enemy{
 	//boolean to keep track if a shark object has been made
@@ -43,10 +45,18 @@ public class Shark extends Enemy{
         }
         // randomly pick a question from the list to ask first to avoid repeats with repeat playthroughs
         questionIndex = (int) Math.floor(Math.random()*questions.size());
-        leftImage = new ImageIcon("images/shark.png");
-        rightImage = new ImageIcon("images/reverseShark.png");
-        width = leftImage.getIconWidth();
-		height = rightImage.getIconHeight();
+        
+        //THIS IS THE BUFFEREDIMAGE STUFF
+        leftImage = createImage("images/orc_forward_west.png");
+        rightImage = createImage("images/orc_forward_east.png");
+        width = leftImage.getWidth() / frameCount;
+        height = rightImage.getHeight();
+        for(int i = 0; i < frameCount; i++) {
+            leftImageArray[i] = leftImage.getSubimage(width*i, 0, width, height);
+            rightImageArray[i] = rightImage.getSubimage(width*i, 0, width, height);
+        }
+        //leftImage = new ImageIcon("images/shark.png");
+        //rightImage = new ImageIcon("images/reverseShark.png");
         sharkWidth = width;
         sharkHeight = height;
 		//Sets bounds on how far off screen a character can go before it loops around

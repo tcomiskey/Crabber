@@ -1,13 +1,23 @@
 import javax.swing.*;
 import java.util.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.io.IOException;
+import javax.imageio.*;
+
 /**
 The parent class of all the characters in the game except the player.
 
 @author Maura Swift
 */
 public class GameCharacter {
-	ImageIcon leftImage;
-	ImageIcon rightImage;
+	BufferedImage leftImage;
+	BufferedImage rightImage;
+    BufferedImage[] leftImageArray;
+    BufferedImage[] rightImageArray;
+    int frameCount = 4;
+    int picNum = 0;
 	int width;
 	int height;
 	int xLoc;
@@ -113,11 +123,11 @@ public class GameCharacter {
 
 	@return the ImageIcon for the character
 	*/
-	public ImageIcon getRightImage(){
+	public BufferedImage getRightImage(){
 		return rightImage;
 	}//getImage
 	
-	public ImageIcon getLeftImage(){
+	public BufferedImage getLeftImage(){
 		return leftImage;
 	}//getImage
 
@@ -156,5 +166,18 @@ public class GameCharacter {
 		return "x: "+xLoc+" y: "+yLoc+" dir: "+dir;
 	}//toString
 	
+    public BufferedImage createImage(String filename){ // takes in a direction!!
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = ImageIO.read(new File(filename));
+            return bufferedImage;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+        
+        // TODO: Change this method so you can load other orc animation bitmaps
+    }
+    
 }//GameCharacter
 

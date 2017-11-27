@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -194,12 +195,12 @@ public class View extends JFrame implements MouseListener{
 		repaint();
 	}
 
-	public void makePlayerLabel(ImageIcon img){
-		playerLabel = new JLabel(img);
+	public void makePlayerLabel(BufferedImage img){
+		playerLabel = new JLabel(new ImageIcon(img));
 	}
 	
-    public void makeBonusLabel(ImageIcon img){
-        bonusLabel = new JLabel(img);
+    public void makeBonusLabel(BufferedImage img){
+        bonusLabel = new JLabel(new ImageIcon(img));
     }
     
     public JButton getEasyButton(){
@@ -235,18 +236,18 @@ public class View extends JFrame implements MouseListener{
               	enemyAtt.add(currentEnemy);
               	if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
               		if(currentEnemy[2] == -1){
-                        enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyShark().getLeftImage()));
+                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getLeftImage())));
                     }
                     else{
-                        enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyShark().getRightImage()));
+                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getRightImage())));
                     }
             }
             else{
               		if(currentEnemy[2] == -1){
-                        enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyTrash().getLeftImage()));
+                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getLeftImage())));
                     }
                     else{
-                        enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyTrash().getRightImage()));
+                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getRightImage())));
                     }
             }
         }

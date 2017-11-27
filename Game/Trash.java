@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Trash extends Enemy{
 	private static boolean noTrash = true;
@@ -7,10 +9,16 @@ public class Trash extends Enemy{
 
 	private Trash(int boardWidth, int xLoc, int yLoc, int direction){
 		super(boardWidth, xLoc, yLoc, direction);
-		rightImage = new ImageIcon("images/Trash.png");
-		leftImage = new ImageIcon("images/Trash.png");
-		width = rightImage.getIconWidth();
-		height = rightImage.getIconHeight();
+		//rightImage = new ImageIcon("images/Trash.png");
+		//leftImage = new ImageIcon("images/Trash.png");
+        leftImage = createImage("images/orc_forward_west.png");
+        rightImage = createImage("images/orc_forward_east.png");
+        width = leftImage.getWidth() / frameCount;
+        height = rightImage.getHeight();
+        for(int i = 0; i < frameCount; i++) {
+            leftImageArray[i] = leftImage.getSubimage(width*i, 0, width, height);
+            rightImageArray[i] = rightImage.getSubimage(width*i, 0, width, height);
+        }
         trashWidth = width;
         trashHeight = height;
 		//Sets bounds on how far off screen a character can go before it loops around
