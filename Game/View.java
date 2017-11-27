@@ -134,37 +134,39 @@ public class View extends JFrame implements MouseListener{
 	* no inputs or outputs and repaints using Swing repaint.
 	*/
 	public void updateLocations(){
-        ArrayList<JLabel> tempArrayList = enemyLabels;
-        enemyLabels.removeAll(tempArrayList);
-        control.getBoard().getTheOneAndOnlyShark().increasePicNum();
-        int tempPicNum = control.getBoard().getTheOneAndOnlyShark().getPicNum();
-        Iterator<int[]> enemyIterator = control.getBoard().getTheOneAndOnlyShark().getEnemyAtt().iterator();
-        while (enemyIterator.hasNext()) {
-            int [] currentEnemy = enemyIterator.next();
-            if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
-              		if(currentEnemy[2] == -1){
-                        System.out.println("things");
-                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getLeftImageArray()[tempPicNum])));
-                        System.out.println(
-                    }
-                    else{
-                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getRightImageArray()[tempPicNum])));
-                    }
-            }
-            else{
-              		if(currentEnemy[2] == -1){
-                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getLeftImageArray()[tempPicNum])));
-                    }
-                    else{
-                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getRightImageArray()[tempPicNum])));
-                    }
-            }
-        }
-        
+
+		control.getBoard().getTheOneAndOnlyShark().increasePicNum();
+		int tempPicNum = control.getBoard().getTheOneAndOnlyShark().getPicNum();
+		Iterator<int[]> enemyIterator = control.getBoard().getTheOneAndOnlyShark().getEnemyAtt().iterator();
+		int counter = 0;
+		while (enemyIterator.hasNext()) {
+		    int [] currentEnemy = enemyIterator.next();
+		    if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
+		      		if(currentEnemy[2] == -1){
+		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getLeftImageArray()[tempPicNum]));
+		            }
+		            else{
+		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getRightImageArray()[tempPicNum]));
+		            }
+		    }
+		    else{
+		      		if(currentEnemy[2] == -1){
+		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getLeftImageArray()[tempPicNum]));
+		            }
+		            else{
+		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getRightImageArray()[tempPicNum]));
+		            }
+		    }
+		    counter++;
+		}
+        	
 		for(int i = 0; i < enemyAtt.size(); i++){
+			//gameScreen.add(enemyLabels.get(i));
+			//enemyLabels.get(i).setBounds(new Rectangle(new Point(enemyAtt.get(i)[0], enemyAtt.get(i)[1]), new Dimension(enemyAtt.get(i)[3], enemyAtt.get(i)[4])));	
 			enemyLabels.get(i).setLocation(enemyAtt.get(i)[0], enemyAtt.get(i)[1]);
 		}
 		repaint();
+		
 		
 	}
     
