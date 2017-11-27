@@ -17,6 +17,10 @@ public class Board extends JFrame{
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>(); // a list of all of the rows that do not contain enemies used for checkpoints
 	private static Shark theOneAndOnlyShark;
 	private static Trash theOneAndOnlyTrash;
+    private Bonus bonus;
+    private long startTime;
+    private long remainingTime;	//time left in the level in milliseconds
+    private long levelTime = 30000; //time to complete the level in milliseconds
     
 	/** Board Constructor sets up the model by creating the player and
 	filling an ArrayList of enemies that will represent every obstacle in 
@@ -36,7 +40,10 @@ public class Board extends JFrame{
 		isOcean = false;	
 		player = new Player(boardWidth, boardHeight);
 		numberOfRows = boardHeight/player.getPlayerHeight()-1;
-		
+        startTime = System.currentTimeMillis();
+        remainingTime = levelTime;
+        generateBonus();
+        
 		// xcoord and ycoord are variables to hold the values of the enemy coordinates
 		int xcoord = 0;
 		int ycoord = boardHeight-(2*player.getPlayerHeight());
@@ -161,8 +168,40 @@ public class Board extends JFrame{
     	return player.getY() == 0;
     }
     
-	//setters
-	public void setBoardWidth(int boardWidth){
+    public void generateBonus(){
+        int r = (int)(Math.random()*6)+2;
+        bonus = Bonus.makeBonus(bonus, boardWidth, player.getY()-player.getPlayerHeight()*r);
+    }
+    
+    public void removeBonus(){
+        bonus.setX(-1*bonus.getWidth());
+        bonus.setY(-1*bonus.getHeight());
+    }
+    
+    
+    public boolean bonusCollisionCheck(){
+        if(player.getX()+player.getPlayerWidth() > bonus.getX() && player.getX() < bonus.getX() + bonus.getWidth() && player.getY() == bonus.getY()){
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean timeLeft(){		//returns true if there is still time to play
+        long curTime = System.currentTimeMillis();
+        return curTime-startTime < levelTime;
+    }
+    
+    public void resetStartTime(long pausedTime){
+        startTime += pausedTime;
+    }
+    
+    public void updateRemainingTime(){
+        long elapsedTime = System.currentTimeMillis()-startTime;
+        remainingTime = levelTime-elapsedTime;
+    }
+    
+    //setters
+    public void setBoardWidth(int boardWidth){
 		this.boardWidth = boardWidth;
 	}
 	public void setBoardHeight(int boardHeight){
@@ -204,9 +243,13 @@ public class Board extends JFrame{
 	}
 	public Trash getTheOneAndOnlyTrash(){
 		return theOneAndOnlyTrash;
-		
 	}
-	public String toString(){
+    
+    public Bonus getBonus(){
+        return bonus;
+    }
+    
+    public String toString(){
         String returnString = "";
         //for (GameCharacter character: enemies){
         //   returnString += character.toString() + "\n";

@@ -9,6 +9,15 @@ public class Shark extends Enemy{
     static int sharkHeight;
     Scanner fileScanner;
 	
+    /**
+     Shark constructor creates the arraylist of questions for all of the enemies, and theOneAndOnlyShark object that holds all the other shark information.
+     
+     @author Tom Comiskey and Erin Hitchner
+     @param boardWidth the width of the game screen
+     @param xLocation the x coordinate for upper left pixel of the image
+     @param yLocation the y coordinate for upper left pixel of the image
+     @param direction the direction the object will move on the screen, decides image direction
+     */
 	private Shark(int boardWidth, int xLocation, int yLocation, int direction){
 		super(boardWidth, xLocation, yLocation, direction);
         // makes an arraylist to hold question objects
@@ -55,6 +64,9 @@ public class Shark extends Enemy{
 		
 	}
 	//Really only need one shark object and just a series of images to be displayed
+    /**
+     Static factory method 
+     */
 	public static Shark sharkFactory(int boardWidth, int xLocation, int yLocation, int direction){
 		if (noSharks){
             noSharks = false;
