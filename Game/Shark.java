@@ -80,6 +80,10 @@ public class Shark extends Enemy{
 	public boolean getNoSharks(){
 		return noSharks;
 	}
+    
+    public void setNoSharks(boolean sharkBoolean) {
+        noSharks = sharkBoolean;
+    }
 
 	public String toString(){
 		return "Shark located at x = " + xLoc + " y = " + yLoc;

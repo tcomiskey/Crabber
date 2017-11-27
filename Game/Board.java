@@ -15,12 +15,16 @@ public class Board extends JFrame{
 	private boolean isOcean; // false for land, true for ocean to change background and enemy types
 	private static Player player; // the controllable player
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>(); // a list of all of the rows that do not contain enemies used for checkpoints
-	private Shark theOneAndOnlyShark;
-	private Trash theOneAndOnlyTrash;
-	/* Board Constructor sets up the model by creating the player and 
+	private static Shark theOneAndOnlyShark;
+	private static Trash theOneAndOnlyTrash;
+    
+	/** Board Constructor sets up the model by creating the player and
 	filling an ArrayList of enemies that will represent every obstacle in 
 	the game. Also sets the size of the game board and the difficulty is used
 	to scale the number of enemies in the game. 
+     
+     @author Erin Hitchner and Tom Comiskey
+     @param difficulty sets easy, medium, or hard based on user input in the view
 	*/
 	
 	public Board(int difficulty){
@@ -48,7 +52,9 @@ public class Board extends JFrame{
 		// picks left as the current direction of movement;
         	int currentDirection = -1;
 		// first enemy will use complex constuctor to instantiate static array of questions
+        // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
 		theOneAndOnlyShark = Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
+        // the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
 		theOneAndOnlyTrash = Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection);
 		// counter for how many enemies have been placed in the current row
 		int enemiesInRow = 1;
@@ -102,11 +108,19 @@ public class Board extends JFrame{
         	
 		
 	}
-    	//move method that is called to move all of the enemy characters
+    /**
+     Move method that is called to move all of the enemy characters.
+     
+     @author Tom Comiskey
+     */
 	public void moveCharacter(){
 		theOneAndOnlyShark.move();
 	}
-	// method called when placing the player back to the last visited safe row
+    
+    /**
+     Method called when placing the player back to the last visited safe row.
+     Loops through array of saferows made when creating enemies to find the closest safe row to the player's collision
+     */
 	public void resetPlayer(){
 		// finds the current row of the character based on current location
 		int currentRow = numberOfRows-player.getY()/player.getPlayerHeight();
@@ -120,6 +134,12 @@ public class Board extends JFrame{
 	
 	}
     
+    /**
+     Checks each enemy for collisions with the player. Checks the location of each enemy against the current location of the player at that tick.
+     
+     @author Erin Hitchner
+     @return true if there is a collision
+     */
     public boolean collisionCheck() {
         	Iterator enemyAttIterator = theOneAndOnlyShark.getEnemyAtt().iterator();
 		while (enemyAttIterator.hasNext()){
@@ -127,10 +147,16 @@ public class Board extends JFrame{
 			if(player.getX()+player.getPlayerWidth() > currentEnemy[0] && player.getX() < currentEnemy[0] + currentEnemy[3] && player.getY() == currentEnemy[1]){
 				return true;
 			}
-            	}
-            return false;
+        }
+        return false;
     }
-
+    
+    /**
+     Checks the location of the player to see if player reaches finish.
+     
+     @author Tom Comiskey
+     @return true if the player is at the finish
+     */
     public boolean playerAtFinish(){
     	return player.getY() == 0;
     }
