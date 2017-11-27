@@ -148,7 +148,7 @@ public class View extends JFrame implements MouseListener{
 	}
 
 	private void startGameWindow(){
-		setEnemies();
+		setEnemiesSea();
 		gameScreen = new JPanel();
 		gameScreen.setLayout(null);
 		for(int i = 0; i < enemyAtt.size(); i++){
@@ -161,6 +161,23 @@ public class View extends JFrame implements MouseListener{
 		gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
 		getContentPane().add(gameScreen);
+		//diffScreen.setOpaque(true);
+		setVisible(true);
+		repaint();
+	}
+
+	public void startLandWindow(){
+		gameScreen.removeAll();
+		setEnemiesSea();
+		gameScreen.setLayout(null);
+		for(int i = 0; i < enemyAtt.size(); i++){
+			gameScreen.add(enemyLabels.get(i));
+			enemyLabels.get(i).setBounds(new Rectangle(new Point(enemyAtt.get(i)[0], enemyAtt.get(i)[1]), new Dimension(enemyAtt.get(i)[3], enemyAtt.get(i)[4])));			
+		}
+		playerLabel.setLocation(playerX, playerY);
+		gameScreen.add(playerLabel);
+		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
+		gameScreen.setBackground(new Color(239,211,110));
 		//diffScreen.setOpaque(true);
 		setVisible(true);
 		repaint();
@@ -187,12 +204,11 @@ public class View extends JFrame implements MouseListener{
 		playerY = y;
 	}
     
-    public void setEnemies() {
+    public void setEnemiesSea() {
     	enemyAtt = new ArrayList<int[]>();
    	enemyLabels = new ArrayList<JLabel>();
         Iterator<int[]> enemyIterator = control.getBoard().getTheOneAndOnlyShark().getEnemyAtt().iterator();
         while (enemyIterator.hasNext()) {
-            System.out.println("enemy");
         	int [] currentEnemy = enemyIterator.next();
               	enemyAtt.add(currentEnemy);
               	if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){

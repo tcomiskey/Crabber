@@ -26,7 +26,7 @@ public class Controller{
 	public Controller(View v){
 		this.v = v;
 		// makes the board
-		b = new Board(v.getDifficulty());
+		b = new Board(v.getDifficulty(),true);
 		// Lets the view know where the player is and what image to use for the player
 		v.setPlayerX(b.getPlayer().getX());
 		v.setPlayerY(b.getPlayer().getY());
@@ -42,11 +42,11 @@ public class Controller{
 		v.setPlayerX(player.getX());
 		v.setPlayerY(player.getY());
 		ArrayList<int[]> boardEnemies = b.getTheOneAndOnlyShark().getEnemyAtt();
-        ArrayList<int[]> viewEnemies = v.getEnemyAtt();
+        	ArrayList<int[]> viewEnemies = v.getEnemyAtt();
 		Message message;
 
-        //Move enemies
-        b.getTheOneAndOnlyShark().move();
+        	//Move enemies
+        	b.getTheOneAndOnlyShark().move();
         
 		for(int i=0; i<boardEnemies.size(); i++){
 			//Current enemy in the board and view arraylists
@@ -64,9 +64,21 @@ public class Controller{
                 break;
 			}
 
-			if(b.playerAtFinish()){
+			if(b.playerAtFinish() && b.getIsOcean()){
 				timer.stop();
-			    	v.startWinWindow();
+				v.clearStaticEnemies();
+			    	b = new Board(v.getDifficulty(),false);
+			    	v.setPlayerX(b.getPlayer().getX());
+				v.setPlayerY(b.getPlayer().getY());
+			    	v.startLandWindow();
+			    	timer.start();
+			    	
+			}
+
+			else if(b.playerAtFinish() && b.getIsOcean()){
+				timer.stop();
+				v.startWinWindow();
+				break;			
 			}
 		}//for
 		v.updateLocations();
