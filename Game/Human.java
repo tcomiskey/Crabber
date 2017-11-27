@@ -1,10 +1,9 @@
 import javax.swing.*;
 
 public class Human extends Enemy{
-    private ImageIcon image;
     public Human(int boardWidth, int xLoc, int yLoc, int direction){
         super(boardWidth, xLoc, yLoc, direction);
-        image = new ImageIcon("images/Sonny stand west.png");
+        rightImage = new ImageIcon("images/Sonny stand west.png");
         width = image.getIconWidth();
 	height = image.getIconHeight();
 	//Sets bounds on how far off screen a character can go before it loops around
