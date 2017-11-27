@@ -4,8 +4,8 @@ public class Human extends Enemy{
     public Human(int boardWidth, int xLoc, int yLoc, int direction){
         super(boardWidth, xLoc, yLoc, direction);
         rightImage = new ImageIcon("images/Sonny stand west.png");
-        width = image.getIconWidth();
-	height = image.getIconHeight();
+        width = rightImage.getIconWidth();
+	height = rightImage.getIconHeight();
 	//Sets bounds on how far off screen a character can go before it loops around
 	int usableWidth = (boardWidth/width) + 3*width; //335
 	farLeft = -(usableWidth)/2;
