@@ -19,6 +19,206 @@ import java.util.*;
  * @author Maura Swift
  */
 public class View extends JFrame implements MouseListener{
+<<<<<<< HEAD
+    private int difficulty;
+    private JPanel menu;
+    private JPanel diffScreen;
+    private JPanel gameScreen;
+    private JPanel gameOverScreen;
+    private JLabel playerLabel;
+    private ArrayList<JLabel> enemyLabels;
+    private JLabel bonusLabel;
+    private JButton start;
+    private JButton easy;
+    private JButton medium;
+    private JButton hard;
+    private JButton playAgain;
+    private Controller control;
+    private int playerX;
+    private int playerY;
+    private int bonusX;
+    private int bonusY;
+    private ArrayList<int[]> enemyAtt;
+    
+    /**
+     * This is the main View constructor that creates a new JPanel onto which a start button
+     * is placed. This start button is able to begin the game and
+     * create all other necessary JPanels.
+     */
+    public View(){
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setLocationRelativeTo(null);
+        setSize(new Dimension(800,700));
+        menu = new JPanel();
+        getContentPane().add(menu);
+        start = new JButton("Start");
+        start.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        start.addActionListener(
+                                new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                createDiffScreen();
+            }
+        }
+                                );
+        start.setVisible(true);
+        menu.add(start);
+        menu.setBackground(Color.black);
+        
+    }
+    
+    /*public static void main (String[] args){
+     SwingUtilities.invokeLater(new Runnable(){
+     public void run(){
+     new View().setVisible(true);
+     }
+     });
+     }*/
+    /**
+     * Method to create the difficulty screen.
+     * This method can either be called by the player clicking the
+     * start button or by the player clicking any "Play again"
+     * button. Once a difficulty is selected, a new controller is
+     * created and the startGameWindow() method is called.
+     */
+    private void createDiffScreen(){
+        //this clears old screen
+        getContentPane().removeAll();
+        diffScreen = new JPanel();
+        easy = new JButton("Easy");
+        easy.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        easy.addActionListener(
+                               new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                difficulty = 1;
+                System.out.println(difficulty);
+                setupController();
+                startGameWindow();
+            }
+        }
+                               );
+        medium = new JButton("Medium");
+        medium.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        medium.addActionListener(
+                                 new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                difficulty = 2;
+                System.out.println(difficulty);
+                setupController();
+                startGameWindow();
+            }
+        }
+                                 );
+        hard = new JButton("Hard");
+        hard.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        hard.addActionListener(
+                               new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                difficulty = 3;
+                System.out.println(difficulty);
+                setupController();
+                startGameWindow();
+            }
+        }
+                               );
+        diffScreen.setVisible(true);
+        diffScreen.add(easy);
+        diffScreen.add(medium);
+        diffScreen.add(hard);
+        getContentPane().add(diffScreen);
+        //diffScreen.setOpaque(true);
+        setVisible(true);
+        repaint();
+    }
+    /**
+     * Method to relocate the enemy images across the gameboard. Takes
+     * no inputs or outputs and repaints using Swing repaint.
+     */
+    public void updateLocations(){
+        for(int i = 0; i < enemyAtt.size(); i++){
+            enemyLabels.get(i).setLocation(enemyAtt.get(i)[0], enemyAtt.get(i)[1]);
+        }
+        repaint();
+    }
+    
+    public void updateBonusLocation(){
+        bonusLabel.setLocation(bonusX, bonusY);
+        repaint();
+    }
+    
+    /**
+     * Method that returns that the difficulty that is selected by
+     * the player. Required so that the controller knows which difficulty
+     * the user selects.
+     *
+     * @return	the difficulty selected by the user
+     */
+    public int getDifficulty(){
+        return difficulty;
+    }
+    
+    private void startGameWindow(){
+        setEnemies();
+        gameScreen = new JPanel();
+        gameScreen.setLayout(null);
+        for(int i = 0; i < enemyAtt.size(); i++){
+            gameScreen.add(enemyLabels.get(i));
+            enemyLabels.get(i).setBounds(new Rectangle(new Point(enemyAtt.get(i)[0], enemyAtt.get(i)[1]), new Dimension(enemyAtt.get(i)[3], enemyAtt.get(i)[4])));
+        }
+        gameScreen.add(playerLabel);
+        gameScreen.add(bonusLabel);
+        playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
+        bonusLabel.setBounds(new Rectangle(new Point(bonusX, bonusY), new Dimension(bonusLabel.getIcon().getIconWidth(), bonusLabel.getIcon().getIconHeight())));
+        gameScreen.addMouseListener(this);
+        gameScreen.setBackground(Color.blue);
+        getContentPane().removeAll();
+        getContentPane().add(gameScreen);
+        //diffScreen.setOpaque(true);
+        setVisible(true);
+        repaint();
+    }
+    
+    public void makePlayerLabel(ImageIcon img){
+        playerLabel = new JLabel(img);
+    }
+    
+    public void makeBonusLabel(ImageIcon img){
+        bonusLabel = new JLabel(img);
+    }
+    
+    public JButton getEasyButton(){
+        return easy;
+    }
+    
+    public void setupController(){
+        control = new Controller(this);
+    }
+    
+    public void setPlayerX(int x){
+        playerX = x;
+    }
+    
+    public void setPlayerY(int y){
+        playerY = y;
+    }
+    
+    public void setBonusX(int x){
+        bonusX = x;
+    }
+    
+    public void setBonusY(int y){
+        bonusY = y;
+    }
+    
+    public void setEnemies() {
+        enemyAtt = new ArrayList<int[]>();
+        enemyLabels = new ArrayList<JLabel>();
+        Iterator<int[]> enemyIterator = control.getBoard().getTheOneAndOnlyShark().getEnemyAtt().iterator();
+        while (enemyIterator.hasNext()) {
+            System.out.println("enemy");
+            int [] currentEnemy = enemyIterator.next();
+            enemyAtt.add(currentEnemy);
+            if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
+=======
 	private int difficulty;
 	private JPanel menu;
 	private JPanel diffScreen;
@@ -26,7 +226,6 @@ public class View extends JFrame implements MouseListener{
 	private JPanel gameOverScreen;
 	private JLabel playerLabel;
 	private ArrayList<JLabel> enemyLabels;
-    private JLabel bonusLabel;
 	private JButton start;
 	private JButton easy;
 	private JButton medium;
@@ -34,10 +233,8 @@ public class View extends JFrame implements MouseListener{
 	private JButton playAgain;
 	private Controller control;
 	private int playerX;
-    private int playerY;
-    private int bonusX;
-    private int bonusY;
-    private ArrayList<int[]> enemyAtt;
+	private int playerY;
+	private ArrayList<int[]> enemyAtt;
 
 	/**
 	* This is the main View constructor that creates a new JPanel onto which a start button
@@ -139,13 +336,7 @@ public class View extends JFrame implements MouseListener{
 		repaint();
 		
 	}
-    
-    public void updateBonusLocation(){
-        bonusLabel.setLocation(bonusX, bonusY);
-        repaint();
-    }
-    
-    /**
+	/**
 	* Method that returns that the difficulty that is selected by
 	* the player. Required so that the controller knows which difficulty
 	* the user selects.
@@ -165,9 +356,7 @@ public class View extends JFrame implements MouseListener{
 			enemyLabels.get(i).setBounds(new Rectangle(new Point(enemyAtt.get(i)[0], enemyAtt.get(i)[1]), new Dimension(enemyAtt.get(i)[3], enemyAtt.get(i)[4])));			
 		}
 		gameScreen.add(playerLabel);
-        gameScreen.add(bonusLabel);
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
-        bonusLabel.setBounds(new Rectangle(new Point(bonusX, bonusY), new Dimension(bonusLabel.getIcon().getIconWidth(), bonusLabel.getIcon().getIconHeight())));
 		gameScreen.addMouseListener(this);
 		gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
@@ -198,11 +387,8 @@ public class View extends JFrame implements MouseListener{
 		playerLabel = new JLabel(img);
 	}
 	
-    public void makeBonusLabel(ImageIcon img){
-        bonusLabel = new JLabel(img);
-    }
-    
-    public JButton getEasyButton(){
+
+	public JButton getEasyButton(){
 		return easy;
 	}
 
@@ -218,14 +404,6 @@ public class View extends JFrame implements MouseListener{
 		playerY = y;
 	}
     
-    public void setBonusX(int x){
-        bonusX = x;
-    }
-    
-    public void setBonusY(int y){
-        bonusY = y;
-    }
-    
     public void setEnemiesSea() {
     	enemyAtt = new ArrayList<int[]>();
    	enemyLabels = new ArrayList<JLabel>();
@@ -234,6 +412,7 @@ public class View extends JFrame implements MouseListener{
         	int [] currentEnemy = enemyIterator.next();
               	enemyAtt.add(currentEnemy);
               	if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
+>>>>>>> a357475722aab5f259d5368f9d72126e31b643d9
               		if(currentEnemy[2] == -1){
                         enemyLabels.add(new JLabel(control.getBoard().getTheOneAndOnlyShark().getLeftImage()));
                     }
