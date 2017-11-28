@@ -47,6 +47,8 @@ public class View extends JFrame implements MouseListener{
     private boolean isTutorial;
     private int tutorialNum;
     private JLabel timerLabel;
+    
+
     /**
 	* This is the main View constructor that creates a new JPanel onto which a start button
 	* is placed. This start button is able to begin the game and 
@@ -192,23 +194,25 @@ public class View extends JFrame implements MouseListener{
 	}
 
 	private void startGameWindow(){
-        setEnemiesSea();
+        	setEnemiesSea();
 		gameScreen = new JPanel();
-        JLabel background = new JLabel(new ImageIcon("images/Ocean Background.png"));
-        gameScreen.add(background);
-        background.setBounds(new Rectangle(new Point(0, 0), background.getSize()));
-        background.setOpaque(true);
 		gameScreen.setLayout(null);
+		
 		for(int i = 0; i < enemyAtt.size(); i++){
 			gameScreen.add(enemyLabels.get(i));
 			enemyLabels.get(i).setBounds(new Rectangle(new Point(enemyAtt.get(i)[0], enemyAtt.get(i)[1]), new Dimension(enemyAtt.get(i)[3], enemyAtt.get(i)[4])));			
 		}
 		gameScreen.add(playerLabel);
-        gameScreen.add(bonusLabel);
-        gameScreen.add(timerLabel);
-        timerLabel.setBounds(new Rectangle(new Point(control.getBoard().getBoardWidth()-(int)(timerLabel.getSize().getWidth())-2, 0), timerLabel.getSize()));
+        	gameScreen.add(bonusLabel);
+        	gameScreen.add(timerLabel);
+        	timerLabel.setBounds(new Rectangle(new Point(control.getBoard().getBoardWidth()-(int)(timerLabel.getSize().getWidth())-2, 0), timerLabel.getSize()));
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
-        bonusLabel.setBounds(new Rectangle(new Point(bonusX, bonusY), new Dimension(bonusLabel.getIcon().getIconWidth(), bonusLabel.getIcon().getIconHeight())));
+       		bonusLabel.setBounds(new Rectangle(new Point(bonusX, bonusY), new Dimension(bonusLabel.getIcon().getIconWidth(), bonusLabel.getIcon().getIconHeight())));
+
+		JLabel background = new JLabel(new ImageIcon("images/Ocean Background.png"));
+        	gameScreen.add(background);
+        	background.setBounds(new Rectangle(new Point(0, 0), new Dimension(800, 700)));
+        	
 		gameScreen.addMouseListener(this);
 		//gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
@@ -231,7 +235,11 @@ public class View extends JFrame implements MouseListener{
 		gameScreen.add(timerLabel);
         	timerLabel.setBounds(new Rectangle(new Point(control.getBoard().getBoardWidth()-(int)(timerLabel.getSize().getWidth())-2, 0), timerLabel.getSize()));
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
-		gameScreen.setBackground(new Color(239,211,110));
+
+		JLabel background = new JLabel(new ImageIcon("images/beach.png"));
+        	gameScreen.add(background);
+        	background.setBounds(new Rectangle(new Point(0, 0), new Dimension(800, 700)));
+		//gameScreen.setBackground(new Color(239,211,110));
 		//diffScreen.setOpaque(true);
 		setVisible(true);
 		repaint();
