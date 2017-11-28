@@ -1,5 +1,13 @@
+/**
+Parent class of quesions and bonus messages
+
+@author Erin Hitchner
+*/
 public class Message {
 
+/**
+Creates a Message object
+*/
 public Message() {
 
 }

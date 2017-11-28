@@ -73,4 +73,8 @@ public class Bonus extends GameCharacter{
     public BufferedImage getRightImage(){
         return rightImage;
     }//getImage
+    
+    public void setNoBonus(boolean bonusBoolean) {
+        noBonus = bonusBoolean;
+    }
 }
