@@ -35,7 +35,7 @@ public class Enemy extends GameCharacter{
 	* @return Message object that contains a question that will be asked.
 	*/
 	public Message hit(){
-        	questionIndex++;
+        	questionIndex = (questionIndex + 1) % questions.size();
         	if(questionIndex == questions.size()){
         		questionIndex = 0;
         	}

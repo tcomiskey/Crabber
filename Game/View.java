@@ -194,8 +194,10 @@ public class View extends JFrame implements MouseListener{
 	}
 
 	private void startGameWindow(){
-		setEnemiesSea();
+        setEnemiesSea();
 		gameScreen = new JPanel();
+        //JLabel background = new JLabel(new ImageIcon("brown rectangle.png"));
+        //gameScreen.add(background);
 		gameScreen.setLayout(null);
 		for(int i = 0; i < enemyAtt.size(); i++){
 			gameScreen.add(enemyLabels.get(i));
@@ -208,7 +210,7 @@ public class View extends JFrame implements MouseListener{
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
         bonusLabel.setBounds(new Rectangle(new Point(bonusX, bonusY), new Dimension(bonusLabel.getIcon().getIconWidth(), bonusLabel.getIcon().getIconHeight())));
 		gameScreen.addMouseListener(this);
-		gameScreen.setBackground(Color.blue);
+		//gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
 		getContentPane().add(gameScreen);
 		//diffScreen.setOpaque(true);
@@ -378,15 +380,52 @@ public class View extends JFrame implements MouseListener{
     }
     
     public void throwQuestion(Message currentMessage) {
-        String[] buttons = {currentMessage.getRightAnswer(), currentMessage.getWrongAnswer1(), currentMessage.getWrongAnswer2()};
+        String[] buttons = new String[3];
+        int r1 = (int)(Math.random()*3);
+        int r2 = (int)(Math.random()*2);
+        if(r1 == 0){
+            buttons[0] = currentMessage.getRightAnswer();
+            if(r2 == 0){
+                buttons[1] = currentMessage.getWrongAnswer1();
+                buttons[2] = currentMessage.getWrongAnswer2();
+            }
+            else{
+                buttons[1] = currentMessage.getWrongAnswer2();
+                buttons[2] = currentMessage.getWrongAnswer1();
+            }
+        }
+        
+        else if(r1 == 1){
+            buttons[1] = currentMessage.getRightAnswer();
+            if(r2 == 0){
+                buttons[0] = currentMessage.getWrongAnswer1();
+                buttons[2] = currentMessage.getWrongAnswer2();
+            }
+            else{
+                buttons[0] = currentMessage.getWrongAnswer2();
+                buttons[2] = currentMessage.getWrongAnswer1();
+            }
+        }
+        else{
+            buttons[2] = currentMessage.getRightAnswer();
+            if(r2 == 0){
+                buttons[1] = currentMessage.getWrongAnswer1();
+                buttons[2] = currentMessage.getWrongAnswer2();
+            }
+            else{
+                buttons[1] = currentMessage.getWrongAnswer2();
+                buttons[2] = currentMessage.getWrongAnswer2();
+            }
+        }
+        
+        //{currentMessage.getRightAnswer(), currentMessage.getWrongAnswer1(), currentMessage.getWrongAnswer2()};
         int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, null);
-        if (rc==0) {
+        if (rc == r1) {
             control.resetPlayer();
             playerLabel.setLocation(playerX, playerY);
             System.out.println(playerLabel.getX());
             System.out.println(playerLabel.getY());
             repaint();
-            
         }
         else {
             startGameOverWindow();
