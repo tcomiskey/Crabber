@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.*;
+import java.io.BufferedReader;
+import java.io.*;
 
 
 //import components.LayeredPaneDemo2;
@@ -47,6 +49,9 @@ public class View extends JFrame implements MouseListener{
     private boolean isTutorial;
     private int tutorialNum;
     private JLabel timerLabel;
+    private String[][] textMatrix;
+    private JTable leaderboard;
+    private int score;
     
 
     /**
@@ -55,20 +60,30 @@ public class View extends JFrame implements MouseListener{
 	* create all other necessary JPanels.
 	*/
 	public View(){
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		//setLocationRelativeTo(null);
-		setSize(new Dimension(800,700));
-		menu = new JPanel();
-		getContentPane().add(menu);
-		start = new JButton("Start");
-		start.setFont(new Font(start.getName(),Font.PLAIN, 72));
-		start.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					runTutorial();
-				}
-			}
-			);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setLocationRelativeTo(null);
+        setSize(new Dimension(800,700));
+        menu = new JPanel();
+        getContentPane().add(menu);
+        start = new JButton("Start");
+        start.setBackground(Color.GREEN);
+        start.setOpaque(true);
+        start.setBorderPainted(false);
+        ImageIcon icon = new ImageIcon("images/Start_Screen.png");
+        JLabel background = new JLabel(icon);
+        menu.add(background);
+        
+        start.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        start.addActionListener(
+                                new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                runTutorial();
+            }
+        }
+                                );
+        score = 0;
+        readLeaderboard();
+        leaderboard.setEnabled(false);
 		start.setVisible(true);
 		menu.add(start);
 		menu.setBackground(Color.black);
@@ -89,57 +104,80 @@ public class View extends JFrame implements MouseListener{
 	* button. Once a difficulty is selected, a new controller is 
 	* created and the startGameWindow() method is called.
 	*/
-	private void createDiffScreen(){
-		//this clears old screen
-		getContentPane().removeAll();
-		diffScreen = new JPanel();
-		easy = new JButton("Easy");
-		easy.setFont(new Font(start.getName(),Font.PLAIN, 72));
-		easy.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					difficulty = 1;
-					System.out.println(difficulty);
-					setupController();
-					startGameWindow();
-				}
-			}
-			);
-		medium = new JButton("Medium");
-		medium.setFont(new Font(start.getName(),Font.PLAIN, 72));
-		medium.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					difficulty = 2;
-					System.out.println(difficulty);
-					setupController();
-					startGameWindow();
-				}
-			}
-			);
-		hard = new JButton("Hard");
-		hard.setFont(new Font(start.getName(),Font.PLAIN, 72));
-		hard.addActionListener(
-			new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					difficulty = 3;
-					System.out.println(difficulty);
-					setupController();
-					startGameWindow();
-				}
-			}
-			);
-		diffScreen.setVisible(true);
-		diffScreen.add(easy);
-		diffScreen.add(medium);
-		diffScreen.add(hard);
-		getContentPane().add(diffScreen);
-		//diffScreen.setOpaque(true);
-		setVisible(true);
-		repaint();
-	}
-	/**
-	* Method to relocate the enemy images across the gameboard. Takes 
+    private void createDiffScreen(){
+        //this clears old screen
+        getContentPane().removeAll();
+        diffScreen = new JPanel();
+        
+        ImageIcon icon = new ImageIcon("images/Start_Screen.png");
+        JLabel background = new JLabel(icon);
+        diffScreen.add(background);
+        
+        easy = new JButton("Easy");
+        
+        easy.setBackground(Color.GREEN);
+        easy.setOpaque(true);
+        easy.setBorderPainted(false);
+        
+        easy.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        easy.addActionListener(
+                               new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                difficulty = 1;
+                System.out.println(difficulty);
+                setupController();
+                startGameWindow();
+            }
+        }
+                               );
+        
+        medium = new JButton("Medium");
+        
+        medium.setBackground(Color.YELLOW);
+        medium.setOpaque(true);
+        medium.setBorderPainted(false);
+        
+        medium.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        medium.addActionListener(
+                                 new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                difficulty = 2;
+                System.out.println(difficulty);
+                setupController();
+                startGameWindow();
+            }
+        }
+                                 );
+        
+        hard = new JButton("Hard");
+        
+        hard.setBackground(Color.RED);
+        hard.setOpaque(true);
+        hard.setBorderPainted(false);
+        
+        hard.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        hard.addActionListener(
+                               new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                difficulty = 3;
+                System.out.println(difficulty);
+                setupController();
+                startGameWindow();
+            }
+        }
+                               );
+        diffScreen.setVisible(true);
+        diffScreen.add(easy);
+        diffScreen.add(medium);
+        diffScreen.add(hard);
+        diffScreen.setBackground(Color.black);
+        getContentPane().add(diffScreen);
+        //diffScreen.setOpaque(true);
+        setVisible(true);
+        repaint();
+    }
+    /**
+     * Method to relocate the enemy images across the gameboard. Takes 
 	* no inputs or outputs and repaints using Swing repaint.
 	*/
 	public void updateLocations(){
@@ -256,6 +294,7 @@ public class View extends JFrame implements MouseListener{
 	}
 
 	public void startLandWindow(){
+        score += difficulty*control.getBoard().getRemainingTime()/10;
 		gameScreen.removeAll();
 		setEnemiesLand();
 		gameScreen.setLayout(null);
@@ -516,12 +555,14 @@ public class View extends JFrame implements MouseListener{
                                     new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 clearStaticEnemies();
+                score = 0;
                 createDiffScreen();
             }
         }
                                     );
         playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
         gameOverScreen.add(playAgain);
+        gameOverScreen.add(leaderboard);
         getContentPane().removeAll();
         getContentPane().add(gameOverScreen);
         //diffScreen.setOpaque(true);
@@ -530,6 +571,7 @@ public class View extends JFrame implements MouseListener{
     }
     
     public void startWinWindow(){
+        score += difficulty*control.getBoard().getRemainingTime()/10;
         JPanel winScreen = new JPanel();
         winScreen.setBackground(Color.yellow);
         winScreen.setLayout(new BoxLayout(winScreen, BoxLayout.Y_AXIS));
@@ -543,16 +585,49 @@ public class View extends JFrame implements MouseListener{
                                     new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 clearStaticEnemies();
+                score = 0;
                 createDiffScreen();
             }
         }
                                     );
         playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
         winScreen.add(playAgain);
+        winScreen.add(leaderboard);
         getContentPane().removeAll();
         getContentPane().add(winScreen);
         //diffScreen.setOpaque(true);
         setVisible(true);
+        if(score >= Integer.parseInt(textMatrix[9][1])){
+            String tempName = "";
+            String tempScore = "";
+            String name = "";
+            try{
+                name = JOptionPane.showInputDialog("New high score! Please enter your name.");
+            }catch(HeadlessException e){
+                e.printStackTrace();
+            }
+            
+            for(int i = 0; i < 10; i++){
+                if(score >= Integer.parseInt(textMatrix[i][1])){
+                    tempName = textMatrix[i][0];
+                    tempScore = textMatrix[i][1];
+                    textMatrix[i][0] = name;
+                    textMatrix[i][1] = Integer.toString(score);
+                    name = tempName;
+                    score = Integer.parseInt(tempScore);
+                }
+            }
+            
+            String[] titles = {"Name","Score"};
+            leaderboard = new JTable(textMatrix, titles);
+            leaderboard.setSize(new Dimension(360,400));
+            try{
+                writeLeaderboard(textMatrix);
+            }catch(FileNotFoundException e){
+                e.printStackTrace();
+            }
+            
+        }
         repaint();
     }
     
@@ -603,6 +678,43 @@ public class View extends JFrame implements MouseListener{
         //diffScreen.setOpaque(true);
         setVisible(true);
         repaint();
+    }
+    
+    private void readLeaderboard() {
+        String[] titles = {"Name","Score"};
+        String leaderboardFile = "leaderboard.csv";
+        BufferedReader br = null;
+        String line = "";
+        textMatrix = new String[10][2];
+        int i = 0;
+        try {
+            br = new BufferedReader(new FileReader(leaderboardFile));
+            while((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                textMatrix[i][0] = values[0];
+                textMatrix[i][1] = values[1];
+                i++;
+            }
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        System.out.println(Arrays.deepToString(textMatrix));
+        leaderboard = new JTable(textMatrix, titles);
+        leaderboard.setSize(new Dimension(360,400));
+    }
+    
+    private void writeLeaderboard(String[][] input) throws FileNotFoundException {
+        PrintWriter pw = new PrintWriter(new File("leaderboard.csv"));
+        String output = "";
+        for (int i = 0; i < 10; i++) {
+            output = output + input[i][0] + "," + input[i][1] + "\n";
+        }
+        pw.write(output);
+        pw.close();
     }
     
 }
