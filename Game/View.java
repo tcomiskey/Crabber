@@ -23,7 +23,8 @@ public class View extends JFrame implements MouseListener{
 	private int difficulty;
 	private JPanel menu;
 	private JPanel diffScreen;
-	private JPanel gameScreen;
+    private JPanel gameScreen;
+    private JPanel tutorialScreen;
 	private JPanel gameOverScreen;
 	private JLabel playerLabel;
 	private ArrayList<JLabel> enemyLabels;
@@ -39,8 +40,13 @@ public class View extends JFrame implements MouseListener{
     private int bonusX;
     private int bonusY;
     private ArrayList<int[]> enemyAtt;
-
-	/**
+    private JLabel tutorialCrab;
+   	private JLabel tutorialShark;
+   	private JLabel tutorialBonus;
+   	private JLabel tutorialText;
+    private boolean isTutorial;
+    private int tutorialNum;
+    /**
 	* This is the main View constructor that creates a new JPanel onto which a start button
 	* is placed. This start button is able to begin the game and 
 	* create all other necessary JPanels.
@@ -56,7 +62,7 @@ public class View extends JFrame implements MouseListener{
 		start.addActionListener(
 			new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					createDiffScreen();
+					runTutorial();
 				}
 			}
 			);
@@ -292,8 +298,41 @@ public class View extends JFrame implements MouseListener{
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        control.getMouseClick(e);
-        playerLabel.setLocation(playerX, playerY);
+        if(!isTutorial){
+            control.getMouseClick(e);
+            playerLabel.setLocation(playerX, playerY);
+        }
+        else if(tutorialNum == 0 && (e.getX() < tutorialCrab.getX())){
+            tutorialCrab.setLocation(tutorialCrab.getX() - 50, tutorialCrab.getY());
+            tutorialText.setText("Click right of the crab to move to the right.");
+            tutorialNum++;
+            repaint();
+        }
+        else if(tutorialNum == 1 && (e.getX() > tutorialCrab.getX()+tutorialCrab.getIcon().getIconWidth())){
+            tutorialCrab.setLocation(tutorialCrab.getX() + 50, tutorialCrab.getY());
+            tutorialText.setText("Click above the crab to move forwards.");
+            tutorialNum++;
+            repaint();
+        }
+        else if(tutorialNum == 2 && (e.getY() < tutorialCrab.getY()-tutorialCrab.getIcon().getIconWidth()/2)){
+            tutorialCrab.setLocation(tutorialCrab.getX(), tutorialCrab.getY()-50);
+            tutorialText.setText("Eat the clam to get a bonus!!");
+            if(tutorialCrab.getY() <= 350){
+                tutorialBonus.setVisible(false);
+                tutorialShark.setVisible(true);
+                tutorialText.setText("Now see if you can eat that dogfish!");
+            }
+            if(tutorialCrab.getY()  == 250){
+                tutorialCrab.setVisible(false);
+                tutorialText.setText("Oh no! You have been eaten. Click anywhere to continue to the game.");
+                tutorialNum++;
+            }
+            repaint();
+        }
+        else if(tutorialNum == 3){
+            isTutorial = false;
+            createDiffScreen();
+        }
     }
     
     @Override
@@ -393,9 +432,40 @@ public class View extends JFrame implements MouseListener{
         control.getBoard().getTheOneAndOnlyShark().setNoSharks(true);
         control.getBoard().getTheOneAndOnlyTrash().setNoTrash(true);
         control.getBoard().getTheOneAndOnlyShark().clearEnemyAtt();
+        control.getBoard().getBonus().setNoBonus(true);
+    }
+    
+    private void runTutorial(){
+        isTutorial = true;
+        tutorialNum = 0;
+        tutorialScreen = new JPanel();
+        tutorialScreen.setLayout(null);
+        tutorialCrab = new JLabel(new ImageIcon("images/brown rectangle.png"));
+        tutorialCrab.setLocation(400,450);
+        tutorialScreen.add(tutorialCrab);
+        tutorialCrab.setBounds(new Rectangle(new Point(350, 450), new Dimension(tutorialCrab.getIcon().getIconWidth(), tutorialCrab.getIcon().getIconHeight())));
+        tutorialBonus = new JLabel(new ImageIcon("images/clam.png"));
+        tutorialBonus.setLocation(400,350);
+        tutorialScreen.add(tutorialBonus);
+        tutorialBonus.setBounds(new Rectangle(new Point(350, 350), new Dimension(tutorialBonus.getIcon().getIconWidth(), tutorialBonus.getIcon().getIconHeight())));
+        tutorialShark = new JLabel(new ImageIcon("images/shark.png"));
+        tutorialShark.setLocation(380,250);
+        tutorialScreen.add(tutorialShark);
+        tutorialShark.setVisible(false);
+        tutorialShark.setBounds(new Rectangle(new Point(330, 250), new Dimension(tutorialShark.getIcon().getIconWidth(), tutorialShark.getIcon().getIconHeight())));
+        tutorialText = new JLabel("Click left of the crab to move to the left", JLabel.CENTER);
+        tutorialText.setFont(new Font(tutorialText.getName(),Font.PLAIN, 20));
+        tutorialText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tutorialText.setLocation(350,100);
+        tutorialScreen.add(tutorialText);
+        tutorialText.setBounds(0, 100, 800, 100);
+        tutorialScreen.addMouseListener(this);
+        tutorialScreen.setBackground(Color.blue);
+        getContentPane().removeAll();
+        getContentPane().add(tutorialScreen);
+        //diffScreen.setOpaque(true);
+        setVisible(true);
+        repaint();
     }
     
 }
-
-
-

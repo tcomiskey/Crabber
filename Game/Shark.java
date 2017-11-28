@@ -47,8 +47,8 @@ public class Shark extends Enemy{
         questionIndex = (int) Math.floor(Math.random()*questions.size());
         
         //THIS IS THE BUFFEREDIMAGE STUFF
-        leftImage = createImage("images/orc_forward_west.png");
-        rightImage = createImage("images/orc_forward_east.png");
+        leftImage = createImage("images/spiny-dogfish.png");
+        rightImage = createImage("images/spiny-dogfish.png");
         width = leftImage.getWidth() / frameCount;
         height = rightImage.getHeight();
         for(int i = 0; i < frameCount; i++) {

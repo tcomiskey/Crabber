@@ -6,8 +6,8 @@ public class Human extends Enemy{
     public Human(int boardWidth, int xLoc, int yLoc, int direction){
         super(boardWidth, xLoc, yLoc, direction);
         //rightImage = new ImageIcon("images/Sonny stand west.png");
-        leftImage = createImage("images/orc_forward_west.png");
-        rightImage = createImage("images/orc_forward_east.png");
+        leftImage = createImage("images/spiny-dogfish.png");
+        rightImage = createImage("images/spiny-dogfish.png");
         width = leftImage.getWidth();
         height = rightImage.getHeight();
         for(int i = 0; i < frameCount; i++) {

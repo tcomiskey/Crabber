@@ -95,7 +95,7 @@ public class Controller{
             System.out.println("Time ran out");
         }
         
-        if(b.bonusCollisionCheck()){
+        if(b.getIsOcean() && b.bonusCollisionCheck()){
             b.resetStartTime(5000);
             b.removeBonus();
             /*if(Math.random() < .01){
