@@ -248,6 +248,10 @@ public class Board extends JFrame{
     public Bonus getBonus(){
         return bonus;
     }
+
+    public long getRemainingTime(){
+    	return remainingTime;
+    }
     
     public String toString(){
         String returnString = "";

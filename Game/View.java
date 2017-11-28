@@ -46,6 +46,7 @@ public class View extends JFrame implements MouseListener{
    	private JLabel tutorialText;
     private boolean isTutorial;
     private int tutorialNum;
+    private JLabel timerLabel;
     /**
 	* This is the main View constructor that creates a new JPanel onto which a start button
 	* is placed. This start button is able to begin the game and 
@@ -202,6 +203,8 @@ public class View extends JFrame implements MouseListener{
 		}
 		gameScreen.add(playerLabel);
         gameScreen.add(bonusLabel);
+        gameScreen.add(timerLabel);
+        timerLabel.setBounds(new Rectangle(new Point(control.getBoard().getBoardWidth()-(int)(timerLabel.getSize().getWidth())-2, 0), timerLabel.getSize()));
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
         bonusLabel.setBounds(new Rectangle(new Point(bonusX, bonusY), new Dimension(bonusLabel.getIcon().getIconWidth(), bonusLabel.getIcon().getIconHeight())));
 		gameScreen.addMouseListener(this);
@@ -223,6 +226,8 @@ public class View extends JFrame implements MouseListener{
 		}
 		playerLabel.setLocation(playerX, playerY);
 		gameScreen.add(playerLabel);
+		gameScreen.add(timerLabel);
+        	timerLabel.setBounds(new Rectangle(new Point(control.getBoard().getBoardWidth()-(int)(timerLabel.getSize().getWidth())-2, 0), timerLabel.getSize()));
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
 		gameScreen.setBackground(new Color(239,211,110));
 		//diffScreen.setOpaque(true);
@@ -236,6 +241,20 @@ public class View extends JFrame implements MouseListener{
 	
     public void makeBonusLabel(BufferedImage img){
         bonusLabel = new JLabel(new ImageIcon(img));
+    }
+
+    public void makeTimerLabel(String time){
+    	timerLabel = new JLabel(time);
+    	timerLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+    	timerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    	timerLabel.setBackground(Color.WHITE);
+    	timerLabel.setOpaque(true);
+    	timerLabel.setFont(new Font(timerLabel.getFont().getName(), Font.PLAIN, 24));
+    	timerLabel.setSize(100, 50);
+    }
+
+    public void updateTimerLabel(String time){
+    	timerLabel.setText(time);
     }
     
     public JButton getEasyButton(){

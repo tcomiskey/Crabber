@@ -34,6 +34,9 @@ public class Controller{
         v.setBonusX(b.getBonus().getX());
         v.setBonusY(b.getBonus().getY());
         v.makeBonusLabel(b.getBonus().getLeftImage());
+        String time = b.getRemainingTime()/1000/60 + ":" + String.format("%02d" , b.getRemainingTime()/1000%60);
+	System.out.println(time);
+	v.makeTimerLabel(time);
         // starts the timer and starts calling tick
         timer.start();
         
@@ -42,6 +45,9 @@ public class Controller{
     // tick method used to update the enemy locations and player location
     public void tick(){
         b.updateRemainingTime();
+        String time = b.getRemainingTime()/1000/60 + ":" + String.format("%02d" , b.getRemainingTime()/1000%60);
+	System.out.println(time);
+	v.updateTimerLabel(time);
         Player player = b.getPlayer();
         v.setPlayerX(player.getX());
         v.setPlayerY(player.getY());

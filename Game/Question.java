@@ -1,11 +1,21 @@
 import java.util.*;
 
+/**
+Contains a question that must be answered when an enemy is hit and three answer choices 
+
+@author Erin Hitchner
+*/
 public class Question extends Message{
     String question;
     String rightAnswer;
     String wrongAnswer1;
     String wronganswer2;
-    
+
+    /**
+    Constructs a quesion object with the given question and answers
+
+    @param questionSpecifics first String is the quesion, second string is the right answer, and the other strings are wrong answers
+    */
     public Question(ArrayList<String> questionSpecifics) {
         question = questionSpecifics.get(0);
         rightAnswer = questionSpecifics.get(1);
