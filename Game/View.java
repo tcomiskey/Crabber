@@ -168,8 +168,6 @@ public class View extends JFrame implements MouseListener{
 		}
         	
 		for(int i = 0; i < enemyAtt.size(); i++){
-			//gameScreen.add(enemyLabels.get(i));
-			//enemyLabels.get(i).setBounds(new Rectangle(new Point(enemyAtt.get(i)[0], enemyAtt.get(i)[1]), new Dimension(enemyAtt.get(i)[3], enemyAtt.get(i)[4])));	
 			enemyLabels.get(i).setLocation(enemyAtt.get(i)[0], enemyAtt.get(i)[1]);
 		}
 		repaint();
