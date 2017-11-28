@@ -49,6 +49,13 @@ public class View extends JFrame implements MouseListener{
 		menu = new JPanel();
 		getContentPane().add(menu);
 		start = new JButton("Start");
+		start.setBackground(Color.GREEN);
+		start.setOpaque(true);
+		start.setBorderPainted(false);
+		ImageIcon icon = new ImageIcon("images/Start_Screen.png");
+		JLabel background = new JLabel(icon);
+		menu.add(background);
+				
 		start.setFont(new Font(start.getName(),Font.PLAIN, 72));
 		start.addActionListener(
 			new ActionListener(){
@@ -57,6 +64,11 @@ public class View extends JFrame implements MouseListener{
 				}
 			}
 			);
+			
+		//JLayeredPane layeredpane = new JLayeredPane();
+		//layeredpane.add(background, 0);
+		//layeredpane.add(menu,1);
+		
 		start.setVisible(true);
 		menu.add(start);
 		menu.setBackground(Color.black);
@@ -81,7 +93,17 @@ public class View extends JFrame implements MouseListener{
 		//this clears old screen
 		getContentPane().removeAll();
 		diffScreen = new JPanel();
+				
+		ImageIcon icon = new ImageIcon("images/Start_Screen.png");
+		JLabel background = new JLabel(icon);
+		diffScreen.add(background);
+		
 		easy = new JButton("Easy");
+		
+		easy.setBackground(Color.GREEN);
+		easy.setOpaque(true);
+		easy.setBorderPainted(false);
+		
 		easy.setFont(new Font(start.getName(),Font.PLAIN, 72));
 		easy.addActionListener(
 			new ActionListener(){
@@ -93,7 +115,13 @@ public class View extends JFrame implements MouseListener{
 				}
 			}
 			);
+		
 		medium = new JButton("Medium");
+		
+		medium.setBackground(Color.YELLOW);
+		medium.setOpaque(true);
+		medium.setBorderPainted(false);
+		
 		medium.setFont(new Font(start.getName(),Font.PLAIN, 72));
 		medium.addActionListener(
 			new ActionListener(){
@@ -105,7 +133,13 @@ public class View extends JFrame implements MouseListener{
 				}
 			}
 			);
+		
 		hard = new JButton("Hard");
+		
+		hard.setBackground(Color.RED);
+		hard.setOpaque(true);
+		hard.setBorderPainted(false);
+		
 		hard.setFont(new Font(start.getName(),Font.PLAIN, 72));
 		hard.addActionListener(
 			new ActionListener(){
@@ -121,6 +155,7 @@ public class View extends JFrame implements MouseListener{
 		diffScreen.add(easy);
 		diffScreen.add(medium);
 		diffScreen.add(hard);
+		diffScreen.setBackground(Color.black);
 		getContentPane().add(diffScreen);
 		//diffScreen.setOpaque(true);
 		setVisible(true);
