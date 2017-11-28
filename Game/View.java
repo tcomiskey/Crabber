@@ -194,8 +194,10 @@ public class View extends JFrame implements MouseListener{
 	private void startGameWindow(){
         setEnemiesSea();
 		gameScreen = new JPanel();
-        //JLabel background = new JLabel(new ImageIcon("brown rectangle.png"));
-        //gameScreen.add(background);
+        JLabel background = new JLabel(new ImageIcon("images/Ocean Background.png"));
+        gameScreen.add(background);
+        background.setBounds(new Rectangle(new Point(0, 0), background.getSize()));
+        background.setOpaque(true);
 		gameScreen.setLayout(null);
 		for(int i = 0; i < enemyAtt.size(); i++){
 			gameScreen.add(enemyLabels.get(i));
@@ -408,15 +410,19 @@ public class View extends JFrame implements MouseListener{
             buttons[2] = currentMessage.getRightAnswer();
             if(r2 == 0){
                 buttons[1] = currentMessage.getWrongAnswer1();
-                buttons[2] = currentMessage.getWrongAnswer2();
+                buttons[0] = currentMessage.getWrongAnswer2();
             }
             else{
                 buttons[1] = currentMessage.getWrongAnswer2();
-                buttons[2] = currentMessage.getWrongAnswer2();
+                buttons[0] = currentMessage.getWrongAnswer1();
             }
         }
         
         //{currentMessage.getRightAnswer(), currentMessage.getWrongAnswer1(), currentMessage.getWrongAnswer2()};
+        System.out.println(currentMessage.getQuestion());
+        for (int i = 0; i < buttons.length; i++) {
+            System.out.println(buttons[i]);
+        }
         int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, null);
         if (rc == r1) {
             control.resetPlayer();
