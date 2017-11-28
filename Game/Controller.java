@@ -35,7 +35,7 @@ public class Controller{
         v.setBonusY(b.getBonus().getY());
         v.makeBonusLabel(b.getBonus().getLeftImage());
         String time = b.getRemainingTime()/1000/60 + ":" + String.format("%02d" , b.getRemainingTime()/1000%60);
-	System.out.println(time);
+	//System.out.println(time);
 	v.makeTimerLabel(time);
         // starts the timer and starts calling tick
         timer.start();
@@ -46,7 +46,7 @@ public class Controller{
     public void tick(){
         b.updateRemainingTime();
         String time = b.getRemainingTime()/1000/60 + ":" + String.format("%02d" , b.getRemainingTime()/1000%60);
-	System.out.println(time);
+	//System.out.println(time);
 	v.updateTimerLabel(time);
         Player player = b.getPlayer();
         v.setPlayerX(player.getX());
@@ -83,7 +83,7 @@ public class Controller{
 				v.clearStaticEnemies();
 			    	b = new Board(v.getDifficulty(),false);
 			    	v.setPlayerX(b.getPlayer().getX());
-				v.setPlayerY(b.getPlayer().getY());
+                    v.setPlayerY(b.getPlayer().getY());
 			    	v.startLandWindow();
 			    	timer.start();
 			    	
@@ -112,8 +112,12 @@ public class Controller{
             v.setBonusY(b.getBonus().getY());
             v.updateBonusLocation();
         }
-        
-        v.updateLocations();
+        if (b.getIsOcean()) {
+            v.updateLocations();
+        }
+        else {
+            v.updateLandLocations();
+        }
 		
 	}//tick
 

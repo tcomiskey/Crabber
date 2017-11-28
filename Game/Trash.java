@@ -8,11 +8,14 @@ public class Trash extends Enemy{
     static int trashHeight;
 
 	private Trash(int boardWidth, int xLoc, int yLoc, int direction){
-		super(boardWidth, xLoc, yLoc, direction);
+        super(boardWidth, xLoc, yLoc, direction);
+        frameCount = 8;
+        leftImageArray = new BufferedImage[frameCount];
+        rightImageArray = new BufferedImage[frameCount];
 		//rightImage = new ImageIcon("images/Trash.png");
 		//leftImage = new ImageIcon("images/Trash.png");
-        leftImage = createImage("images/spiny-dogfish.png");
-        rightImage = createImage("images/spiny-dogfish.png");
+        leftImage = createImage("images/reverseTrash.png");
+        rightImage = createImage("images/trash.png");
         width = leftImage.getWidth() / frameCount;
         height = rightImage.getHeight();
         for(int i = 0; i < frameCount; i++) {

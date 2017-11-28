@@ -17,6 +17,8 @@ public class Board extends JFrame{
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>(); // a list of all of the rows that do not contain enemies used for checkpoints
 	private static Shark theOneAndOnlyShark;
 	private static Trash theOneAndOnlyTrash;
+    private static Human theOneAndOnlyHuman;
+    private static Bird theOneAndOnlyBird;
     private Bonus bonus;
     private long startTime;
     private long remainingTime;	//time left in the level in milliseconds
@@ -58,6 +60,9 @@ public class Board extends JFrame{
 		int numPerRowConstant = 3*difficulty;
 		// picks left as the current direction of movement;
         	int currentDirection = -1;
+        
+        
+        if (isOcean == true) {
 		// first enemy will use complex constuctor to instantiate static array of questions
         // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
 		theOneAndOnlyShark = Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
@@ -108,11 +113,67 @@ public class Board extends JFrame{
 		        else{
 		            currentDirection = 1;
 		        }
-		    }  
+		    } // if enemiesInRow
 		    
-        	}
-        	
-        	
+        } // for loop
+        }
+        
+        else {
+            System.out.println("LAND HO");
+            // first enemy will use complex constuctor to instantiate static array of questions
+            // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
+            theOneAndOnlyHuman = Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection);
+            // the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
+            theOneAndOnlyBird = Bird.birdFactory(boardWidth, xcoord, ycoord, currentDirection);
+            // counter for how many enemies have been placed in the current row
+            int enemiesInRow = 1;
+            // xcoord will be incremented based on the game difficulty*width of the player
+            xcoord += theOneAndOnlyHuman.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+            // since an enemy was added to this row the safeRow value is set to false
+            safeRows.set(row, new Boolean(false));
+            // looping until total number of enemies needed for game difficulty are instantiated
+            for(int i = 1; row < numberOfRows/*multiplier to get number of enemies required for the difficulty*/; i++){
+                if (row%2 == 1){ // odd rows will be sharks
+                    Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection);
+                    xcoord += theOneAndOnlyHuman.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+                }
+                else{ // even rows will be trash
+                    Bird.birdFactory(boardWidth, xcoord, ycoord, currentDirection);
+                    xcoord += theOneAndOnlyBird.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
+                }
+                enemiesInRow++;
+                // if you max out the number of enemies for a row, pick next row to fill (1 or 2 rows up)
+                if (enemiesInRow == numPerRowConstant){
+                    double randomRowSpacing = Math.random();
+                    // pick randomly with a slight bias what row to go to next
+                    if (randomRowSpacing < 0.4){
+                        ycoord -= player.getPlayerHeight();
+                        row++;
+                        //sets the next row to be used as unsafe
+                        safeRows.set(row, new Boolean(false));
+                    }
+                    else{
+                        ycoord -= 2*player.getPlayerHeight();
+                        row+=2;
+                        //sets the next row to be used as unsafe
+                        safeRows.set(row, new Boolean(false));
+                    }
+                    // picks a random new xcoord to use when starting a new row to create staggered enemies
+                    xcoord = (int) Math.floor(Math.random() * 4 * player.getPlayerWidth());
+                    // resets the counter
+                    enemiesInRow = 0;
+                    // picks a direction randomly
+                    double randomDir = Math.random();
+                    if (randomDir < 0.5){
+                        currentDirection = -1;
+                    }
+                    else{
+                        currentDirection = 1;
+                    }
+                }  
+                
+            }
+        }
 		
 	}
     /**
@@ -244,7 +305,12 @@ public class Board extends JFrame{
 	public Trash getTheOneAndOnlyTrash(){
 		return theOneAndOnlyTrash;
 	}
-    
+    public Human getTheOneAndOnlyHuman(){
+        return theOneAndOnlyHuman;
+    }
+    public Bird getTheOneAndOnlyBird(){
+        return theOneAndOnlyBird;
+    }
     public Bonus getBonus(){
         return bonus;
     }

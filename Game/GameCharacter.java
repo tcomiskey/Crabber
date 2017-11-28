@@ -14,9 +14,9 @@ The parent class of all the characters in the game except the player.
 public class GameCharacter {
 	BufferedImage leftImage;
 	BufferedImage rightImage;
-    int frameCount = 4;
-    BufferedImage[] leftImageArray = new BufferedImage[frameCount];
-    BufferedImage[] rightImageArray = new BufferedImage[frameCount];
+    int frameCount;
+    BufferedImage[] leftImageArray;
+    BufferedImage[] rightImageArray;
     static int picNum = 0;
 	int width;
 	int height;

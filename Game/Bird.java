@@ -2,28 +2,28 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Human extends Enemy{
-    private static boolean noHumans = true;
-    static int humanWidth;
-    static int humanHeight;
+public class Bird extends Enemy{
+    private static boolean noBird = true;
+    static int birdWidth;
+    static int birdHeight;
     
-    private Human(int boardWidth, int xLoc, int yLoc, int direction){
+    private Bird(int boardWidth, int xLoc, int yLoc, int direction){
         super(boardWidth, xLoc, yLoc, direction);
-        frameCount = 4;
+        frameCount = 6;
         leftImageArray = new BufferedImage[frameCount];
         rightImageArray = new BufferedImage[frameCount];
         //rightImage = new ImageIcon("images/Trash.png");
         //leftImage = new ImageIcon("images/Trash.png");
-        leftImage = createImage("images/Sonny run west.png");
-        rightImage = createImage("images/Sonny run east.png");
+        leftImage = createImage("images/bird.png");
+        rightImage = createImage("images/reverseBird.png");
         width = leftImage.getWidth() / frameCount;
         height = rightImage.getHeight();
         for(int i = 0; i < frameCount; i++) {
             leftImageArray[i] = leftImage.getSubimage(width*i, 0, width, height);
             rightImageArray[i] = rightImage.getSubimage(width*i, 0, width, height);
         }
-        humanWidth = width;
-        humanHeight = height;
+        birdWidth = width;
+        birdHeight = height;
         //Sets bounds on how far off screen a character can go before it loops around
         int usableWidth = (boardWidth/width) + 3*width; //335
         farLeft = -(usableWidth)/2;
@@ -36,17 +36,17 @@ public class Human extends Enemy{
         xydir[4] = height;
         enemyAtt.add(xydir);
     }
-    public static Human humanFactory(int boardWidth, int xLoc, int yLoc, int direction){
-        if (noHumans){
-            return new Human(boardWidth, xLoc, yLoc, direction);
+    public static Bird birdFactory(int boardWidth, int xLoc, int yLoc, int direction){
+        if (noBird){
+            return new Bird(boardWidth, xLoc, yLoc, direction);
         }
         else{
-            addHuman(xLoc, yLoc, direction, humanWidth, humanHeight);
+            addBird(xLoc, yLoc, direction, birdWidth, birdHeight);
             return null;
         }
         
     }
-    private static void addHuman(int xLocation, int yLocation, int direction, int currentWidth, int currentHeight){
+    private static void addBird(int xLocation, int yLocation, int direction, int currentWidth, int currentHeight){
         int[] xydir = new int[5];
         xydir[0] = xLocation;
         xydir[1] = yLocation;
@@ -56,15 +56,15 @@ public class Human extends Enemy{
         enemyAtt.add(xydir);
         
     }
-    public boolean getNoHumans(){
-        return noHumans;
+    public boolean getNoBird(){
+        return noBird;
     }
     
-    public void setNoHumans(boolean humanBoolean) {
-        noHumans = humanBoolean;
+    public void setNoBird(boolean birdBoolean) {
+        noBird = birdBoolean;
     }
     
-	public String toString(){
-		return "Human located at x = " + xLoc + " y = " + yLoc;
-	}
+    public String toString(){
+        return "Bird located at x = " + xLoc + " y = " + yLoc;
+    }
 }
