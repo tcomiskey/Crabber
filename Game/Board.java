@@ -13,7 +13,7 @@ public class Board extends JFrame{
 	private int numberOfRows; // number of rows in the game board
 	private boolean win; // parameter used for stopping game
 	private boolean isOcean; // false for land, true for ocean to change background and enemy types
-	private static Player player; // the controllable player
+	private static Player player; // the controllable player 
 	private ArrayList<Boolean> safeRows = new ArrayList<Boolean>(); // a list of all of the rows that do not contain enemies used for checkpoints
 	private static Shark theOneAndOnlyShark;
 	private static Trash theOneAndOnlyTrash;
@@ -44,7 +44,8 @@ public class Board extends JFrame{
 		numberOfRows = boardHeight/player.getPlayerHeight()-1;
         startTime = System.currentTimeMillis();
         remainingTime = levelTime;
-        generateBonus();
+        bonus = generateBonus();
+        
         
 		// xcoord and ycoord are variables to hold the values of the enemy coordinates
 		int xcoord = 0;
@@ -174,7 +175,7 @@ public class Board extends JFrame{
                 
             }
         }
-		
+        System.out.println("in board bonus is " + bonus);
 	}
     /**
      Move method that is called to move all of the enemy characters.
@@ -229,9 +230,9 @@ public class Board extends JFrame{
     	return player.getY() == 0;
     }
     
-    public void generateBonus(){
+    public Bonus generateBonus(){
         int r = (int)(Math.random()*6)+2;
-        bonus = Bonus.makeBonus(boardWidth, player.getY()-player.getPlayerHeight()*r);
+        return Bonus.makeBonus(boardWidth, player.getY()-player.getPlayerHeight()*r);
     }
     
     public void removeBonus(){
@@ -280,6 +281,11 @@ public class Board extends JFrame{
 	public void setIsOcean(boolean isOcean){
 		this.isOcean = isOcean;
 	}
+	
+	public void setBonus(Bonus bonus){
+		this.bonus = bonus;
+	}
+	
 	//getters
 	public int getBoardWidth(){
 		return boardWidth;
@@ -317,6 +323,10 @@ public class Board extends JFrame{
 
     public long getRemainingTime(){
     	return remainingTime;
+    }
+    
+    public long getStartTime(){
+    	return startTime;
     }
     
     public String toString(){

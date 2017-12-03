@@ -342,6 +342,14 @@ public class View extends JFrame implements MouseListener{
     public JButton getEasyButton(){
 		return easy;
 	}
+    
+    public JLabel getBonusLabel(){
+    	return bonusLabel;
+    }
+    
+    public JLabel getTimerLabel(){
+    	return timerLabel;
+    }
 
 	public void setupController(){
 		control = new Controller(this);
