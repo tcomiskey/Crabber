@@ -46,12 +46,17 @@ public class View extends JFrame implements MouseListener{
    	private JLabel tutorialShark;
    	private JLabel tutorialBonus;
    	private JLabel tutorialText;
+   	private JLabel startScreenLabel;
     private boolean isTutorial;
     private int tutorialNum;
     private JLabel timerLabel;
     private String[][] textMatrix;
     private JTable leaderboard;
     private int score;
+    private double aspectRatio = 580.0/930; // height/width of start screen image
+    private double scalingFactor;
+    private int screenWidth;
+    private int screenHeight;	//as long as these are the overall width and height of the frame everything should work
     
 
     /**
@@ -62,16 +67,32 @@ public class View extends JFrame implements MouseListener{
 	public View(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //setLocationRelativeTo(null);
-        setSize(new Dimension(800,700));
+	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        if(dim.getHeight()/dim.getWidth() < aspectRatio){
+        	screenHeight = (int)dim.getHeight();
+        	screenWidth = (int)((screenHeight-150)/aspectRatio);
+        }
+        else{
+        	screenWidth = (int)dim.getWidth();
+        	screenHeight = (int)(screenWidth*aspectRatio)+150;
+        }
+        setSize(new Dimension(screenWidth, screenHeight));
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         menu = new JPanel();
         getContentPane().add(menu);
         start = new JButton("Start");
         start.setBackground(Color.GREEN);
         start.setOpaque(true);
         start.setBorderPainted(false);
-        ImageIcon icon = new ImageIcon("images/Start_Screen.png");
-        JLabel background = new JLabel(icon);
-        menu.add(background);
+
+        try {
+            Image image = ImageIO.read(new File("images/Start_Screen.png"));
+            image = image.getScaledInstance((int)((screenHeight-150)/aspectRatio), screenHeight-150, Image.SCALE_SMOOTH);
+            startScreenLabel = new JLabel(new ImageIcon(image));
+            menu.add(startScreenLabel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
         start.setFont(new Font(start.getName(),Font.PLAIN, 72));
         start.addActionListener(
@@ -108,17 +129,12 @@ public class View extends JFrame implements MouseListener{
         //this clears old screen
         getContentPane().removeAll();
         diffScreen = new JPanel();
-        
-        ImageIcon icon = new ImageIcon("images/Start_Screen.png");
-        JLabel background = new JLabel(icon);
-        diffScreen.add(background);
+        diffScreen.add(startScreenLabel);
         
         easy = new JButton("Easy");
-        
         easy.setBackground(Color.GREEN);
         easy.setOpaque(true);
         easy.setBorderPainted(false);
-        
         easy.setFont(new Font(start.getName(),Font.PLAIN, 72));
         easy.addActionListener(
                                new ActionListener(){
@@ -132,11 +148,9 @@ public class View extends JFrame implements MouseListener{
                                );
         
         medium = new JButton("Medium");
-        
         medium.setBackground(Color.YELLOW);
         medium.setOpaque(true);
         medium.setBorderPainted(false);
-        
         medium.setFont(new Font(start.getName(),Font.PLAIN, 72));
         medium.addActionListener(
                                  new ActionListener(){
@@ -150,11 +164,9 @@ public class View extends JFrame implements MouseListener{
                                  );
         
         hard = new JButton("Hard");
-        
         hard.setBackground(Color.RED);
         hard.setOpaque(true);
         hard.setBorderPainted(false);
-        
         hard.setFont(new Font(start.getName(),Font.PLAIN, 72));
         hard.addActionListener(
                                new ActionListener(){
@@ -279,10 +291,16 @@ public class View extends JFrame implements MouseListener{
         	timerLabel.setBounds(new Rectangle(new Point(control.getBoard().getBoardWidth()-(int)(timerLabel.getSize().getWidth())-2, 0), timerLabel.getSize()));
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
        		bonusLabel.setBounds(new Rectangle(new Point(bonusX, bonusY), new Dimension(bonusLabel.getIcon().getIconWidth(), bonusLabel.getIcon().getIconHeight())));
-
-		JLabel background = new JLabel(new ImageIcon("images/Ocean Background.png"));
-        	gameScreen.add(background);
-        	background.setBounds(new Rectangle(new Point(0, 0), new Dimension(800, 700)));
+        	
+        	try {
+            		Image image = ImageIO.read(new File("images/Ocean Background.png"));
+           		image = image.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+           		JLabel background = new JLabel(new ImageIcon(image));
+           		gameScreen.add(background);
+           		background.setBounds(new Rectangle(new Point(0, 0), new Dimension(screenWidth, screenHeight)));
+        	} catch (IOException e) {
+           		e.printStackTrace();
+        	}
         	
 		gameScreen.addMouseListener(this);
 		//gameScreen.setBackground(Color.blue);
@@ -308,9 +326,15 @@ public class View extends JFrame implements MouseListener{
         	timerLabel.setBounds(new Rectangle(new Point(control.getBoard().getBoardWidth()-(int)(timerLabel.getSize().getWidth())-2, 0), timerLabel.getSize()));
 		playerLabel.setBounds(new Rectangle(new Point(playerX, playerY), new Dimension(playerLabel.getIcon().getIconWidth(), playerLabel.getIcon().getIconHeight())));
 
-		JLabel background = new JLabel(new ImageIcon("images/beach.png"));
-        	gameScreen.add(background);
-        	background.setBounds(new Rectangle(new Point(0, 0), new Dimension(800, 700)));
+        	try {
+            		Image image = ImageIO.read(new File("images/beach.png"));
+           		image = image.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+           		JLabel background = new JLabel(new ImageIcon(image));
+           		gameScreen.add(background);
+           		background.setBounds(new Rectangle(new Point(0, 0), new Dimension(screenWidth, screenHeight)));
+        	} catch (IOException e) {
+           		e.printStackTrace();
+        	}
 		//gameScreen.setBackground(new Color(239,211,110));
 		//diffScreen.setOpaque(true);
 		setVisible(true);
@@ -349,6 +373,14 @@ public class View extends JFrame implements MouseListener{
     
     public JLabel getTimerLabel(){
     	return timerLabel;
+    }
+
+    public int getScreenWidth(){
+    	return screenWidth;
+    }
+
+    public int getScreenHeight(){
+    	return screenHeight;
     }
 
 	public void setupController(){

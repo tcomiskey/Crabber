@@ -33,13 +33,13 @@ public class Board extends JFrame{
      @param difficulty sets easy, medium, or hard based on user input in the view
 	*/
 	
-	public Board(int difficulty, boolean isOcean){
+	public Board(int difficulty, boolean isOcean, int boardWidth, int boardHeight){
 		// set the initial values for the board attributes
-		boardWidth = 800;
-		boardHeight = 700;
+		this.boardWidth = boardWidth;
+		this.boardHeight = boardHeight;
 		this.difficulty = difficulty;
-		win = true;
 		this.isOcean = isOcean;	
+		win = true;
 		player = new Player(boardWidth, boardHeight);
 		numberOfRows = boardHeight/player.getPlayerHeight()-1;
         startTime = System.currentTimeMillis();
