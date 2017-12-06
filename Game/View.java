@@ -97,6 +97,7 @@ public class View extends JFrame implements MouseListener{
             		e.printStackTrace();
         	}
         
+
         	start.setFont(new Font(start.getName(),Font.PLAIN, 72));
         	start.addActionListener(
                 	new ActionListener(){
@@ -623,13 +624,24 @@ public class View extends JFrame implements MouseListener{
     public void startWinWindow(){
         score += difficulty*control.getBoard().getRemainingTime()/10;
         JPanel winScreen = new JPanel();
-        winScreen.setBackground(Color.yellow);
-        winScreen.setLayout(new BoxLayout(winScreen, BoxLayout.Y_AXIS));
-        JLabel winText = new JLabel("Congrats!!! You won!");
+        JPanel dummy = new JPanel(new BorderLayout(5,5));
+        dummy.setBorder(BorderFactory.createEmptyBorder(0, getWidth()/4, 0, getWidth()/4));
+        JPanel dummy2 = new JPanel(new FlowLayout());
+        JPanel dummy3 = new JPanel(new BorderLayout(5,5));
+        dummy.setOpaque(false);
+        dummy2.setOpaque(false);
+        dummy3.setOpaque(false);
+        winScreen.setBackground(Color.black);
+        winScreen.setLayout(new BorderLayout(0, 5));
+        dummy3.setBorder(BorderFactory.createEmptyBorder(getHeight()/4, 0, 0, 0));
+        JLabel winText = new JLabel("Congrats!!! You won!",SwingConstants.CENTER);
         winText.setFont(new Font(winText.getName(),Font.PLAIN, 72));
         winText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        winScreen.add(winText);
+        dummy.add(winText, BorderLayout.NORTH);
         playAgain = new JButton("Play again?");
+        playAgain.setBackground(new Color(159,253,255));
+        playAgain.setOpaque(true);
+        playAgain.setBorderPainted(false);
         playAgain.addActionListener(
                                     
                                     new ActionListener(){
@@ -641,8 +653,24 @@ public class View extends JFrame implements MouseListener{
         }
                                     );
         playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
-        winScreen.add(playAgain);
-        winScreen.add(leaderboard);
+        playAgain.setSize(new Dimension(200,200));
+        dummy2.add(playAgain);
+        dummy.add(leaderboard, BorderLayout.CENTER);
+        dummy3.add(dummy, BorderLayout.NORTH);
+        dummy3.add(dummy2, BorderLayout.CENTER);
+        try {
+    		Image image = ImageIO.read(new File("images/Ocean Background.png"));
+   		image = image.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+   		JLabel background = new JLabel(new ImageIcon(image));
+   		background.setLayout(new BorderLayout());
+   		background.add(dummy3);
+   		background.setOpaque(false);
+   		winScreen.add(background);
+   		
+	} catch (IOException e) {
+   		e.printStackTrace();
+	}
+        
         getContentPane().removeAll();
         getContentPane().add(winScreen);
         //diffScreen.setOpaque(true);
@@ -670,7 +698,7 @@ public class View extends JFrame implements MouseListener{
             
             String[] titles = {"Name","Score"};
             leaderboard = new JTable(textMatrix, titles);
-            leaderboard.setSize(new Dimension(360,400));
+            //leaderboard.setSize(new Dimension(360,400));
             try{
                 writeLeaderboard(textMatrix);
             }catch(FileNotFoundException e){
@@ -754,7 +782,7 @@ public class View extends JFrame implements MouseListener{
         }
         System.out.println(Arrays.deepToString(textMatrix));
         leaderboard = new JTable(textMatrix, titles);
-        leaderboard.setSize(new Dimension(360,400));
+        //leaderboard.setSize(new Dimension(360,400));
     }
     
     private void writeLeaderboard(String[][] input) throws FileNotFoundException {
