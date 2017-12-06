@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 /*import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+=======
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import java.awt.Color;
+import java.awt.Dimension;
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,13 +19,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+<<<<<<< HEAD
 
 import org.junit.Test;
+=======
+import javax.swing.JLabel;
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 
 
 import org.junit.After;
 import org.junit.Before;
 public class Tests {
+<<<<<<< HEAD
 	
 	//Maura
 	@Test
@@ -38,11 +51,40 @@ public class Tests {
 //	}
 //	
 //	//not sure if this will work
+=======
+//
+//	//Maura
+	
+	//THEY ALL WORK BUT THEY DON'T ALL WORK TOGETHER
+	
+//	@Test
+//	public void bonusMakeBonusTest() {
+//		Bonus b = Bonus.makeBonus(800, 200);
+//		assertEquals(200, b.getY());
+//		assertTrue(b.getX() < 800);
+//	}
+//	
+//	@Test
+//	public void viewUpdateBonusLocationTest(){
+//		View v = new View();
+//		try{
+//			v.makeBonusLabel(ImageIO.read(new File("images/clam.png")));
+//			v.setBonusX(250);
+//			v.setBonusY(300);
+//			v.updateBonusLocation();
+//			assertEquals(250, v.getBonusLabel().getX());
+//			assertEquals(300, v.getBonusLabel().getY());
+//		}catch(IOException e){}
+//		
+//	}
+//	
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 //	@Test
 //	public void viewMakeBonusLabelTest(){
 //		View v = new View();
 //		try{
 //			v.makeBonusLabel(ImageIO.read(new File("images/clam.png")));
+<<<<<<< HEAD
 //		}catch (IOException e){
 //			e.printStackTrace();
 //		}
@@ -57,13 +99,26 @@ public class Tests {
 //	}
 //	
 	//Have to make timerLabel package private
+=======
+//			JLabel label = new JLabel(new ImageIcon(ImageIO.read(new File("images/clam.png"))));
+//			assertEquals(label.getSize(), v.getBonusLabel().getSize());
+//		}catch (IOException e){}		
+//	}
+//	
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 //	@Test
 //	public void viewMakeTimerLabelTest(){
 //		View v = new View();
 //		v.makeTimerLabel("0:25");
+<<<<<<< HEAD
 //		assertEquals("0:25", v.timerLabel.getText());
 //		assertEquals(Color.WHITE, v.timerLabel.getBackground());
 //		assertEquals(new Dimension(100,50), v.timerLabel.getSize());
+=======
+//		assertEquals("0:25", v.getTimerLabel().getText());
+//		assertEquals(Color.WHITE, v.getTimerLabel().getBackground());
+//		assertEquals(new Dimension(100,50), v.getTimerLabel().getSize());
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 //	}
 //	
 //	@Test
@@ -71,6 +126,7 @@ public class Tests {
 //		View v = new View();
 //		v.makeTimerLabel("0:25");
 //		v.updateTimerLabel("0:20");
+<<<<<<< HEAD
 //		assertEquals("0:20", v.timerLabel.getText());
 //	}
 	
@@ -78,6 +134,16 @@ public class Tests {
 //	public void boardGenerateBonusTest(){
 //		Board b = new Board(1,true);
 //		b.generateBonus();
+=======
+//		assertEquals("0:20", v.getTimerLabel().getText());
+//	}
+//	
+//
+//	@Test
+//	public void boardGenerateBonusTest(){
+//		Board b = new Board(1,true);
+//		System.out.println("***"+b.getBonus());
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 //		assertTrue(b.getBonus().getY() < b.getPlayer().getY());
 //		assertTrue(b.getBonus().getX() < b.getBoardWidth());
 //	}
@@ -85,7 +151,10 @@ public class Tests {
 //	@Test
 //	public void boardRemoveBonusTest(){
 //		Board b = new Board(1,true);
+<<<<<<< HEAD
 //		b.generateBonus();
+=======
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 //		b.removeBonus();
 //		assertEquals(b.getBonus().getWidth()*-1, b.getBonus().getX());
 //		assertEquals(b.getBonus().getHeight()*-1, b.getBonus().getY());
@@ -94,18 +163,26 @@ public class Tests {
 //	@Test
 //	public void boardBonusCollisionCheckTest(){
 //		Board b = new Board(1,true);
+<<<<<<< HEAD
 //		b.generateBonus();
+=======
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 //		assertEquals(false, b.bonusCollisionCheck());
 //		b.getPlayer().setX(b.getBonus().getX());
 //		b.getPlayer().setY(b.getBonus().getY());
 //		assertEquals(true, b.bonusCollisionCheck());
 //	}
+<<<<<<< HEAD
 //	
+=======
+	
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 //	@Test
 //	public void boardTimeLeftTest(){
 //		Board b = new Board(1,true);
 //		assertEquals(true, b.timeLeft());
 //		//Should wait over 30 sec and test when false (but not right now)
+<<<<<<< HEAD
 //	}
 //	
 //	//Have to make startTime package private
@@ -126,6 +203,34 @@ public class Tests {
 		assertTrue(b.getRemainingTime() < 30000);
 		
 	}
+=======
+//		try{
+//			Thread.sleep(31000);			//Pauses for 31 seconds
+//		}catch(InterruptedException e){}
+//		assertEquals(false, b.timeLeft());
+//		
+//	}
+//
+//	@Test
+//	public void boardResetStartTimeTest(){
+//		Board b = new Board(1,true);
+//		long origTime = b.getStartTime();
+//		b.resetStartTime(5000);
+//		assertEquals(origTime+5000, b.getStartTime());
+//	}
+	
+//	@Test
+//	public void boardUpdateRemainingTimeTest(){
+//		Board b = new Board(1,true);
+//		try{
+//			Thread.sleep(5000);			//Pauses for 5 seconds
+//		}catch(InterruptedException e){}
+//		b.updateRemainingTime();
+//		assertTrue(b.getRemainingTime() < 30000);
+//		
+//	}
+	/*	
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 	@Test
 	public void test() {
 		fail("Not yet implemented");
