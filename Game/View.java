@@ -127,7 +127,7 @@ public class View extends JFrame implements MouseListener{
                 		public void mouseReleased(MouseEvent e){}
                 		public void mouseClicked(MouseEvent e){
                 			if(e.getX() < screenWidth/2+90*scalingFactor && e.getX() > screenWidth/2-90*scalingFactor && e.getY() < 537*scalingFactor && e.getY() > 437*scalingFactor){
-                				JLabel preTutorialMsg = new JLabel("Help the horseshoe crab reach the shore so it can lay its eggs!", JLabel.CENTER);
+                				JLabel preTutorialMsg = new JLabel("<html><center>Help the horseshoe crab reach the shore<br>so it can lay its eggs!<html>", JLabel.CENTER);
                 				preTutorialMsg.setFont(new Font(preTutorialMsg.getName(),Font.PLAIN, 40));
        						preTutorialMsg.setAlignmentX(Component.CENTER_ALIGNMENT);
                 				JPanel preTutorial = new JPanel(new BorderLayout());
@@ -616,7 +616,7 @@ public class View extends JFrame implements MouseListener{
             }
             if(tutorialCrab.getY()  == getHeight()/2-100){
                 tutorialCrab.setVisible(false);
-                tutorialText.setText("Oh no! You have been eaten. Click anywhere to continue to the game.");
+                tutorialText.setText("<html><center>Oh no! You have been eaten. <br>Click anywhere to continue to the game.<html>");
                 tutorialNum++;
             }
             repaint();
