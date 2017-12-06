@@ -78,7 +78,8 @@ public class View extends JFrame implements MouseListener{
         		screenWidth = (int)dim.getWidth();
         		screenHeight = (int)(screenWidth*aspectRatio);
        		}
-       
+
+       		scalingFactor = screenWidth/930.0;
         	setExtendedState(JFrame.MAXIMIZED_BOTH);
         	menu = new JPanel();
         	menu.setLayout(new BorderLayout());
@@ -109,6 +110,20 @@ public class View extends JFrame implements MouseListener{
         		}
                 );
                 */
+
+                startScreenLabel.addMouseListener(
+                	new MouseListener(){
+                		public void mouseEntered(MouseEvent arg0){}
+                		public void mouseExited(MouseEvent arg0){}
+                		public void mousePressed(MouseEvent e){}
+                		public void mouseReleased(MouseEvent e){}
+                		public void mouseClicked(MouseEvent e){
+                			if(e.getX() < screenWidth/2+90*scalingFactor && e.getX() > screenWidth/2-90*scalingFactor && e.getY() < 537*scalingFactor && e.getY() > 437*scalingFactor){
+                				runTutorial();
+                			}
+                		}
+                	}
+                );
         	score = 0;
         	readLeaderboard();
         	leaderboard.setEnabled(false);
@@ -147,7 +162,7 @@ public class View extends JFrame implements MouseListener{
         easy.setBackground(Color.GREEN);
         easy.setOpaque(true);
         easy.setBorderPainted(false);
-        easy.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        easy.setFont(new Font(easy.getName(),Font.PLAIN, 72));
         easy.addActionListener(
                                new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -163,7 +178,7 @@ public class View extends JFrame implements MouseListener{
         medium.setBackground(Color.YELLOW);
         medium.setOpaque(true);
         medium.setBorderPainted(false);
-        medium.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        medium.setFont(new Font(medium.getName(),Font.PLAIN, 72));
         medium.addActionListener(
                                  new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -179,7 +194,7 @@ public class View extends JFrame implements MouseListener{
         hard.setBackground(Color.RED);
         hard.setOpaque(true);
         hard.setBorderPainted(false);
-        hard.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        hard.setFont(new Font(hard.getName(),Font.PLAIN, 72));
         hard.addActionListener(
                                new ActionListener(){
             public void actionPerformed(ActionEvent e){
