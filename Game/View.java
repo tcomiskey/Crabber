@@ -67,18 +67,22 @@ public class View extends JFrame implements MouseListener{
 	public View(){
         	setDefaultCloseOperation(EXIT_ON_CLOSE);
         	//setLocationRelativeTo(null);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        	if(dim.getHeight()/dim.getWidth() < aspectRatio){
-                	System.out.println("IF STATEMENT");
-        		screenHeight = (int)dim.getHeight();
+
+		//Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        	if(screenSize.getHeight()/screenSize.getWidth() < aspectRatio){
+                System.out.println("IF STATEMENT");
+        		screenHeight = (int)screenSize.getHeight();
         		screenWidth = (int)(screenHeight/aspectRatio);
         	}
         	else{
-                	System.out.println("ELSE STATEMENT");
-        		screenWidth = (int)dim.getWidth();
+                System.out.println("ELSE STATEMENT");
+        		screenWidth = (int)screenSize.getWidth();
+
         		screenHeight = (int)(screenWidth*aspectRatio);
        		}
-       
+
+       		scalingFactor = screenWidth/930.0;
         	setExtendedState(JFrame.MAXIMIZED_BOTH);
         	menu = new JPanel();
         	menu.setLayout(new BorderLayout());
@@ -109,8 +113,23 @@ public class View extends JFrame implements MouseListener{
             			}
         		}
                 );
-		*/
-                
+
+                */
+
+                startScreenLabel.addMouseListener(
+                	new MouseListener(){
+                		public void mouseEntered(MouseEvent arg0){}
+                		public void mouseExited(MouseEvent arg0){}
+                		public void mousePressed(MouseEvent e){}
+                		public void mouseReleased(MouseEvent e){}
+                		public void mouseClicked(MouseEvent e){
+                			if(e.getX() < screenWidth/2+90*scalingFactor && e.getX() > screenWidth/2-90*scalingFactor && e.getY() < 537*scalingFactor && e.getY() > 437*scalingFactor){
+                				runTutorial();
+                			}
+                		}
+                	}
+                );
+
         	score = 0;
         	readLeaderboard();
         	leaderboard.setEnabled(false);
@@ -140,10 +159,18 @@ public class View extends JFrame implements MouseListener{
         getContentPane().removeAll();
         diffScreen = new JPanel();
         diffScreen.setLayout(new BorderLayout());
-        diffScreen.add(startScreenLabel);
+        try {
+            		Image image = ImageIO.read(new File("images/Diff_Screen.png"));
+            		image = image.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+            		JLabel diffScreenLabel = new JLabel(new ImageIcon(image));
+           		diffScreen.add(diffScreenLabel);
+        	} catch (IOException e) {
+            		e.printStackTrace();
+        	}
         screenWidth = getWidth();
 	screenHeight = getHeight();
 
+/*
         JPanel buttons = new JPanel();
         
         easy = new JButton("Easy");
@@ -193,12 +220,47 @@ public class View extends JFrame implements MouseListener{
             }
         }
                                );
+                               */
+
+         diffScreen.addMouseListener(
+                	new MouseListener(){
+                		public void mouseEntered(MouseEvent arg0){}
+                		public void mouseExited(MouseEvent arg0){}
+                		public void mousePressed(MouseEvent e){}
+                		public void mouseReleased(MouseEvent e){}
+                		public void mouseClicked(MouseEvent e){
+                			if(e.getY() < 564*scalingFactor && e.getY() > 464*scalingFactor){
+                				if(e.getX() < 308*scalingFactor && e.getX() > 118*scalingFactor){
+                					difficulty = 1;
+                					System.out.println(difficulty);
+                					setupController();
+                					startGameWindow();
+                				}
+                				else if(e.getX() < 605*scalingFactor && e.getX() > 325*scalingFactor){
+                					difficulty = 2;
+                					System.out.println(difficulty);
+                					setupController();
+                					startGameWindow();
+                				}
+                				else if(e.getX() < 812*scalingFactor && e.getX() > 622*scalingFactor){
+                					difficulty = 3;
+                					System.out.println(difficulty);
+                					setupController();
+                					startGameWindow();
+                				}
+                			}
+                		}
+                	}
+                );
+                
         diffScreen.setVisible(true);
+        /*
         buttons.add(easy);
         buttons.add(medium);
         buttons.add(hard);
         buttons.setBackground(Color.BLACK);
         diffScreen.add(buttons, BorderLayout.SOUTH);
+        */
         diffScreen.setBackground(Color.BLACK);
         getContentPane().add(diffScreen);
         //diffScreen.setOpaque(true);
