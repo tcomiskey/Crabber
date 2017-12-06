@@ -10,6 +10,7 @@ public class Shark extends Enemy{
     static int sharkWidth;
     static int sharkHeight;
     Scanner fileScanner;
+    int totalWidth;
 	
     /**
      Shark constructor creates the arraylist of questions for all of the enemies, and theOneAndOnlyShark object that holds all the other shark information.
@@ -63,9 +64,10 @@ public class Shark extends Enemy{
         sharkWidth = width;
         sharkHeight = height;
 		//Sets bounds on how far off screen a character can go before it loops around
-		int usableWidth = (boardWidth/width) + 3*width; 
+		int usableWidth = (boardWidth/width) + 3*width;
 		farLeft = -(usableWidth)/2;
 		farRight = boardWidth+(usableWidth)/2;
+        totalWidth = farRight - farLeft;
 		int[] xydir = new int[5];
 		xydir[0] = xLocation;
 		xydir[1] = yLocation;
@@ -113,5 +115,9 @@ public class Shark extends Enemy{
 	public String toString(){
 		return "Shark located at x = " + xLoc + " y = " + yLoc;
 	}
+    
+    public int getTotalWidth() {
+        return totalWidth;
+    }
 	
 }	

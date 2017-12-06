@@ -53,7 +53,7 @@ public class View extends JFrame implements MouseListener{
     private String[][] textMatrix;
     private JTable leaderboard;
     private int score;
-    private double aspectRatio = 580.0/930; // height/width of start screen image
+    private double aspectRatio = 580.0/930; // height/width of start screen image = 0.623
     private double scalingFactor;
     private int screenWidth;
     private int screenHeight;	//as long as these are the overall width and height of the frame everything should work
@@ -67,9 +67,9 @@ public class View extends JFrame implements MouseListener{
 	public View(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         //setLocationRelativeTo(null);
-	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        if(dim.getHeight()/dim.getWidth() < aspectRatio){
-        	screenHeight = (int)dim.getHeight();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        if(dim.getHeight() < dim.getWidth()){
+        	screenHeight = (int)dim.getHeight()-100;
         	screenWidth = (int)((screenHeight-150)/aspectRatio);
         }
         else{
