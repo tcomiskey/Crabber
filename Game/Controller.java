@@ -25,8 +25,9 @@ public class Controller{
     
     public Controller(View v){
         this.v = v;
+        v.getScalingFactor();
         // makes the board
-        b = new Board(v.getDifficulty(), true, v.getScreenWidth(), v.getScreenHeight());
+        b = new Board(v.getDifficulty(), true, v.getScreenWidth(), v.getScreenHeight(), v.getScalingFactor());
         // Lets the view know where the player is and what image to use for the player
         v.setPlayerX(b.getPlayer().getX());
         v.setPlayerY(b.getPlayer().getY());
@@ -81,9 +82,9 @@ public class Controller{
 			if(b.playerAtFinish() && b.getIsOcean()){
 				timer.stop();
 				v.clearStaticEnemies();
-			    	b = new Board(v.getDifficulty(),false, v.getScreenWidth(), v.getScreenHeight());
+			    	b = new Board(v.getDifficulty(),false, v.getScreenWidth(), v.getScreenHeight(), v.getScalingFactor());
 			    	v.setPlayerX(b.getPlayer().getX());
-                    v.setPlayerY(b.getPlayer().getY());
+                    		v.setPlayerY(b.getPlayer().getY());
 			    	v.startLandWindow();
 			    	timer.start();
 			    	

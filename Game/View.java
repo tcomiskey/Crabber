@@ -420,7 +420,7 @@ public class View extends JFrame implements MouseListener{
 		repaint();
 	}
 
-	public void makePlayerLabel(BufferedImage img){
+	public void makePlayerLabel(Image img){
 		playerLabel = new JLabel(new ImageIcon(img));
 	}
 	
@@ -460,6 +460,10 @@ public class View extends JFrame implements MouseListener{
 
     public int getScreenHeight(){
     	return screenHeight;
+    }
+
+    public double getScalingFactor(){
+    	return scalingFactor;
     }
 
 	public void setupController(){

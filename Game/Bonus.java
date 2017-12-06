@@ -12,9 +12,9 @@ public class Bonus extends GameCharacter{
     private static boolean noBonus = true;
     
     // Bonus character constructor
-    private Bonus(int boardWidth, int xLoc, int yLoc, int direction) {
+    private Bonus(int boardWidth, int xLoc, int yLoc, int direction, double scalingFactor) {
         // need to find an image and use it here
-        super(boardWidth, xLoc, yLoc, direction);
+        super(boardWidth, xLoc, yLoc, direction, scalingFactor);
         try {
             leftImage = ImageIO.read(new File("images/clam.png"));
             rightImage = ImageIO.read(new File("images/clam.png"));
@@ -33,7 +33,7 @@ public class Bonus extends GameCharacter{
         System.out.println("Bonus made at "+x+" "+y);
         if(noBonus == true){
             noBonus = false;
-            return new Bonus(boardWidth, x, y, 0);
+            return new Bonus(boardWidth, x, y, 0, scalingFactor);
         }
         return null;
     }

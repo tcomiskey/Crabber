@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.lang.Math;
 import java.util.concurrent.*;
 import java.io.*;
+import javax.imageio.ImageIO;
 
 public class Board extends JFrame{
 	private int boardWidth;
@@ -23,6 +24,7 @@ public class Board extends JFrame{
     private long startTime;
     private long remainingTime;	//time left in the level in milliseconds
     private long levelTime = 30000; //time to complete the level in milliseconds
+    private double scalingFactor;
     
 	/** Board Constructor sets up the model by creating the player and
 	filling an ArrayList of enemies that will represent every obstacle in 
@@ -33,18 +35,20 @@ public class Board extends JFrame{
      @param difficulty sets easy, medium, or hard based on user input in the view
 	*/
 	
-	public Board(int difficulty, boolean isOcean, int boardWidth, int boardHeight){
+	public Board(int difficulty, boolean isOcean, int boardWidth, int boardHeight, double scalingFactor){
 		// set the initial values for the board attributes
 		this.boardWidth = boardWidth;
 		this.boardHeight = boardHeight;
 		this.difficulty = difficulty;
 		this.isOcean = isOcean;	
+		this.scalingFactor = scalingFactor;
 		win = true;
-		player = new Player(boardWidth, boardHeight);
+		player = new Player(this.boardWidth, this.boardHeight, this.scalingFactor);
 		numberOfRows = boardHeight/player.getPlayerHeight()-1;
-        startTime = System.currentTimeMillis();
-        remainingTime = levelTime;
-        bonus = generateBonus();
+		System.out.println(numberOfRows);
+        	startTime = System.currentTimeMillis();
+        	remainingTime = levelTime;
+        	bonus = generateBonus();
         
         
 		// xcoord and ycoord are variables to hold the values of the enemy coordinates
@@ -64,13 +68,16 @@ public class Board extends JFrame{
         
         
         if (isOcean == true) {
+        Shark.setNoSharks(true);
 		// first enemy will use complex constuctor to instantiate static array of questions
         // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
-            theOneAndOnlyShark = Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
+		System.out.println(Shark.getNoSharks());
+            theOneAndOnlyShark = Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
+            System.out.println(Shark.getNoSharks());
             System.out.println("Usable Width " +  theOneAndOnlyShark.getTotalWidth());
             System.out.println(theOneAndOnlyShark.getTotalWidth()/numPerRowConstant);
         // the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
-		theOneAndOnlyTrash = Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection);
+		theOneAndOnlyTrash = Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
 		// counter for how many enemies have been placed in the current row
 		int enemiesInRow = 1;
 		// xcoord will be incremented based on the game difficulty*width of the player
@@ -80,12 +87,12 @@ public class Board extends JFrame{
 		// looping until total number of enemies needed for game difficulty are instantiated
 		for(int i = 1; row < numberOfRows/*multiplier to get number of enemies required for the difficulty*/; i++){
 		    if (row%2 == 1){ // odd rows will be sharks
-		        Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection);
+		        Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
 		        //xcoord += theOneAndOnlyShark.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
                 xcoord = xcoord + theOneAndOnlyShark.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyShark.getImgWidth())/numPerRowConstant;
 		    }
 		    else{ // even rows will be trash
-		       	Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection);
+		       	Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
 		        //xcoord += theOneAndOnlyTrash.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
                 xcoord = xcoord + theOneAndOnlyTrash.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyTrash.getImgWidth())/numPerRowConstant;
 		    }
@@ -127,9 +134,9 @@ public class Board extends JFrame{
             System.out.println("LAND HO");
             // first enemy will use complex constuctor to instantiate static array of questions
             // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
-            theOneAndOnlyHuman = Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection);
+            theOneAndOnlyHuman = Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
             // the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
-            theOneAndOnlyBird = Bird.birdFactory(boardWidth, xcoord, ycoord, currentDirection);
+            theOneAndOnlyBird = Bird.birdFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
             // counter for how many enemies have been placed in the current row
             int enemiesInRow = 1;
             // xcoord will be incremented based on the game difficulty*width of the player
@@ -139,12 +146,12 @@ public class Board extends JFrame{
             // looping until total number of enemies needed for game difficulty are instantiated
             for(int i = 1; row < numberOfRows/*multiplier to get number of enemies required for the difficulty*/; i++){
                 if (row%2 == 1){ // odd rows will be sharks
-                    Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection);
+                    Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
                     //xcoord += theOneAndOnlyHuman.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
                     xcoord = xcoord + theOneAndOnlyHuman.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyHuman.getImgWidth())/numPerRowConstant;
                 }
                 else{ // even rows will be trash
-                    Bird.birdFactory(boardWidth, xcoord, ycoord, currentDirection);
+                    Bird.birdFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
                     //xcoord += theOneAndOnlyBird.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
                     xcoord = xcoord + theOneAndOnlyBird.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyBird.getImgWidth())/numPerRowConstant;
                 }

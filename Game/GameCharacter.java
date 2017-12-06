@@ -26,6 +26,7 @@ public class GameCharacter {
 	int farLeft;
 	int farRight;
 	static ArrayList<int[]> enemyAtt = new ArrayList<int[]>(); 
+	static double scalingFactor;
 
 	/**
 	Constructs a GameCharacter with a given location and direction
@@ -35,10 +36,11 @@ public class GameCharacter {
 	@param yLoc the y-coordinate of the character
 	@param direction the direction that the character will travel. Value of 1 or -1
 	*/
-	public GameCharacter(int boardWidth, int xLoc, int yLoc, int direction){
+	public GameCharacter(int boardWidth, int xLoc, int yLoc, int direction, double scalingFactor){
         	this.xLoc=xLoc;
         	this.yLoc=yLoc;
         	dir = direction;
+        	this.scalingFactor = scalingFactor;
 	}//constructor
 
 
@@ -174,7 +176,7 @@ public class GameCharacter {
 		return "x: "+xLoc+" y: "+yLoc+" dir: "+dir;
 	}//toString
 	
-    public BufferedImage createImage(String filename){ // takes in a direction!!
+    public BufferedImage createCharacterImage(String filename){ // takes in a direction!!
         BufferedImage bufferedImage;
         try {
             bufferedImage = ImageIO.read(new File(filename));

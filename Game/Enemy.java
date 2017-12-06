@@ -24,8 +24,8 @@ public class Enemy extends GameCharacter{
 	* @param yLoc is the y location of the top left of the enemy image
 	* @param direction is which direction this enemy will move in
 	*/
-	Enemy(int boardWidth, int xLoc, int yLoc, int direction){
-		super(boardWidth, xLoc, yLoc, direction);
+	Enemy(int boardWidth, int xLoc, int yLoc, int direction, double scalingFactor){
+		super(boardWidth, xLoc, yLoc, direction, scalingFactor);
 		
 	}
 

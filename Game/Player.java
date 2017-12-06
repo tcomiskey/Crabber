@@ -13,34 +13,39 @@ public class Player {
 	private int xLocation;	//Locations are top left corner
 	private int yLocation;
 	// actual image dimensions
-	static final int PLAYER_WIDTH = 50;
-	static final int PLAYER_HEIGHT = 50;
+	private int playerWidth = 50;
+	private int playerHeight = 50;
 	static final int BOARD_LEFT_BOUNDARY = 0;
 	static int BOARD_RIGHT_BOUNDARY;
 	static int BOARD_HEIGHT;
-	private BufferedImage image;
+	private Image image;
 
-	public Player(int boardWidth, int boardHeight){
+	public Player(int boardWidth, int boardHeight, double scalingFactor){
         	BOARD_RIGHT_BOUNDARY = boardWidth;
         	BOARD_HEIGHT = boardHeight;
-		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
+        	playerWidth = (int)(50*scalingFactor);
+		playerHeight = (int)(50*scalingFactor);
+        	try {
+            		image = ImageIO.read(new File("images/brown rectangle.png"));
+			image = image.getScaledInstance(playerWidth, playerHeight, Image.SCALE_SMOOTH);
+        	} catch (IOException e) {
+            		e.printStackTrace();
+        	}
+        	
+		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - playerWidth/2;
 		
-		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
+		yLocation = BOARD_HEIGHT - playerHeight;
+		System.out.println("Player: " + playerHeight);
 		System.out.println(yLocation);
 		
-        try {
-            image = ImageIO.read(new File("images/brown rectangle.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 	}
 
 	//Chooses a direction to move
 	public void move(MouseEvent e){
-		if(e.getY() < yLocation-PLAYER_HEIGHT/2){
+		if(e.getY() < yLocation-playerHeight/2){
 			moveForward();
 		}
-		else if(e.getX() > xLocation + PLAYER_WIDTH){
+		else if(e.getX() > xLocation + playerWidth){
 			moveRight();
 		}
 		else if(e.getX() < xLocation){
@@ -49,23 +54,23 @@ public class Player {
 	}
 	
 	private void moveLeft(){
-		if(xLocation >= BOARD_LEFT_BOUNDARY + PLAYER_WIDTH){	//makes sure player is on screen and has room to move
-			xLocation -= PLAYER_WIDTH; // Increment by a quarter of player width
+		if(xLocation >= BOARD_LEFT_BOUNDARY + playerWidth){	//makes sure player is on screen and has room to move
+			xLocation -= playerWidth; 
 			System.out.println("Player moved left");	
 			System.out.println(this);	
 		}
 	}
 	
 	private void moveRight(){
-		if(xLocation <= BOARD_RIGHT_BOUNDARY - PLAYER_WIDTH){
-			xLocation += PLAYER_WIDTH;
+		if(xLocation <= BOARD_RIGHT_BOUNDARY - playerWidth){
+			xLocation += playerWidth;
 			System.out.println("Player moved right");	
 			System.out.println(this);
 		}
 	}
 
 	private void moveForward(){
-		yLocation -= PLAYER_HEIGHT;
+		yLocation -= playerHeight;
 		System.out.println("Player moved forward");
 		System.out.println(this);	
 	}
@@ -75,8 +80,8 @@ public class Player {
 	}	
 
 	public void sendPlayerToStart(){
-		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - PLAYER_WIDTH/2;
-		yLocation = BOARD_HEIGHT - PLAYER_HEIGHT;
+		xLocation = (BOARD_RIGHT_BOUNDARY-BOARD_LEFT_BOUNDARY)/2 - playerWidth/2;
+		yLocation = BOARD_HEIGHT - playerHeight;
 	}
 	
 	public int getX(){
@@ -91,13 +96,19 @@ public class Player {
 	public void setY(int yCoord){
 		yLocation = yCoord;
 	} 	
+	public void setSize(double scalingFactor){
+		playerWidth = (int)(50*scalingFactor);
+		playerHeight = (int)(50*scalingFactor);
+		image = image.getScaledInstance(playerWidth, playerHeight, Image.SCALE_SMOOTH);
+		System.out.println("Player: " + playerHeight);
+	}
 	public int getPlayerHeight(){
-		return PLAYER_HEIGHT;
+		return playerHeight;
 	}
 	public int getPlayerWidth(){
-		return PLAYER_WIDTH;
+		return playerWidth;
 	}
-	public BufferedImage getImage(){
+	public Image getImage(){
 		return image;
 	}
 }

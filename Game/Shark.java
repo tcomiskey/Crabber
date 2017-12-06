@@ -3,6 +3,7 @@ import java.util.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 public class Shark extends Enemy{
 	//boolean to keep track if a shark object has been made
@@ -21,8 +22,8 @@ public class Shark extends Enemy{
      @param yLocation the y coordinate for upper left pixel of the image
      @param direction the direction the object will move on the screen, decides image direction
      */
-	private Shark(int boardWidth, int xLocation, int yLocation, int direction){
-		super(boardWidth, xLocation, yLocation, direction);
+	private Shark(int boardWidth, int xLocation, int yLocation, int direction, double scalingFactor){
+		super(boardWidth, xLocation, yLocation, direction, scalingFactor);
         // makes an arraylist to hold question objects
         questions = new ArrayList<Question>();
         // saves the file that hols the quesitons
@@ -51,14 +52,25 @@ public class Shark extends Enemy{
         frameCount = 4;
         leftImageArray = new BufferedImage[frameCount];
         rightImageArray = new BufferedImage[frameCount];
-        leftImage = createImage("images/reverseShark.png");
-        rightImage = createImage("images/shark.png");
-        width = leftImage.getWidth() / frameCount;
-        height = rightImage.getHeight();
-        for(int i = 0; i < frameCount; i++) {
-            leftImageArray[i] = leftImage.getSubimage(width*i, 0, width, height);
-            rightImageArray[i] = rightImage.getSubimage(width*i, 0, width, height);
-        }
+        leftImage = createCharacterImage("images/reverseShark.png");
+        rightImage = createCharacterImage("images/shark.png");
+	Image tmp1 = leftImage.getScaledInstance((int)(leftImage.getWidth()*scalingFactor), (int)(leftImage.getHeight()*scalingFactor), Image.SCALE_SMOOTH);
+	int TYPE_INT_RGB=1;
+	leftImage = new BufferedImage((int)(leftImage.getWidth()*scalingFactor), (int)(leftImage.getHeight()*scalingFactor), TYPE_INT_RGB);
+	leftImage.getGraphics().drawImage(tmp1,0,0,null);
+
+	tmp1 = rightImage.getScaledInstance((int)(rightImage.getWidth()*scalingFactor), (int)(rightImage.getHeight()*scalingFactor), Image.SCALE_SMOOTH);
+	rightImage = new BufferedImage((int)(rightImage.getWidth()*scalingFactor), (int)(rightImage.getHeight()*scalingFactor), TYPE_INT_RGB);
+	rightImage.getGraphics().drawImage(tmp1,0,0,null);
+	
+		width = (int)(leftImage.getWidth() / frameCount);
+        	height = (int)(rightImage.getHeight());
+        	for(int i = 0; i < frameCount; i++) {
+            		leftImageArray[i] = (BufferedImage)(leftImage).getSubimage(width*i, 0, width, height);
+            		rightImageArray[i] = (BufferedImage)(rightImage).getSubimage(width*i, 0, width, height);
+        	}
+        
+        
         //leftImage = new ImageIcon("images/shark.png");
         //rightImage = new ImageIcon("images/reverseShark.png");
         sharkWidth = width;
@@ -82,10 +94,10 @@ public class Shark extends Enemy{
     /**
      Static factory method 
      */
-	public static Shark sharkFactory(int boardWidth, int xLocation, int yLocation, int direction){
+	public static Shark sharkFactory(int boardWidth, int xLocation, int yLocation, int direction, double scalingFactor){
 		if (noSharks){
             noSharks = false;
-			return new Shark(boardWidth, xLocation, yLocation, direction);
+			return new Shark(boardWidth, xLocation, yLocation, direction, scalingFactor);
 		}
 		else{
 			addShark(xLocation, yLocation, direction, sharkWidth, sharkHeight);
@@ -104,11 +116,11 @@ public class Shark extends Enemy{
 		
 	}
 	
-	public boolean getNoSharks(){
+	public static boolean getNoSharks(){
 		return noSharks;
 	}
     
-    public void setNoSharks(boolean sharkBoolean) {
+    public static void setNoSharks(boolean sharkBoolean) {
         noSharks = sharkBoolean;
     }
 
