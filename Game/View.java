@@ -135,7 +135,7 @@ public class View extends JFrame implements MouseListener{
 	* button. Once a difficulty is selected, a new controller is 
 	* created and the startGameWindow() method is called.
 	*/
-    private void createDiffScreen(){
+    	public void createDiffScreen(){
         //this clears old screen
         getContentPane().removeAll();
         diffScreen = new JPanel();
@@ -150,7 +150,7 @@ public class View extends JFrame implements MouseListener{
         easy.setBackground(Color.GREEN);
         easy.setOpaque(true);
         easy.setBorderPainted(false);
-        easy.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        easy.setFont(new Font(easy.getName(),Font.PLAIN, 72));
         easy.addActionListener(
                                new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -166,7 +166,7 @@ public class View extends JFrame implements MouseListener{
         medium.setBackground(Color.YELLOW);
         medium.setOpaque(true);
         medium.setBorderPainted(false);
-        medium.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        medium.setFont(new Font(medium.getName(),Font.PLAIN, 72));
         medium.addActionListener(
                                  new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -182,7 +182,7 @@ public class View extends JFrame implements MouseListener{
         hard.setBackground(Color.RED);
         hard.setOpaque(true);
         hard.setBorderPainted(false);
-        hard.setFont(new Font(start.getName(),Font.PLAIN, 72));
+        hard.setFont(new Font(hard.getName(),Font.PLAIN, 72));
         hard.addActionListener(
                                new ActionListener(){
             public void actionPerformed(ActionEvent e){
@@ -757,7 +757,7 @@ public class View extends JFrame implements MouseListener{
         }
     }
     
-    private void runTutorial(){
+    public void runTutorial(){
         isTutorial = true;
         tutorialNum = 0;
         tutorialScreen = new JPanel();
