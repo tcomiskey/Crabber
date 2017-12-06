@@ -95,20 +95,7 @@ public class View extends JFrame implements MouseListener{
             		e.printStackTrace();
         	}
         
-<<<<<<< HEAD
-        start.setFont(new Font(start.getName(),Font.PLAIN, 72));
-        start.addActionListener(
-                                new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                //runTutorial();
-                runTutorial();
-            }
-        }
-                                );
-        score = 0;
-        readLeaderboard();
-        leaderboard.setEnabled(false);
-=======
+
         	start.setFont(new Font(start.getName(),Font.PLAIN, 72));
         	start.addActionListener(
                 	new ActionListener(){
@@ -120,7 +107,6 @@ public class View extends JFrame implements MouseListener{
         	score = 0;
         	readLeaderboard();
         	leaderboard.setEnabled(false);
->>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 		start.setVisible(true);
 		menu.add(start, BorderLayout.SOUTH);
 		menu.setBackground(Color.black);
