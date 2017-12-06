@@ -321,6 +321,7 @@ public class View extends JFrame implements MouseListener{
 		    if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
 		      		if(currentEnemy[2] == -1){
 		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getLeftImageArray()[tempPicNum]));
+		                
 		            }
 		            else{
 		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getRightImageArray()[tempPicNum]));
