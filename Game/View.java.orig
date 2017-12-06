@@ -25,12 +25,12 @@ public class View extends JFrame implements MouseListener{
 	private int difficulty;
 	private JPanel menu;
 	private JPanel diffScreen;
-    private JPanel gameScreen;
-    private JPanel tutorialScreen;
+    	private JPanel gameScreen;
+    	private JPanel tutorialScreen;
 	private JPanel gameOverScreen;
 	private JLabel playerLabel;
 	private ArrayList<JLabel> enemyLabels;
-    private JLabel bonusLabel;
+    	private JLabel bonusLabel;
 	private JButton start;
 	private JButton easy;
 	private JButton medium;
@@ -38,15 +38,16 @@ public class View extends JFrame implements MouseListener{
 	private JButton playAgain;
 	private Controller control;
 	private int playerX;
-    private int playerY;
-    private int bonusX;
-    private int bonusY;
-    private ArrayList<int[]> enemyAtt;
-    private JLabel tutorialCrab;
+    	private int playerY;
+    	private int bonusX;
+    	private int bonusY;
+   	private ArrayList<int[]> enemyAtt;
+    	private JLabel tutorialCrab;
    	private JLabel tutorialShark;
    	private JLabel tutorialBonus;
    	private JLabel tutorialText;
    	private JLabel startScreenLabel;
+<<<<<<< HEAD
     private boolean isTutorial;
     private int tutorialNum;
     private JLabel timerLabel;
@@ -57,6 +58,18 @@ public class View extends JFrame implements MouseListener{
     private double scalingFactor;
     private int screenWidth;
     private int screenHeight;	//as long as these are the overall width and height of the frame everything should work
+=======
+    	private boolean isTutorial;
+    	private int tutorialNum;
+    	private JLabel timerLabel;
+    	private String[][] textMatrix;
+    	private JTable leaderboard;
+    	private int score;
+    	private double aspectRatio = 580.0/930; // height/width of start screen image
+    	private double scalingFactor;
+    	private int screenWidth;
+    	private int screenHeight;	//as long as these are the overall width and height of the frame everything should work
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
     
 
     /**
@@ -65,18 +78,37 @@ public class View extends JFrame implements MouseListener{
 	* create all other necessary JPanels.
 	*/
 	public View(){
+<<<<<<< HEAD
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setLocationRelativeTo(null);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        if(dim.getHeight() < dim.getWidth()){
+        	screenHeight = (int)dim.getHeight()-100;
+        	screenWidth = (int)((screenHeight-150)/aspectRatio);
+        }
+        else{
+        	screenWidth = (int)dim.getWidth();
+        	screenHeight = (int)(screenWidth*aspectRatio)+150;
+        }
+        setSize(new Dimension(screenWidth, screenHeight));
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        menu = new JPanel();
+        getContentPane().add(menu);
+        start = new JButton("Start");
+        start.setBackground(Color.GREEN);
+        start.setOpaque(true);
+        start.setBorderPainted(false);
+=======
         	setDefaultCloseOperation(EXIT_ON_CLOSE);
         	//setLocationRelativeTo(null);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         	if(dim.getHeight()/dim.getWidth() < aspectRatio){
-                System.out.println("IF STATEMENT");
         		screenHeight = (int)dim.getHeight();
         		screenWidth = (int)((screenHeight-150)/aspectRatio);
         	}
         	else{
-                System.out.println("ELSE STATEMENT");
         		screenWidth = (int)dim.getWidth();
-        		screenHeight = (int)(screenWidth*aspectRatio)+100;
+        		screenHeight = (int)(screenWidth*aspectRatio)+150;
        		}
        
         	setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -87,6 +119,7 @@ public class View extends JFrame implements MouseListener{
         	start.setBackground(Color.GREEN);
         	start.setOpaque(true);
         	start.setBorderPainted(false);
+>>>>>>> 1c6d4a785854717dbb2d0d742ffe1dfc40c636ef
 
         	try {
             		Image image = ImageIO.read(new File("images/Start_Screen.png"));
