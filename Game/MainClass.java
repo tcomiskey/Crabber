@@ -7,7 +7,7 @@ public class MainClass{
 	public static void main(String[] args){
         	v = new View();
 		v.setVisible(true);
-		v.runTutorial();
+
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				createAndShowGUI();
