@@ -319,20 +319,21 @@ public class View extends JFrame implements MouseListener{
 		while (enemyIterator.hasNext()) {
 		    int [] currentEnemy = enemyIterator.next();
 		    if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
-		      		if(currentEnemy[2] == -1){
-		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getLeftImageArray()[tempPicNum]));
-		                
+		      	    if(currentEnemy[2] == -1){
+
+		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getLeftImageArray()[tempPicNum]));
+
 		            }
 		            else{
-		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getRightImageArray()[tempPicNum]));
+		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getRightImageArray()[tempPicNum]));
 		            }
 		    }
 		    else{
 		      		if(currentEnemy[2] == -1){
-		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getLeftImageArray()[tempPicNum]));
+		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getLeftImageArray()[tempPicNum]));
 		            }
 		            else{
-		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getRightImageArray()[tempPicNum]));
+		                enemyLabels.get(counter).setIcon(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getRightImageArray()[tempPicNum]));
 		            }
 		    }
 		    counter++;
@@ -340,7 +341,7 @@ public class View extends JFrame implements MouseListener{
         	
 		for(int i = 0; i < enemyAtt.size(); i++){
 			enemyLabels.get(i).setLocation(enemyAtt.get(i)[0], enemyAtt.get(i)[1]);
-		}
+		}	
 		repaint();
 		
 	}

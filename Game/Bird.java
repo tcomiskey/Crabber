@@ -18,12 +18,12 @@ public class Bird extends Enemy{
         leftImage = createCharacterImage("images/bird.png");
         rightImage = createCharacterImage("images/reverseBird.png");
         Image tmp1 = leftImage.getScaledInstance((int)(leftImage.getWidth()*scalingFactor), (int)(leftImage.getHeight()*scalingFactor), Image.SCALE_SMOOTH);
-	int TYPE_INT_RGB=1;
-	leftImage = new BufferedImage((int)(leftImage.getWidth()*scalingFactor), (int)(leftImage.getHeight()*scalingFactor), TYPE_INT_RGB);
+	int TYPE_INT_ARGB=2;
+	leftImage = new BufferedImage((int)(leftImage.getWidth()*scalingFactor), (int)(leftImage.getHeight()*scalingFactor), TYPE_INT_ARGB);
 	leftImage.getGraphics().drawImage(tmp1,0,0,null);
 
 	tmp1 = rightImage.getScaledInstance((int)(rightImage.getWidth()*scalingFactor), (int)(rightImage.getHeight()*scalingFactor), Image.SCALE_SMOOTH);
-	rightImage = new BufferedImage((int)(rightImage.getWidth()*scalingFactor), (int)(rightImage.getHeight()*scalingFactor), TYPE_INT_RGB);
+	rightImage = new BufferedImage((int)(rightImage.getWidth()*scalingFactor), (int)(rightImage.getHeight()*scalingFactor), TYPE_INT_ARGB);
 	rightImage.getGraphics().drawImage(tmp1,0,0,null);
 
 	width = leftImage.getWidth() / frameCount;
