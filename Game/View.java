@@ -102,7 +102,7 @@ public class View extends JFrame implements MouseListener{
         	start.addActionListener(
                 	new ActionListener(){
            			public void actionPerformed(ActionEvent e){
-                			runTutorial();
+                			startWinWindow();
             			}
         		}
                 );
@@ -622,7 +622,7 @@ public class View extends JFrame implements MouseListener{
     }
     
     public void startWinWindow(){
-        score += difficulty*control.getBoard().getRemainingTime()/10;
+        //score += difficulty*control.getBoard().getRemainingTime()/10;
         JPanel winScreen = new JPanel();
         JPanel dummy = new JPanel(new BorderLayout(5,5));
         dummy.setBorder(BorderFactory.createEmptyBorder(0, getWidth()/4, 0, getWidth()/4));
@@ -635,7 +635,7 @@ public class View extends JFrame implements MouseListener{
         winScreen.setLayout(new BorderLayout(0, 5));
         dummy3.setBorder(BorderFactory.createEmptyBorder(getHeight()/4, 0, 0, 0));
         JLabel winText = new JLabel("Congrats!!! You won!",SwingConstants.CENTER);
-        winText.setFont(new Font(winText.getName(),Font.PLAIN, 72));
+        winText.setFont(new Font(winText.getName(),Font.PLAIN, 48));
         winText.setAlignmentX(Component.CENTER_ALIGNMENT);
         dummy.add(winText, BorderLayout.NORTH);
         playAgain = new JButton("Play again?");
@@ -653,7 +653,6 @@ public class View extends JFrame implements MouseListener{
         }
                                     );
         playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
-        playAgain.setSize(new Dimension(200,200));
         dummy2.add(playAgain);
         dummy.add(leaderboard, BorderLayout.CENTER);
         dummy3.add(dummy, BorderLayout.NORTH);
