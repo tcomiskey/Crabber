@@ -71,33 +71,35 @@ public class View extends JFrame implements MouseListener{
         	if(dim.getHeight()/dim.getWidth() < aspectRatio){
                 System.out.println("IF STATEMENT");
         		screenHeight = (int)dim.getHeight();
-        		screenWidth = (int)((screenHeight-150)/aspectRatio);
+        		screenWidth = (int)(screenHeight/aspectRatio);
         	}
         	else{
                 System.out.println("ELSE STATEMENT");
         		screenWidth = (int)dim.getWidth();
-        		screenHeight = (int)(screenWidth*aspectRatio)+100;
+        		screenHeight = (int)(screenWidth*aspectRatio);
        		}
        
         	setExtendedState(JFrame.MAXIMIZED_BOTH);
         	menu = new JPanel();
         	menu.setLayout(new BorderLayout());
         	getContentPane().add(menu);
+        	/*
         	start = new JButton("Start");
         	start.setBackground(Color.GREEN);
         	start.setOpaque(true);
         	start.setBorderPainted(false);
+        	*/
 
         	try {
             		Image image = ImageIO.read(new File("images/Start_Screen.png"));
-            		image = image.getScaledInstance((int)((screenHeight-150)/aspectRatio), screenHeight-150, Image.SCALE_SMOOTH);
+            		image = image.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
             		startScreenLabel = new JLabel(new ImageIcon(image));
            		 menu.add(startScreenLabel);
         	} catch (IOException e) {
             		e.printStackTrace();
         	}
         
-
+/*
         	start.setFont(new Font(start.getName(),Font.PLAIN, 72));
         	start.addActionListener(
                 	new ActionListener(){
@@ -106,11 +108,12 @@ public class View extends JFrame implements MouseListener{
             			}
         		}
                 );
+                */
         	score = 0;
         	readLeaderboard();
         	leaderboard.setEnabled(false);
-		start.setVisible(true);
-		menu.add(start, BorderLayout.SOUTH);
+		//start.setVisible(true);
+		//menu.add(start, BorderLayout.SOUTH);
 		menu.setBackground(Color.black);
 		
 	}
