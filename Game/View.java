@@ -69,12 +69,12 @@ public class View extends JFrame implements MouseListener{
         	//setLocationRelativeTo(null);
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         	if(dim.getHeight()/dim.getWidth() < aspectRatio){
-                System.out.println("IF STATEMENT");
+                	System.out.println("IF STATEMENT");
         		screenHeight = (int)dim.getHeight();
         		screenWidth = (int)(screenHeight/aspectRatio);
         	}
         	else{
-                System.out.println("ELSE STATEMENT");
+                	System.out.println("ELSE STATEMENT");
         		screenWidth = (int)dim.getWidth();
         		screenHeight = (int)(screenWidth*aspectRatio);
        		}
@@ -83,6 +83,7 @@ public class View extends JFrame implements MouseListener{
         	menu = new JPanel();
         	menu.setLayout(new BorderLayout());
         	getContentPane().add(menu);
+
         	/*
         	start = new JButton("Start");
         	start.setBackground(Color.GREEN);
@@ -99,22 +100,24 @@ public class View extends JFrame implements MouseListener{
             		e.printStackTrace();
         	}
         
-/*
+		/*
         	start.setFont(new Font(start.getName(),Font.PLAIN, 72));
         	start.addActionListener(
                 	new ActionListener(){
            			public void actionPerformed(ActionEvent e){
-                			startWinWindow();
+                			startGameOverWindow();;
             			}
         		}
                 );
-                */
+		*/
+                
         	score = 0;
         	readLeaderboard();
         	leaderboard.setEnabled(false);
 		//start.setVisible(true);
 		//menu.add(start, BorderLayout.SOUTH);
 		menu.setBackground(Color.black);
+		
 		
 	}
 
@@ -597,15 +600,27 @@ public class View extends JFrame implements MouseListener{
     }
     
     public void startGameOverWindow(){
-        gameOverScreen = new JPanel();
-        gameOverScreen.setBackground(Color.red);
-        gameOverScreen.setLayout(new BoxLayout(gameOverScreen, BoxLayout.Y_AXIS));
-        JLabel gameOverText = new JLabel("Oh no! You lost.");
-        gameOverText.setFont(new Font(gameOverText.getName(),Font.PLAIN, 72));
-        gameOverText.setAlignmentX(Component.CENTER_ALIGNMENT);
-        gameOverScreen.add(gameOverText);
+        JPanel loseScreen = new JPanel();
+        JPanel dummy = new JPanel(new BorderLayout(5,5));
+        dummy.setBorder(BorderFactory.createEmptyBorder(0, getWidth()/4, 0, getWidth()/4));
+        JPanel dummy2 = new JPanel(new FlowLayout());
+        JPanel dummy3 = new JPanel(new BorderLayout(5,5));
+        dummy.setOpaque(false);
+        dummy2.setOpaque(false);
+        dummy3.setOpaque(false);
+        loseScreen.setBackground(Color.black);
+        loseScreen.setLayout(new BorderLayout(0, 5));
+        dummy3.setBorder(BorderFactory.createEmptyBorder(getHeight()/4, 0, 0, 0));
+        JLabel loseText = new JLabel("Oh no! You lost",SwingConstants.CENTER);
+        loseText.setFont(new Font(loseText.getName(),Font.PLAIN, 48));
+        loseText.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dummy.add(loseText, BorderLayout.NORTH);
         playAgain = new JButton("Play again?");
+        playAgain.setBackground(new Color(159,253,255));
+        playAgain.setOpaque(true);
+        playAgain.setBorderPainted(false);
         playAgain.addActionListener(
+                                    
                                     new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 clearStaticEnemies();
@@ -615,17 +630,32 @@ public class View extends JFrame implements MouseListener{
         }
                                     );
         playAgain.setAlignmentX(Component.CENTER_ALIGNMENT);
-        gameOverScreen.add(playAgain);
-        gameOverScreen.add(leaderboard);
+        dummy2.add(playAgain);
+        dummy.add(leaderboard, BorderLayout.CENTER);
+        dummy3.add(dummy, BorderLayout.NORTH);
+        dummy3.add(dummy2, BorderLayout.CENTER);
+        try {
+    		Image image = ImageIO.read(new File("images/Ocean Background.png"));
+   		image = image.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+   		JLabel background = new JLabel(new ImageIcon(image));
+   		background.setLayout(new BorderLayout());
+   		background.add(dummy3);
+   		background.setOpaque(false);
+   		loseScreen.add(background);
+   		
+	} catch (IOException e) {
+   		e.printStackTrace();
+	}
+        
         getContentPane().removeAll();
-        getContentPane().add(gameOverScreen);
+        getContentPane().add(loseScreen);
         //diffScreen.setOpaque(true);
         setVisible(true);
         repaint();
     }
     
     public void startWinWindow(){
-        //score += difficulty*control.getBoard().getRemainingTime()/10;
+        score += difficulty*control.getBoard().getRemainingTime()/10;
         JPanel winScreen = new JPanel();
         JPanel dummy = new JPanel(new BorderLayout(5,5));
         dummy.setBorder(BorderFactory.createEmptyBorder(0, getWidth()/4, 0, getWidth()/4));
