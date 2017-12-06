@@ -67,15 +67,16 @@ public class View extends JFrame implements MouseListener{
 	public View(){
         	setDefaultCloseOperation(EXIT_ON_CLOSE);
         	//setLocationRelativeTo(null);
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        	if(dim.getHeight()/dim.getWidth() < aspectRatio){
+		//Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        	if(screenSize.getHeight()/screenSize.getWidth() < aspectRatio){
                 System.out.println("IF STATEMENT");
-        		screenHeight = (int)dim.getHeight();
+        		screenHeight = (int)screenSize.getHeight();
         		screenWidth = (int)(screenHeight/aspectRatio);
         	}
         	else{
                 System.out.println("ELSE STATEMENT");
-        		screenWidth = (int)dim.getWidth();
+        		screenWidth = (int)screenSize.getWidth();
         		screenHeight = (int)(screenWidth*aspectRatio);
        		}
 
