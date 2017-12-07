@@ -76,21 +76,23 @@ public class Board extends JFrame{
         	// the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
 		System.out.println(Shark.getNoSharks());
        	    	theOneAndOnlyShark = Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
+            theOneAndOnlyShark.getEnemyAtt().remove(0);
             	System.out.println(Shark.getNoSharks());
             	System.out.println("Usable Width " +  theOneAndOnlyShark.getTotalWidth());
             	System.out.println(theOneAndOnlyShark.getTotalWidth()/numPerRowConstant);
         	// the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
 		theOneAndOnlyTrash = Trash.trashFactory(boardWidth, xcoord, ycoord-player.getPlayerHeight(), -1*currentDirection, scalingFactor);
+            theOneAndOnlyTrash.getEnemyAtt().remove(0);
 		// counter for how many enemies have been placed in the current row
-		int enemiesInRow = 1;
+		int enemiesInRow = 0;
             theOneAndOnlyArray[0] = true;
 		// xcoord will be incremented based on the game difficulty*width of the player
-		xcoord += theOneAndOnlyShark.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyShark.getImgWidth())/numPerRowConstant;
+		//xcoord += theOneAndOnlyShark.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyShark.getImgWidth())/numPerRowConstant;
 		// since an enemy was added to this row the safeRow value is set to false
 		safeRows.set(row, new Boolean(false));
 		// looping until total number of enemies needed for game difficulty are instantiated
 		for(int i = 1; row < numberOfRows/*multiplier to get number of enemies required for the difficulty*/; i++){
-		    if (row%2 == 1){ // odd rows will be sharks
+		    if (row%2 == 0){ // odd rows will be sharks
 		        Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
 		        //xcoord += theOneAndOnlyShark.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
                 	xcoord = xcoord + theOneAndOnlyShark.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyShark.getImgWidth())/numPerRowConstant;
@@ -128,7 +130,8 @@ public class Board extends JFrame{
                     currentDirection = 1;
                 }
                 // resets the counter
-                if(row%2 == 0) {enemiesInRow = 0;}
+                enemiesInRow = 0;
+                /*if(row%2 == 0) {enemiesInRow = 0;}
                 else if(row%2 == 1 && theOneAndOnlyArray[1] == true){
                     enemiesInRow = 0;
                 }
@@ -138,7 +141,7 @@ public class Board extends JFrame{
                     theOneAndOnlyTrash.getEnemyAtt().get(1)[1]=(numberOfRows-row-1)*player.getPlayerHeight();
                     theOneAndOnlyTrash.getEnemyAtt().get(1)[2]=currentDirection;
                     
-                }
+                }*/
 		    } // if enemiesInRow
 		    
         } // for loop
@@ -151,13 +154,15 @@ public class Board extends JFrame{
             // first enemy will use complex constuctor to instantiate static array of questions
             // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
             theOneAndOnlyHuman = Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
+            theOneAndOnlyHuman.getEnemyAtt().remove(0);
             // the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
             theOneAndOnlyBird = Bird.birdFactory(boardWidth, xcoord, ycoord-player.getPlayerHeight(), -1*currentDirection, scalingFactor);
+            theOneAndOnlyBird.getEnemyAtt().remove(0);
             // counter for how many enemies have been placed in the current row
-            int enemiesInRow = 1;
+            int enemiesInRow = 0;
             theOneAndOnlyArray[3] = true;
             // xcoord will be incremented based on the game difficulty*width of the player
-            xcoord += theOneAndOnlyHuman.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyHuman.getImgWidth())/numPerRowConstant;
+            //xcoord += theOneAndOnlyHuman.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyHuman.getImgWidth())/numPerRowConstant;
             // since an enemy was added to this row the safeRow value is set to false
             safeRows.set(row, new Boolean(false));
             // looping until total number of enemies needed for game difficulty are instantiated
@@ -177,7 +182,7 @@ public class Board extends JFrame{
                 if (enemiesInRow == numPerRowConstant){
                     double randomRowSpacing = Math.random();
                     // pick randomly with a slight bias what row to go to next
-                    if (randomRowSpacing < 0.4){
+                    if (randomRowSpacing < 0.5){
                         ycoord -= player.getPlayerHeight();
                         row++;
                         //sets the next row to be used as unsafe
@@ -200,7 +205,8 @@ public class Board extends JFrame{
                         currentDirection = 1;
                     }
                     // resets the counter
-                    if(row%2 == 0) {enemiesInRow = 0;}
+                    enemiesInRow = 0;
+                    /*if(row%2 == 0) {enemiesInRow = 0;}
                     else if(row%2 == 1 && theOneAndOnlyArray[3] == true){
                         enemiesInRow = 0;
                     }
@@ -209,7 +215,7 @@ public class Board extends JFrame{
                         theOneAndOnlyArray[3] = true;
                         theOneAndOnlyBird.getEnemyAtt().get(1)[1]=(numberOfRows-row-1)*player.getPlayerHeight();
                         theOneAndOnlyBird.getEnemyAtt().get(1)[2]=currentDirection;
-                    }
+                    }*/
                 }  
                 
             }
