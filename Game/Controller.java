@@ -40,7 +40,6 @@ public class Controller{
 	//System.out.println(time);
 	v.makeTimerLabel(time);
         // starts the timer and starts calling tick
-        timer.start();
         
     }
     
@@ -156,6 +155,9 @@ public class Controller{
         b.getPlayer().sendPlayerToStart();
     }
     
+    public void startTimer(){
+        timer.start();
+    }
     
     
 }
