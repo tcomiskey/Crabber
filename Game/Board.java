@@ -135,7 +135,7 @@ public class Board extends JFrame{
                 else if(row%2 == 1 && theOneAndOnlyArray[1] == false){
                     enemiesInRow = 1;
                     theOneAndOnlyArray[1] = true;
-                    theOneAndOnlyTrash.getEnemyAtt().get(1)[1]=(numberOfRows-row)*player.getPlayerHeight();
+                    theOneAndOnlyTrash.getEnemyAtt().get(1)[1]=(numberOfRows-row-1)*player.getPlayerHeight();
                     theOneAndOnlyTrash.getEnemyAtt().get(1)[2]=currentDirection;
                     
                 }
@@ -207,7 +207,7 @@ public class Board extends JFrame{
                     else if(row%2 == 1 && theOneAndOnlyArray[3] == false){
                         enemiesInRow = 1;
                         theOneAndOnlyArray[3] = true;
-                        theOneAndOnlyBird.getEnemyAtt().get(1)[1]=(numberOfRows-row)*player.getPlayerHeight();
+                        theOneAndOnlyBird.getEnemyAtt().get(1)[1]=(numberOfRows-row-1)*player.getPlayerHeight();
                         theOneAndOnlyBird.getEnemyAtt().get(1)[2]=currentDirection;
                     }
                 }  
