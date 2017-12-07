@@ -125,11 +125,11 @@ public class GameCharacter {
 
 	@return the ImageIcon for the character
 	*/
-	public BufferedImage getRightImage(){
+	public Image getRightImage(){
 		return rightImage;
 	}//getImage
 	
-	public BufferedImage getLeftImage(){
+	public Image getLeftImage(){
 		return leftImage;
 	}//getImage
     

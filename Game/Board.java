@@ -245,7 +245,7 @@ public class Board extends JFrame{
     
     public Bonus generateBonus(){
         int r = (int)(Math.random()*6)+2;
-        return Bonus.makeBonus(boardWidth, player.getY()-player.getPlayerHeight()*r);
+        return Bonus.makeBonus(boardWidth, player.getY()-player.getPlayerHeight()*r, scalingFactor);
     }
     
     public void removeBonus(){

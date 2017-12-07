@@ -7,20 +7,27 @@ import javax.swing.*;
 import javax.imageio.ImageIO;
 
 public class Bonus extends GameCharacter{
-    private static BufferedImage leftImage;
-    private static BufferedImage rightImage;
+    private static Image leftImage;
+    private static Image rightImage;
     private static boolean noBonus = true;
+    private static int bonusWidth;
+    private static int bonusHeight;
     
     // Bonus character constructor
     private Bonus(int boardWidth, int xLoc, int yLoc, int direction, double scalingFactor) {
         // need to find an image and use it here
         super(boardWidth, xLoc, yLoc, direction, scalingFactor);
+        System.out.println(scalingFactor);
+       	bonusWidth = (int)(50*scalingFactor);
+	bonusHeight = (int)(50*scalingFactor);
         try {
-            leftImage = ImageIO.read(new File("images/clam.png"));
-            rightImage = ImageIO.read(new File("images/clam.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            		leftImage = ImageIO.read(new File("images/clam.png"));
+			leftImage = leftImage.getScaledInstance(bonusWidth, bonusHeight, Image.SCALE_SMOOTH);
+			rightImage = ImageIO.read(new File("images/clam.png"));
+			rightImage = rightImage.getScaledInstance(bonusWidth, bonusHeight, Image.SCALE_SMOOTH);
+        	} catch (IOException e) {
+            		e.printStackTrace();
+        	}
     }
     
     // Hit method that is called when the player collides with a bonus
@@ -28,7 +35,7 @@ public class Bonus extends GameCharacter{
         return new BonusMessage();
     }
     
-    public static Bonus makeBonus(int boardWidth, int y){
+    public static Bonus makeBonus(int boardWidth, int y, double scalingFactor){
         int x = (int)(Math.random()*(boardWidth-50)); // hardcoded width???
         System.out.println("Bonus made at "+x+" "+y);
         if(noBonus == true){
@@ -59,18 +66,18 @@ public class Bonus extends GameCharacter{
     }//setDir
     
     public int getWidth(){
-        return leftImage.getWidth();
+        return bonusWidth;
     }
     
     public int getHeight(){
-        return leftImage.getHeight();
+        return bonusHeight;
     }
     
-    public BufferedImage getLeftImage(){
+    public Image getLeftImage(){
         return leftImage;
     }//getImage
     
-    public BufferedImage getRightImage(){
+    public Image getRightImage(){
         return rightImage;
     }//getImage
     

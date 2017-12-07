@@ -463,7 +463,7 @@ public class View extends JFrame implements MouseListener{
 		playerLabel = new JLabel(new ImageIcon(img));
 	}
 	
-    public void makeBonusLabel(BufferedImage img){
+    public void makeBonusLabel(Image img){
         bonusLabel = new JLabel(new ImageIcon(img));
     }
 
