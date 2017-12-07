@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Controller{
     // controller attributes
@@ -39,7 +40,6 @@ public class Controller{
 	//System.out.println(time);
 	v.makeTimerLabel(time);
         // starts the timer and starts calling tick
-        timer.start();
         
     }
     
@@ -155,6 +155,9 @@ public class Controller{
         b.getPlayer().sendPlayerToStart();
     }
     
+    public void startTimer(){
+        timer.start();
+    }
     
     
 }

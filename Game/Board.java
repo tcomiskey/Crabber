@@ -26,6 +26,7 @@ public class Board extends JFrame{
     private long levelTime = 30000; //time to complete the level in milliseconds
     private double scalingFactor;
     private int collisionBuffer;
+    boolean[] theOneAndOnlyArray = {false, false, false, false};
     
 	/** Board Constructor sets up the model by creating the player and
 	filling an ArrayList of enemies that will represent every obstacle in 
@@ -77,9 +78,10 @@ public class Board extends JFrame{
         	// the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
        	    	theOneAndOnlyShark = Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
         	// the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
-		theOneAndOnlyTrash = Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
+		theOneAndOnlyTrash = Trash.trashFactory(boardWidth, xcoord, ycoord-player.getPlayerHeight(), -1*currentDirection, scalingFactor);
 		// counter for how many enemies have been placed in the current row
 		int enemiesInRow = 1;
+            theOneAndOnlyArray[0] = true;
 		// xcoord will be incremented based on the game difficulty*width of the player
 		xcoord += theOneAndOnlyShark.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyShark.getImgWidth())/numPerRowConstant;
 		// since an enemy was added to this row the safeRow value is set to false
@@ -113,16 +115,26 @@ public class Board extends JFrame{
 		        }
 		        // picks a random new xcoord to use when starting a new row to create staggered enemies
 		        xcoord = (int) Math.floor(Math.random() * 4 * player.getPlayerWidth());
-		        // resets the counter
-		        enemiesInRow = 0;
-		        // picks a direction randomly
-		        double randomDir = Math.random();
-		        if (randomDir < 0.5){
-		            currentDirection = -1;
-		        }
-		        else{
-		            currentDirection = 1;
-		        }
+                // picks a direction randomly
+                double randomDir = Math.random();
+                if (randomDir < 0.5){
+                    currentDirection = -1;
+                }
+                else{
+                    currentDirection = 1;
+                }
+                // resets the counter
+                if(row%2 == 0) {enemiesInRow = 0;}
+                else if(row%2 == 1 && theOneAndOnlyArray[1] == true){
+                    enemiesInRow = 0;
+                }
+                else if(row%2 == 1 && theOneAndOnlyArray[1] == false){
+                    enemiesInRow = 1;
+                    theOneAndOnlyArray[1] = true;
+                    theOneAndOnlyTrash.getEnemyAtt().get(1)[1]=(numberOfRows-row-1)*player.getPlayerHeight();
+                    theOneAndOnlyTrash.getEnemyAtt().get(1)[2]=currentDirection;
+                    
+                }
 		    } // if enemiesInRow
 		    
        		} // for loop
@@ -130,13 +142,16 @@ public class Board extends JFrame{
         
         else {
             System.out.println("LAND HO");
+            bonus.setX(-1*bonus.getWidth());
+            bonus.setY(-1*bonus.getHeight());
             // first enemy will use complex constuctor to instantiate static array of questions
             // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
             theOneAndOnlyHuman = Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
             // the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
-            theOneAndOnlyBird = Bird.birdFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
+            theOneAndOnlyBird = Bird.birdFactory(boardWidth, xcoord, ycoord-player.getPlayerHeight(), -1*currentDirection, scalingFactor);
             // counter for how many enemies have been placed in the current row
             int enemiesInRow = 1;
+            theOneAndOnlyArray[3] = true;
             // xcoord will be incremented based on the game difficulty*width of the player
             xcoord += theOneAndOnlyHuman.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyHuman.getImgWidth())/numPerRowConstant;
             // since an enemy was added to this row the safeRow value is set to false
@@ -172,8 +187,6 @@ public class Board extends JFrame{
                     }
                     // picks a random new xcoord to use when starting a new row to create staggered enemies
                     xcoord = (int) Math.floor(Math.random() * 4 * player.getPlayerWidth());
-                    // resets the counter
-                    enemiesInRow = 0;
                     // picks a direction randomly
                     double randomDir = Math.random();
                     if (randomDir < 0.5){
@@ -181,6 +194,17 @@ public class Board extends JFrame{
                     }
                     else{
                         currentDirection = 1;
+                    }
+                    // resets the counter
+                    if(row%2 == 0) {enemiesInRow = 0;}
+                    else if(row%2 == 1 && theOneAndOnlyArray[3] == true){
+                        enemiesInRow = 0;
+                    }
+                    else if(row%2 == 1 && theOneAndOnlyArray[3] == false){
+                        enemiesInRow = 1;
+                        theOneAndOnlyArray[3] = true;
+                        theOneAndOnlyBird.getEnemyAtt().get(1)[1]=(numberOfRows-row-1)*player.getPlayerHeight();
+                        theOneAndOnlyBird.getEnemyAtt().get(1)[2]=currentDirection;
                     }
                 }  
                 
@@ -369,6 +393,10 @@ public class Board extends JFrame{
         //}
         return returnString;
 	}
+    
+    public void setStartTime(){
+        startTime = System.currentTimeMillis();
+    }
 /*    
     public static final int BUTTON1 = 1;
     public static final int MOUSE_CLICKED = 500;
