@@ -713,6 +713,38 @@ public class View extends JFrame implements MouseListener{
     	*/
     @Override
     public void mouseClicked(MouseEvent e) {
+        
+    }
+
+    /**
+    	* Does nothing in this game
+	*
+	* @param	e mouseEvent that does nothing
+    	*/
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /**
+    	* Does nothing in this game
+	*
+	* @param	e mouseEvent that does nothing
+    	*/
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /**
+    	* Does nothing in this game
+	*
+	* @param	e mouseEvent that does nothing
+    	*/
+    @Override
+    public void mousePressed(MouseEvent e) {
         if(!isTutorial){
             control.getMouseClick(e);
             playerLabel.setLocation(playerX, playerY);
@@ -751,38 +783,6 @@ public class View extends JFrame implements MouseListener{
             isTutorial = false;
             createDiffScreen();
         }
-    }
-
-    /**
-    	* Does nothing in this game
-	*
-	* @param	e mouseEvent that does nothing
-    	*/
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    /**
-    	* Does nothing in this game
-	*
-	* @param	e mouseEvent that does nothing
-    	*/
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    /**
-    	* Does nothing in this game
-	*
-	* @param	e mouseEvent that does nothing
-    	*/
-    @Override
-    public void mousePressed(MouseEvent e) {
-        
     }
 
     /**
