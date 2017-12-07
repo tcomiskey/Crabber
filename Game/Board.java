@@ -240,7 +240,9 @@ public class Board extends JFrame{
      @return true if the player is at the finish
      */
     public boolean playerAtFinish(){
+
     	return player.getY() <= player.getPlayerHeight()/2;
+
     }
     
     public Bonus generateBonus(){
