@@ -320,10 +320,20 @@ public class Board extends JFrame{
         return curTime-startTime < levelTime;
     }
     
+     /**
+    Unpauses the game without removing time
+    
+    @author Maura Swift
+    */
     public void resetStartTime(long pausedTime){
         startTime += pausedTime;
     }
     
+     /**
+    Updates the timer
+    
+    @author Maura Swift
+    */
     public void updateRemainingTime(){
         long elapsedTime = System.currentTimeMillis()-startTime;
         remainingTime = levelTime-elapsedTime;
@@ -397,9 +407,6 @@ public class Board extends JFrame{
     
     public String toString(){
         String returnString = "";
-        //for (GameCharacter character: enemies){
-        //   returnString += character.toString() + "\n";
-        //}
         return returnString;
 	}
     
