@@ -146,6 +146,8 @@ public class Board extends JFrame{
         
         else {
             System.out.println("LAND HO");
+            bonus.setX(-1*bonus.getWidth());
+            bonus.setY(-1*bonus.getHeight());
             // first enemy will use complex constuctor to instantiate static array of questions
             // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
             theOneAndOnlyHuman = Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
