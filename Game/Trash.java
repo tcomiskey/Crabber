@@ -3,11 +3,25 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+/**
+A class of obstacles that are found in the water level
+
+@author Tom Comiskey and Erin Hitchner
+*/
 public class Trash extends Enemy{
 	private static boolean noTrash = true;
     static int trashWidth;
     static int trashHeight;
 
+	/**
+     Trash constructor creates the arraylist of questions for all of the enemies, and theOneAndOnlyTrash object that holds all the other shark information.
+     
+     @author Tom Comiskey and Erin Hitchner
+     @param boardWidth the width of the game screen
+     @param xLocation the x coordinate for upper left pixel of the image
+     @param yLocation the y coordinate for upper left pixel of the image
+     @param direction the direction the object will move on the screen, decides image direction
+     */
 	private Trash(int boardWidth, int xLoc, int yLoc, int direction, double scalingFactor){
         super(boardWidth, xLoc, yLoc, direction, scalingFactor);
         frameCount = 8;
@@ -47,6 +61,17 @@ public class Trash extends Enemy{
 		xydir[4] = height;
 		enemyAtt.add(xydir);
 	}
+
+	/**
+     Static factory method for creating Trash objects
+
+     @param boardWidth the width of the board that the trash is on
+     @param xLocation the x-coordinate of the trash
+     @param yLocation the y-coordinate of the trash
+     @param direction the direction that the trash will move, 1 for right, -1 for left
+     @param scalingFactor multiplier by which to scale the image to the screen size
+     @return Returns a new trash if there is not one already made, otherwise returns null
+     */
 	public static Trash trashFactory(int boardWidth, int xLoc, int yLoc, int direction, double scalingFactor){
 		if (noTrash){
 			return new Trash(boardWidth, xLoc, yLoc, direction, scalingFactor);
@@ -57,6 +82,15 @@ public class Trash extends Enemy{
 		}
 		
 	}
+
+	/**
+	Part of Singleton, adds trash attributes to the list of enemy attributes
+	@param xLocation the x-coordinate of the trash
+	@param yLocation the y-coordinate of the trash
+	@param direction the direction that the trash will move, 1 for right, -1 for left
+	@param currentWidth the current width of the trash
+	@param currentHeight the current height of the trash
+	*/
 	private static void addTrash(int xLocation, int yLocation, int direction, int currentWidth, int currentHeight){
 		int[] xydir = new int[5];
 		xydir[0] = xLocation;
