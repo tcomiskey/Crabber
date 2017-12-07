@@ -3,11 +3,25 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+/**
+A class of obstacles that are found in the land level
+
+@author Tom Comiskey and Erin Hitchner
+*/
 public class Bird extends Enemy{
     private static boolean noBird = true;
     static int birdWidth;
     static int birdHeight;
-    
+
+    /**
+     Bird constructor creates the arraylist of questions for all of the enemies, and theOneAndOnlyBird object that holds all the other shark information.
+     
+     @author Tom Comiskey and Erin Hitchner
+     @param boardWidth the width of the game screen
+     @param xLocation the x coordinate for upper left pixel of the image
+     @param yLocation the y coordinate for upper left pixel of the image
+     @param direction the direction the object will move on the screen, decides image direction
+     */
     private Bird(int boardWidth, int xLoc, int yLoc, int direction, double scalingFactor){
         super(boardWidth, xLoc, yLoc, direction, scalingFactor);
         frameCount = 6;
@@ -47,6 +61,17 @@ public class Bird extends Enemy{
         xydir[4] = height;
         enemyAtt.add(xydir);
     }
+
+    /**
+     Static factory method for creating Bird objects
+
+     @param boardWidth the width of the board that the bird is on
+     @param xLocation the x-coordinate of the bird
+     @param yLocation the y-coordinate of the bird
+     @param direction the direction that the bird will move, 1 for right, -1 for left
+     @param scalingFactor multiplier by which to scale the image to the screen size
+     @return Returns a new bird if there is not one already made, otherwise returns null
+     */
     public static Bird birdFactory(int boardWidth, int xLoc, int yLoc, int direction, double scalingFactor){
         if (noBird){
             return new Bird(boardWidth, xLoc, yLoc, direction, scalingFactor);
@@ -57,6 +82,15 @@ public class Bird extends Enemy{
         }
         
     }
+
+    /**
+	Part of Singleton, adds bird attributes to the list of enemy attributes
+	@param xLocation the x-coordinate of the bird
+	@param yLocation the y-coordinate of the bird
+	@param direction the direction that the bird will move, 1 for right, -1 for left
+	@param currentWidth the current width of the bird
+	@param currentHeight the current height of the bird
+	*/
     private static void addBird(int xLocation, int yLocation, int direction, int currentWidth, int currentHeight){
         int[] xydir = new int[5];
         xydir[0] = xLocation;

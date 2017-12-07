@@ -5,6 +5,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
+/**
+A class of obstacles that are found in the water level
+
+@author Tom Comiskey and Erin Hitchner
+*/
 public class Shark extends Enemy{
 	//boolean to keep track if a shark object has been made
 	private static boolean noSharks = true;
@@ -93,7 +98,14 @@ public class Shark extends Enemy{
 	}
 	//Really only need one shark object and just a series of images to be displayed
     /**
-     Static factory method 
+     Static factory method for creating Shark objects
+
+     @param boardWidth the width of the board that the shark is on
+     @param xLocation the x-coordinate of the shark
+     @param yLocation the y-coordinate of the shark
+     @param direction the direction that the shark will move, 1 for right, -1 for left
+     @param scalingFactor multiplier by which to scale the image to the screen size
+     @return Returns a new shark if there is not one already made, otherwise returns null
      */
 	public static Shark sharkFactory(int boardWidth, int xLocation, int yLocation, int direction, double scalingFactor){
 		if (noSharks){
@@ -106,6 +118,15 @@ public class Shark extends Enemy{
 		}
 		
 	}
+
+	/**
+	Part of Singleton, adds shark attributes to the list of enemy attributes
+	@param xLocation the x-coordinate of the shark
+	@param yLocation the y-coordinate of the shark
+	@param direction the direction that the shark will move, 1 for right, -1 for left
+	@param currentWidth the current width of the shark
+	@param currentHeight the current height of the shark
+	*/
 	private static void addShark(int xLocation, int yLocation, int direction, int currentWidth, int currentHeight){
 		int[] xydir = new int[5];
 		xydir[0] = xLocation;
