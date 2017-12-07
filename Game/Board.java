@@ -35,13 +35,16 @@ public class Board extends JFrame{
      
      @author Erin Hitchner and Tom Comiskey
      @param difficulty sets easy, medium, or hard based on user input in the view
+     @param isOcean sets whether or not the game is in the ocean or land stage
+     @param boardWidth is the board width
+     @param boardHeight is the board height
+     @param scalingFactor is a factor that changes the size of the game characters based on screensize
 	*/
 	
 	public Board(int difficulty, boolean isOcean, int boardWidth, int boardHeight, double scalingFactor){
 		// set the initial values for the board attributes
 		this.boardWidth = boardWidth;
 		this.boardHeight = boardHeight;
-		System.out.println("Board H " + boardHeight);
 		this.difficulty = difficulty;
 		this.isOcean = isOcean;	
 		this.scalingFactor = scalingFactor;
@@ -49,7 +52,6 @@ public class Board extends JFrame{
 		win = true;
 		player = new Player(this.boardWidth, this.boardHeight, this.scalingFactor);
 		numberOfRows = boardHeight/player.getPlayerHeight()-1;
-		System.out.println(numberOfRows);
         	startTime = System.currentTimeMillis();
         	remainingTime = levelTime;
         	bonus = generateBonus();
@@ -61,7 +63,7 @@ public class Board extends JFrame{
 		// row is a counter for what row the enemies are in
 		int row = 1;
 		// set all rows to safe until they get populated with an enemy
-		for (int i = 0; i<300; i++){
+		for (int i = 0; i<50; i++){
 			safeRows.add(new Boolean(true));
 		}
 		// set a number of enemies and how many per row based on difficulty
@@ -69,40 +71,39 @@ public class Board extends JFrame{
 		// picks left as the current direction of movement;
         	int currentDirection = -1;
         
-        
+        //if on the ocean stage make shark and trash enemies
         if (isOcean == true) {
+        	//make sure that there are no sharks made currently
         	Shark.setNoSharks(true);
-		// first enemy will use complex constuctor to instantiate static array of questions
         	// the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
-		System.out.println(Shark.getNoSharks());
        	    	theOneAndOnlyShark = Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
+            theOneAndOnlyShark.getEnemyAtt().remove(0);
             	System.out.println(Shark.getNoSharks());
             	System.out.println("Usable Width " +  theOneAndOnlyShark.getTotalWidth());
             	System.out.println(theOneAndOnlyShark.getTotalWidth()/numPerRowConstant);
         	// the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
 		theOneAndOnlyTrash = Trash.trashFactory(boardWidth, xcoord, ycoord-player.getPlayerHeight(), -1*currentDirection, scalingFactor);
+            theOneAndOnlyTrash.getEnemyAtt().remove(0);
 		// counter for how many enemies have been placed in the current row
-		int enemiesInRow = 1;
+		int enemiesInRow = 0;
             theOneAndOnlyArray[0] = true;
 		// xcoord will be incremented based on the game difficulty*width of the player
-		xcoord += theOneAndOnlyShark.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyShark.getImgWidth())/numPerRowConstant;
+		//xcoord += theOneAndOnlyShark.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyShark.getImgWidth())/numPerRowConstant;
 		// since an enemy was added to this row the safeRow value is set to false
 		safeRows.set(row, new Boolean(false));
 		// looping until total number of enemies needed for game difficulty are instantiated
 		for(int i = 1; row < numberOfRows/*multiplier to get number of enemies required for the difficulty*/; i++){
-		    if (row%2 == 1){ // odd rows will be sharks
+		    if (row%2 == 0){ // odd rows will be sharks
 		        Shark.sharkFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
-		        //xcoord += theOneAndOnlyShark.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
                 	xcoord = xcoord + theOneAndOnlyShark.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyShark.getImgWidth())/numPerRowConstant;
 		    }
 		    else{ // even rows will be trash
 		       	Trash.trashFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
-		        //xcoord += theOneAndOnlyTrash.getImgWidth()+ (5-difficulty)*player.getPlayerWidth();
-                xcoord = xcoord + theOneAndOnlyTrash.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyTrash.getImgWidth())/numPerRowConstant;
+                	xcoord = xcoord + theOneAndOnlyTrash.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyTrash.getImgWidth())/numPerRowConstant;
 		    }
 		    enemiesInRow++;
 		    // if you max out the number of enemies for a row, pick next row to fill (1 or 2 rows up)
-		    if (enemiesInRow == numPerRowConstant){
+		    if (enemiesInRow >= numPerRowConstant){
 		        double randomRowSpacing = Math.random();
 		        // pick randomly with a slight bias what row to go to next
 		        if (randomRowSpacing < 0.4){
@@ -128,7 +129,8 @@ public class Board extends JFrame{
                     currentDirection = 1;
                 }
                 // resets the counter
-                if(row%2 == 0) {enemiesInRow = 0;}
+                enemiesInRow = 0;
+                /*if(row%2 == 0) {enemiesInRow = 0;}
                 else if(row%2 == 1 && theOneAndOnlyArray[1] == true){
                     enemiesInRow = 0;
                 }
@@ -138,10 +140,10 @@ public class Board extends JFrame{
                     theOneAndOnlyTrash.getEnemyAtt().get(1)[1]=(numberOfRows-row-1)*player.getPlayerHeight();
                     theOneAndOnlyTrash.getEnemyAtt().get(1)[2]=currentDirection;
                     
-                }
+                }*/
 		    } // if enemiesInRow
 		    
-        } // for loop
+       		} // for loop
         }
         
         else {
@@ -151,13 +153,15 @@ public class Board extends JFrame{
             // first enemy will use complex constuctor to instantiate static array of questions
             // the first shark must be instantiated with its factory such that it can hold an array of attributes for other sharks
             theOneAndOnlyHuman = Human.humanFactory(boardWidth, xcoord, ycoord, currentDirection, scalingFactor);
+            theOneAndOnlyHuman.getEnemyAtt().remove(0);
             // the first trash must be instantiated with its factory such that it can hold an array of attributes for other trash
             theOneAndOnlyBird = Bird.birdFactory(boardWidth, xcoord, ycoord-player.getPlayerHeight(), -1*currentDirection, scalingFactor);
+            theOneAndOnlyBird.getEnemyAtt().remove(0);
             // counter for how many enemies have been placed in the current row
-            int enemiesInRow = 1;
+            int enemiesInRow = 0;
             theOneAndOnlyArray[3] = true;
             // xcoord will be incremented based on the game difficulty*width of the player
-            xcoord += theOneAndOnlyHuman.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyHuman.getImgWidth())/numPerRowConstant;
+            //xcoord += theOneAndOnlyHuman.getImgWidth() + (theOneAndOnlyShark.getTotalWidth()-numPerRowConstant*theOneAndOnlyHuman.getImgWidth())/numPerRowConstant;
             // since an enemy was added to this row the safeRow value is set to false
             safeRows.set(row, new Boolean(false));
             // looping until total number of enemies needed for game difficulty are instantiated
@@ -177,7 +181,7 @@ public class Board extends JFrame{
                 if (enemiesInRow == numPerRowConstant){
                     double randomRowSpacing = Math.random();
                     // pick randomly with a slight bias what row to go to next
-                    if (randomRowSpacing < 0.4){
+                    if (randomRowSpacing < 0.5){
                         ycoord -= player.getPlayerHeight();
                         row++;
                         //sets the next row to be used as unsafe
@@ -200,7 +204,8 @@ public class Board extends JFrame{
                         currentDirection = 1;
                     }
                     // resets the counter
-                    if(row%2 == 0) {enemiesInRow = 0;}
+                    enemiesInRow = 0;
+                    /*if(row%2 == 0) {enemiesInRow = 0;}
                     else if(row%2 == 1 && theOneAndOnlyArray[3] == true){
                         enemiesInRow = 0;
                     }
@@ -209,12 +214,11 @@ public class Board extends JFrame{
                         theOneAndOnlyArray[3] = true;
                         theOneAndOnlyBird.getEnemyAtt().get(1)[1]=(numberOfRows-row-1)*player.getPlayerHeight();
                         theOneAndOnlyBird.getEnemyAtt().get(1)[2]=currentDirection;
-                    }
+                    }*/
                 }  
                 
             }
         }
-        System.out.println("in board bonus is " + bonus);
 	}
     /**
      Move method that is called to move all of the enemy characters.
@@ -270,17 +274,33 @@ public class Board extends JFrame{
     	return player.getY() <= player.getPlayerHeight()/2;
 
     }
+    /**
+    Creates the bonus at a random location.
+    
+    @author Maura Swift
+    @return The bonus object
+    */ 
     
     public Bonus generateBonus(){
         int r = (int)(Math.random()*6)+2;
         return Bonus.makeBonus(boardWidth, player.getY()-player.getPlayerHeight()*r, scalingFactor);
     }
+    /**
+    Removes the bonus from the screen
     
+    @author Maura Swift
+    */
     public void removeBonus(){
         bonus.setX(-1*bonus.getWidth());
         bonus.setY(-1*bonus.getHeight());
     }
     
+    /**
+    Checks for a bonus collision with the player
+    
+    @author Maura Swift
+    @return true if the player collides with the bonus
+    */
     
     public boolean bonusCollisionCheck(){
         if(player.getX()+player.getPlayerWidth() > bonus.getX() && player.getX() < bonus.getX() + bonus.getWidth() && player.getY() == bonus.getY()){
@@ -289,6 +309,12 @@ public class Board extends JFrame{
         return false;
     }
     
+    /**
+    Determines if there is still time in the game
+    
+    @author Maura Swift
+    @return true if there is still time and false if time has run out
+    */
     public boolean timeLeft(){		//returns true if there is still time to play
         long curTime = System.currentTimeMillis();
         return curTime-startTime < levelTime;
@@ -326,7 +352,6 @@ public class Board extends JFrame{
 	public void setBonus(Bonus bonus){
 		this.bonus = bonus;
 	}
-	
 	//getters
 	public int getBoardWidth(){
 		return boardWidth;
