@@ -17,7 +17,7 @@ import java.io.*;
  * This class contains all necessary fields and methods to create the
  * user interface for the Crabber game. It handles all of the Swing painting
  * and is passed data and images from a controller.
- *
+ * 
  * @author John Malone
  * @author Maura Swift
  */
@@ -308,6 +308,7 @@ public class View extends JFrame implements MouseListener{
         setVisible(true);
         repaint();
     }
+    
     /**
      * Method to relocate the enemy images across the gameboard. Takes 
 	* no inputs or outputs and repaints using Swing repaint.
@@ -347,7 +348,11 @@ public class View extends JFrame implements MouseListener{
 		repaint();
 		
 	}
-    
+
+    /**
+     * Method to relocate the enemy land images across the gameboard. Takes 
+	* no inputs or outputs and repaints using Swing repaint.
+	*/
     public void updateLandLocations(){
         
         control.getBoard().getTheOneAndOnlyHuman().increasePicNum();
@@ -381,7 +386,12 @@ public class View extends JFrame implements MouseListener{
         repaint();
         
     }
-    
+
+    /**
+     * Method to relocate the bonus images across the gameboard. Takes 
+	* no inputs or outputs and repaints using Swing repaint.
+
+	*/
     public void updateBonusLocation(){
         bonusLabel.setLocation(bonusX, bonusY);
         repaint();
@@ -398,6 +408,10 @@ public class View extends JFrame implements MouseListener{
 		return difficulty;
 	}
 
+	/**
+	* Method that starts the main game window. Contains a horseshoe crab label as well as many
+	* enemy labels and a bonus label. Contains a mouselistener to trigger the movement.
+	*/
 	private void startGameWindow(){
         	setEnemiesSea();
 		gameScreen = new JPanel();
@@ -434,6 +448,10 @@ public class View extends JFrame implements MouseListener{
 		repaint();
 	}
 
+	/**
+	* Triggers the gameBoard to change to land mode. This causes the enemies
+	* to become humans and birds. Also saves the score from the first stage.
+	*/
 	public void startLandWindow(){
         score += difficulty*control.getBoard().getRemainingTime()/10;
 		gameScreen.removeAll();
@@ -464,98 +482,173 @@ public class View extends JFrame implements MouseListener{
 		repaint();
 	}
 
+	/**
+	* Creates a new JLabel that is assigned to the playerLabel for the main character
+	*
+	* @param img	takes the image of the player to be created
+	*/
 	public void makePlayerLabel(Image img){
 		playerLabel = new JLabel(new ImageIcon(img));
 	}
-	
-    public void makeBonusLabel(Image img){
-        bonusLabel = new JLabel(new ImageIcon(img));
-    }
 
-    public void makeTimerLabel(String time){
-    	timerLabel = new JLabel(time);
-    	timerLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
-    	timerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-    	timerLabel.setBackground(Color.WHITE);
-    	timerLabel.setOpaque(true);
-    	timerLabel.setFont(new Font(timerLabel.getFont().getName(), Font.PLAIN, 24));
-    	timerLabel.setSize(100, 50);
-    }
+	/**
+	* Creates a new JLabel that is assigned to the bonusLabel for the bonus clam
+	*
+	* @param img	takes the image of the bonus to be created
+	*/
+   	public void makeBonusLabel(Image img){
+        	bonusLabel = new JLabel(new ImageIcon(img));
+   	}
 
-    public void updateTimerLabel(String time){
-    	timerLabel.setText(time);
-    }
-    
-    public JButton getEasyButton(){
+	/**
+	* Takes a time and adds it to the timerLabel that appears onscreen
+	*
+	* @param time	time that should be added to the game screen
+	*/
+    	public void makeTimerLabel(String time){
+    		timerLabel = new JLabel(time);
+    		timerLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+    		timerLabel.setHorizontalAlignment(SwingConstants.CENTER);
+    		timerLabel.setBackground(Color.WHITE);
+    		timerLabel.setOpaque(true);
+    		timerLabel.setFont(new Font(timerLabel.getFont().getName(), Font.PLAIN, 24));
+    		timerLabel.setSize(100, 50);
+    	}
+
+	/**
+	* Updates the onscreen time to have the new time
+	*
+	* @param time	takes the image of the player to be created
+	*/
+    	public void updateTimerLabel(String time){
+    		timerLabel.setText(time);
+    	}
+
+    	/**
+    	* Returns the easy JButton
+    	*
+    	* @return	returns the easy JButton
+    	*/
+    	public JButton getEasyButton(){
 		return easy;
 	}
-    
-    public JLabel getBonusLabel(){
-    	return bonusLabel;
-    }
-    
-    public JLabel getTimerLabel(){
-    	return timerLabel;
-    }
 
-    public int getScreenWidth(){
-    	return screenWidth;
-    }
+    	/**
+    	* Returns the bonus JLabel
+    	*
+    	* @return	returns the bonus JLabel
+    	*/
+    	public JLabel getBonusLabel(){
+    		return bonusLabel;
+    	}
 
-    public int getScreenHeight(){
-    	return screenHeight;
-    }
+    	/**
+    	* Returns the timer JLabel
+    	*
+    	* @return	returns the time JLabel
+    	*/
+    	public JLabel getTimerLabel(){
+    		return timerLabel;
+    	}
 
-    public double getScalingFactor(){
-    	return scalingFactor;
-    }
+	/**
+    	* Returns the screen width
+    	*
+    	* @return	returns the width of the screen
+    	*/
+    	public int getScreenWidth(){
+    		return screenWidth;
+    	}
 
+	/**
+    	* Returns the screen height
+    	*
+    	* @return	returns the height of the screen
+    	*/
+    	public int getScreenHeight(){
+    		return screenHeight;
+    	}
+
+	/**
+    	* Returns the scaling factor used to adjust the images
+    	*
+    	* @return	returns the scaling factor
+    	*/
+    	public double getScalingFactor(){
+    		return scalingFactor;
+    	}
+
+	/**
+    	* Creates a new controller with this View as a parameter
+    	*
+    	*/
 	public void setupController(){
 		control = new Controller(this);
 	}
 
+	/**
+    	* Sets the x location of the player on the screen
+    	*
+    	* @param x	the new x location of the player
+    	*/
 	public void setPlayerX(int x){
 		playerX = x;
 	}
 
+	/**
+    	* Sets the y location of the player on the screen
+    	*
+    	* @param y	the new y location of the player
+    	*/
 	public void setPlayerY(int y){
 		playerY = y;
 	}
-    
-    public void setBonusX(int x){
-        bonusX = x;
-    }
-    
-    public void setBonusY(int y){
-        bonusY = y;
-    }
-    
-    public void setEnemiesSea() {
-    	enemyAtt = new ArrayList<int[]>();
-        enemyLabels = new ArrayList<JLabel>();
-        int tempPicNum = control.getBoard().getTheOneAndOnlyShark().getPicNum();
-        Iterator<int[]> enemyIterator = control.getBoard().getTheOneAndOnlyShark().getEnemyAtt().iterator();
-        while (enemyIterator.hasNext()) {
-        	int [] currentEnemy = enemyIterator.next();
-              	enemyAtt.add(currentEnemy);
-              	if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
-              		if(currentEnemy[2] == -1){
-                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getLeftImageArray()[tempPicNum])));
-                    }
-                    else{
-                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getRightImageArray()[tempPicNum])));
-                    }
-                }
-                else{
-                    if(currentEnemy[2] == -1){
-                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getLeftImageArray()[tempPicNum])));
-                    }
-                    else{
-                        enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getRightImageArray()[tempPicNum])));
-                    }
-            }
-        }
-    }
+
+    	/**
+    	* Sets the x location of the bonus on the screen
+    	*
+    	* @param x	the new x location of the bonus
+    	*/
+    	public void setBonusX(int x){
+        	bonusX = x;
+    	}
+
+    	/**
+    	* Sets the y location of the player on the screen
+    	*
+    	* @param x	the new y location of the player
+    	*/
+    	public void setBonusY(int y){
+        	bonusY = y;
+    	}
+
+    	
+    	public void setEnemiesSea() {
+    		enemyAtt = new ArrayList<int[]>();
+        	enemyLabels = new ArrayList<JLabel>();
+        	int tempPicNum = control.getBoard().getTheOneAndOnlyShark().getPicNum();
+        	Iterator<int[]> enemyIterator = control.getBoard().getTheOneAndOnlyShark().getEnemyAtt().iterator();
+        	while (enemyIterator.hasNext()) {
+        		int [] currentEnemy = enemyIterator.next();
+        	      	enemyAtt.add(currentEnemy);
+        	      	if((currentEnemy[1]/control.getBoard().getPlayer().getPlayerHeight())%2 == 0){
+        	      		if(currentEnemy[2] == -1){
+        		                enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getLeftImageArray()[tempPicNum])));
+                    		}
+                    		else{
+                        		enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyShark().getRightImageArray()[tempPicNum])));
+                    		}
+                	}
+                	else{
+                    		if(currentEnemy[2] == -1){
+                        		enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getLeftImageArray()[tempPicNum])));
+                    		}
+                    		else{
+                        		enemyLabels.add(new JLabel(new ImageIcon(control.getBoard().getTheOneAndOnlyTrash().getRightImageArray()[tempPicNum])));
+                    		}
+            		}
+        	}
+    	}
     public void setEnemiesLand() {
         enemyAtt = new ArrayList<int[]>();
         enemyLabels = new ArrayList<JLabel>();
@@ -617,7 +710,7 @@ public class View extends JFrame implements MouseListener{
                 tutorialTrash.setVisible(true);
                 tutorialBird.setVisible(true);
                 tutorialHuman.setVisible(true);
-                tutorialText.setText("Now see if you can eat that dogfish!");
+                tutorialText.setText("<html><center>You got five extra seconds!<br>Now see if you can eat that dogfish shark!<html>");
             }
             if(tutorialCrab.getY()  == getHeight()/2-100){
                 tutorialCrab.setVisible(false);
@@ -921,7 +1014,7 @@ public class View extends JFrame implements MouseListener{
         tutorialText.setAlignmentX(Component.CENTER_ALIGNMENT);
         tutorialText.setLocation(getWidth(),100);
         background.add(tutorialText);
-        tutorialText.setBounds(getWidth()/2-600, 100, 1200, 100);
+        tutorialText.setBounds(getWidth()/2-600, 80, 1200, 100);
         
         tutorialScreen.addMouseListener(this);
         tutorialScreen.setBackground(Color.black);
