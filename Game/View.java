@@ -620,13 +620,15 @@ public class View extends JFrame implements MouseListener{
     	/**
     	* Sets the y location of the player on the screen
     	*
-    	* @param x	the new y location of the player
+    	* @param y	the new y location of the player
     	*/
     	public void setBonusY(int y){
         	bonusY = y;
     	}
 
-    	
+    	/**
+    	*Sets up the sea enemies on the game screen at the very beginning of the game
+    	*/
     	public void setEnemiesSea() {
     		enemyAtt = new ArrayList<int[]>();
         	enemyLabels = new ArrayList<JLabel>();
@@ -653,6 +655,10 @@ public class View extends JFrame implements MouseListener{
             		}
         	}
     	}
+
+    	/**
+    	*Sets up the land enemies on the game screen at the beginning of the second stage
+    	*/
     public void setEnemiesLand() {
         enemyAtt = new ArrayList<int[]>();
         enemyLabels = new ArrayList<JLabel>();
@@ -679,14 +685,32 @@ public class View extends JFrame implements MouseListener{
             }
         }
     }
-    
-    public ArrayList<int[]> getEnemyAtt(){
-        return enemyAtt;
-    }
-    public Controller getControl() {
-        return control;
-    }
-    
+
+    	/**
+    	* Returns the ArrayList of the enemies in the game
+	*
+	* @return returns the ArrayList of enemies in the game
+    	*/
+    	public ArrayList<int[]> getEnemyAtt(){
+        	return enemyAtt;
+    	}
+
+    	/**
+    	* Returns the controller
+	*
+	* @return returns the controller
+    	*/
+    	public Controller getControl() {
+        	return control;
+    	}
+
+    /**
+    	* Allows the player to interact with the tutorial and also play the game.
+    	* A click to the left of the horseshoe crab causes him to move left, a click to the right 
+    	* causes a right move, and a click above causes upward movement.
+	*
+	* @param	e mouseEvent that triggers the game to advance
+    	*/
     @Override
     public void mouseClicked(MouseEvent e) {
         if(!isTutorial){
@@ -728,30 +752,55 @@ public class View extends JFrame implements MouseListener{
             createDiffScreen();
         }
     }
-    
+
+    /**
+    	* Does nothing in this game
+	*
+	* @param	e mouseEvent that does nothing
+    	*/
     @Override
-    public void mouseEntered(MouseEvent arg0) {
+    public void mouseEntered(MouseEvent e) {
         // TODO Auto-generated method stub
         
     }
-    
+
+    /**
+    	* Does nothing in this game
+	*
+	* @param	e mouseEvent that does nothing
+    	*/
     @Override
-    public void mouseExited(MouseEvent arg0) {
+    public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
         
     }
-    
+
+    /**
+    	* Does nothing in this game
+	*
+	* @param	e mouseEvent that does nothing
+    	*/
     @Override
     public void mousePressed(MouseEvent e) {
         
     }
-    
+
+    /**
+    	* Does nothing in this game
+	*
+	* @param	e mouseEvent that does nothing
+    	*/
     @Override
-    public void mouseReleased(MouseEvent arg0) {
+    public void mouseReleased(MouseEvent e) {
         // TODO Auto-generated method stub
         
     }
-    
+    /**
+    	* Triggers a pop up messsage that contains a question that the player
+    	* must answer to continue with the game
+	*
+	* @param	currentMessage the question that the code should give to the player with the associated answers
+    	*/
     public void throwQuestion(Message currentMessage) {
         String[] buttons = new String[3];
         int r1 = (int)(Math.random()*3);
@@ -790,10 +839,7 @@ public class View extends JFrame implements MouseListener{
                 buttons[0] = currentMessage.getWrongAnswer1();
             }
         }
-        /*System.out.println(currentMessage.getQuestion());
-        for (int i = 0; i < buttons.length; i++) {
-            System.out.println(buttons[i]);
-        }*/
+		
         int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, null);
         if (rc == r1) {
             control.resetPlayer();
@@ -807,7 +853,12 @@ public class View extends JFrame implements MouseListener{
             startGameOverWindow();
         }
     }
-    
+
+    /**
+    	* Causes the JFrame to display the game over window which contains the leaderboard and 
+    	* the option for the player to play again
+	*
+    	*/
     public void startGameOverWindow(){
         JPanel loseScreen = new JPanel();
         JPanel dummy = new JPanel(new BorderLayout(5,5));
@@ -859,10 +910,17 @@ public class View extends JFrame implements MouseListener{
         getContentPane().removeAll();
         getContentPane().add(loseScreen);
         //diffScreen.setOpaque(true);
+
         setVisible(true);
         repaint();
     }
-    
+
+    /**
+    	* Causes the JFrame to display the win window which contains the leaderboard and 
+    	* the option for the player to play again. Also allows for the player to enter a high score
+    	* if they have a score that is higher than one currently on the scoreboard
+	*
+    	*/
     public void startWinWindow(){
         score += difficulty*control.getBoard().getRemainingTime()/10;
         JPanel winScreen = new JPanel();
@@ -949,7 +1007,10 @@ public class View extends JFrame implements MouseListener{
         }
         repaint();
     }
-    
+
+    /*
+    * Clears static enemies that cause a problem when the game changes screens
+    */
     public void clearStaticEnemies() {
         // SET NOTRASH AND NOSHARK TO TRUE AGAIN BEFORE DELETING EVERYTHING
         if(control.getBoard().getIsOcean()) {
@@ -965,7 +1026,12 @@ public class View extends JFrame implements MouseListener{
             control.getBoard().getBonus().setNoBonus(true);
         }
     }
-    
+
+    /**
+    	* Runs the interactive tutorial which prompts the user for input.
+    	* Input can be entered by using mouse events.
+	*
+    	*/
     public void runTutorial(){
         isTutorial = true;
         tutorialNum = 0;
@@ -1027,7 +1093,11 @@ public class View extends JFrame implements MouseListener{
         setVisible(true);
         repaint();
     }
-    
+
+    /**
+    	* Reads in the leaderboard from a csv file so that it can be displayed later in the game
+	*
+    	*/
     private void readLeaderboard() {
         String[] titles = {"Name","Score"};
         String leaderboardFile = "leaderboard.csv";
@@ -1054,7 +1124,12 @@ public class View extends JFrame implements MouseListener{
         leaderboard = new JTable(textMatrix, titles);
         //leaderboard.setSize(new Dimension(360,400));
     }
-    
+
+    /**
+    	* Writes the leaderboard to a JTable so that it can be placed on a JPanel later in the code
+	*
+	* @param	input contains the strings that are the leaderboard winners
+    	*/
     private void writeLeaderboard(String[][] input) throws FileNotFoundException {
         PrintWriter pw = new PrintWriter(new File("leaderboard.csv"));
         String output = "";
