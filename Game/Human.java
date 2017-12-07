@@ -17,13 +17,14 @@ public class Human extends Enemy{
         //leftImage = new ImageIcon("images/Trash.png");
         leftImage = createCharacterImage("images/Sonny run west.png");
         rightImage = createCharacterImage("images/Sonny run east.png");
-        Image tmp1 = leftImage.getScaledInstance((int)(leftImage.getWidth()*scalingFactor), (int)(leftImage.getHeight()*scalingFactor), Image.SCALE_SMOOTH);
+        int newWidth = (int)(leftImage.getWidth()*scalingFactor-leftImage.getWidth()*scalingFactor%frameCount);	//makes image width divisible by frameCount
+        Image tmp1 = leftImage.getScaledInstance(newWidth, (int)(leftImage.getHeight()*scalingFactor), Image.SCALE_SMOOTH);
 	int TYPE_INT_ARGB=2;
-	leftImage = new BufferedImage((int)(leftImage.getWidth()*scalingFactor), (int)(leftImage.getHeight()*scalingFactor), TYPE_INT_ARGB);
+	leftImage = new BufferedImage(newWidth, (int)(leftImage.getHeight()*scalingFactor), TYPE_INT_ARGB);
 	leftImage.getGraphics().drawImage(tmp1,0,0,null);
 
-	tmp1 = rightImage.getScaledInstance((int)(rightImage.getWidth()*scalingFactor), (int)(rightImage.getHeight()*scalingFactor), Image.SCALE_SMOOTH);
-	rightImage = new BufferedImage((int)(rightImage.getWidth()*scalingFactor), (int)(rightImage.getHeight()*scalingFactor), TYPE_INT_ARGB);
+	tmp1 = rightImage.getScaledInstance(newWidth, (int)(rightImage.getHeight()*scalingFactor), Image.SCALE_SMOOTH);
+	rightImage = new BufferedImage(newWidth, (int)(rightImage.getHeight()*scalingFactor), TYPE_INT_ARGB);
 	rightImage.getGraphics().drawImage(tmp1,0,0,null);
 
 	width = leftImage.getWidth() / frameCount;
