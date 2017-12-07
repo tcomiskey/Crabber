@@ -25,6 +25,7 @@ public class Board extends JFrame{
     private long remainingTime;	//time left in the level in milliseconds
     private long levelTime = 30000; //time to complete the level in milliseconds
     private double scalingFactor;
+    private int collisionBuffer;
     
 	/** Board Constructor sets up the model by creating the player and
 	filling an ArrayList of enemies that will represent every obstacle in 
@@ -43,6 +44,7 @@ public class Board extends JFrame{
 		this.difficulty = difficulty;
 		this.isOcean = isOcean;	
 		this.scalingFactor = scalingFactor;
+		collisionBuffer = (int) (8*scalingFactor);
 		win = true;
 		player = new Player(this.boardWidth, this.boardHeight, this.scalingFactor);
 		numberOfRows = boardHeight/player.getPlayerHeight()-1;
@@ -227,7 +229,7 @@ public class Board extends JFrame{
         	Iterator enemyAttIterator = theOneAndOnlyShark.getEnemyAtt().iterator();
 		while (enemyAttIterator.hasNext()){
             		int[] currentEnemy = (int[]) enemyAttIterator.next();
-			if(player.getX()+player.getPlayerWidth() > currentEnemy[0] && player.getX() < currentEnemy[0] + currentEnemy[3] && player.getY() == currentEnemy[1]){
+			if(player.getX()+player.getPlayerWidth()-collisionBuffer > currentEnemy[0] && player.getX()+collisionBuffer < currentEnemy[0] + currentEnemy[3] && player.getY() == currentEnemy[1]){
 				return true;
 			}
         }
