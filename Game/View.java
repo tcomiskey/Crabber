@@ -175,6 +175,7 @@ public class View extends JFrame implements MouseListener{
 		//start.setVisible(true);
 		//menu.add(start, BorderLayout.SOUTH);
 		menu.setBackground(Color.black);
+		System.out.println("View H " + screenHeight);
 		
 		
 	}
@@ -207,7 +208,8 @@ public class View extends JFrame implements MouseListener{
             		e.printStackTrace();
         	}
         screenWidth = getWidth();
-	screenHeight = getHeight();
+	screenHeight = getHeight()-getHeight()%(int)(50*scalingFactor);
+	System.out.println("View H2 " + screenHeight);
 
 /*
         JPanel buttons = new JPanel();

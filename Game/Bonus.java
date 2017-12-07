@@ -28,6 +28,7 @@ public class Bonus extends GameCharacter{
         	} catch (IOException e) {
             		e.printStackTrace();
         	}
+        System.out.println("Bonus H " + bonusHeight);
     }
     
     // Hit method that is called when the player collides with a bonus

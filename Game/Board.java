@@ -39,6 +39,7 @@ public class Board extends JFrame{
 		// set the initial values for the board attributes
 		this.boardWidth = boardWidth;
 		this.boardHeight = boardHeight;
+		System.out.println("Board H " + boardHeight);
 		this.difficulty = difficulty;
 		this.isOcean = isOcean;	
 		this.scalingFactor = scalingFactor;
