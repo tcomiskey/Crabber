@@ -432,6 +432,10 @@ public class View extends JFrame implements MouseListener{
 		//diffScreen.setOpaque(true);
 		setVisible(true);
 		repaint();
+        control.tick();
+        JOptionPane.showMessageDialog(this, "You have 30 seconds to complete each stage! Good Luck!");
+        control.getBoard().setStartTime();
+        control.startTimer();
 	}
 
 	public void startLandWindow(){
@@ -693,12 +697,10 @@ public class View extends JFrame implements MouseListener{
                 buttons[0] = currentMessage.getWrongAnswer1();
             }
         }
-        
-        //{currentMessage.getRightAnswer(), currentMessage.getWrongAnswer1(), currentMessage.getWrongAnswer2()};
-        System.out.println(currentMessage.getQuestion());
+        /*System.out.println(currentMessage.getQuestion());
         for (int i = 0; i < buttons.length; i++) {
             System.out.println(buttons[i]);
-        }
+        }*/
         int rc = JOptionPane.showOptionDialog(null,currentMessage.getQuestion(),"Quiz Question", JOptionPane.WARNING_MESSAGE, 0, null, buttons, null);
         if (rc == r1) {
             control.resetPlayer();
@@ -708,6 +710,7 @@ public class View extends JFrame implements MouseListener{
             repaint();
         }
         else {
+            JOptionPane.showMessageDialog(this, "Sorry, the correct answer was: " + currentMessage.getRightAnswer());
             startGameOverWindow();
         }
     }
