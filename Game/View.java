@@ -425,6 +425,7 @@ public class View extends JFrame implements MouseListener{
         	}
         	
 		gameScreen.addMouseListener(this);
+		gameScreen.setBackground(Color.black);
 		//gameScreen.setBackground(Color.blue);
 		getContentPane().removeAll();
 		getContentPane().add(gameScreen);
